@@ -1,8 +1,9 @@
-# typescript-npm-package-template
+# Human Design Core Computations and Objects
 
-> Template to kickstart creating a Node.js module using TypeScript and VSCode
+- Api Client for ASTROAPI
 
-Inspired by [node-module-boilerplate](https://github.com/sindresorhus/node-module-boilerplate)
+
+
 
 ## Features
 

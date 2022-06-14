@@ -49,8 +49,13 @@
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+    "@types/cookie": "^0.5.1",
+    "@types/d3": "^7.4.0",
+    "@types/d3-path": "^3.0.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^12.20.11",
+    "@types/ramda": "^0.28.14",
+    "@types/url-parse": "^1.4.8",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "codecov": "^3.8.3",
@@ -120,5 +125,15 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cookie": "^0.5.0",
+    "d3": "^7.4.4",
+    "d3-path": "^3.0.1",
+    "es6-promise": "^4.2.8",
+    "jsdom": "^19.0.0",
+    "ramda": "^0.28.0",
+    "url-parse": "^1.5.10"
   }
 }
