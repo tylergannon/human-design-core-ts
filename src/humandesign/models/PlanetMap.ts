@@ -1,27 +1,38 @@
-import type { IPlanetMap } from "./types";
+import type { IPlanetMap } from './types'
 
 export class PlanetMap<T> implements IPlanetMap<T> {
-    [zodiac: string]: T;
+    [zodiac: string]: T
     constructor(data: IPlanetMap<T>) {
         Object.assign(this, data)
     }
-    sun!: T;
-    earth!: T;
-    moon!: T;
-    northNode!: T;
-    southNode!: T;
-    mercury!: T;
-    venus!: T;
-    mars!: T;
-    jupiter!: T;
-    saturn!: T;
-    chiron!: T;
-    uranus!: T;
-    neptune!: T;
-    pluto!: T;
+    sun!: T
+    earth!: T
+    moon!: T
+    northNode!: T
+    southNode!: T
+    mercury!: T
+    venus!: T
+    mars!: T
+    jupiter!: T
+    saturn!: T
+    chiron!: T
+    uranus!: T
+    neptune!: T
+    pluto!: T
 }
 
-export function mapPlanets<T, U>(from: PlanetMap<T>, transform: (val: T)=>U): PlanetMap<U> {
+/**
+ *
+ * @param param0 Planet Map
+ * @returns the values for planets + pluto, excluding asteroids (chiron)
+ */
+export const standardPlanets = <T>({ chiron: _, ...map }: PlanetMap<T>) =>
+    Object.values(map)
+
+export function mapPlanets<T, U>(
+    from: PlanetMap<T>,
+    transform: (val: T) => U
+): PlanetMap<U> {
     return new PlanetMap<U>({
         sun: transform(from.sun),
         earth: transform(from.earth),

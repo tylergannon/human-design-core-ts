@@ -1,4 +1,4 @@
-import type { RequestContext } from "../http/http";
+import { RequestContext } from '../http/http'
 
 /**
  * Interface authentication schemes.
@@ -7,18 +7,18 @@ export interface SecurityAuthentication {
     /*
      * @return returns the name of the security authentication as specified in OAI
      */
-    getName(): string;
+    getName(): string
 
     /**
      * Applies the authentication scheme to the request context
      *
      * @params context the request context which should use this authentication scheme
      */
-    applySecurityAuthentication(context: RequestContext): void | Promise<void>;
+    applySecurityAuthentication(context: RequestContext): void | Promise<void>
 }
 
 export interface TokenProvider {
-  getToken(): Promise<string> | string;
+    getToken(): Promise<string> | string
 }
 
 /**
@@ -33,11 +33,11 @@ export class APIKeyCookieAuthentication implements SecurityAuthentication {
     public constructor(private apiKey: string) {}
 
     public getName(): string {
-        return "APIKeyCookie";
+        return 'APIKeyCookie'
     }
 
     public applySecurityAuthentication(context: RequestContext) {
-        context.addCookie("api_key", this.apiKey);
+        context.addCookie('Api-Key', this.apiKey)
     }
 }
 
@@ -53,11 +53,11 @@ export class APIKeyHeaderAuthentication implements SecurityAuthentication {
     public constructor(private apiKey: string) {}
 
     public getName(): string {
-        return "APIKeyHeader";
+        return 'APIKeyHeader'
     }
 
     public applySecurityAuthentication(context: RequestContext) {
-        context.setHeaderParam("api_key", this.apiKey);
+        context.setHeaderParam('Api-Key', this.apiKey)
     }
 }
 
@@ -73,63 +73,64 @@ export class APIKeyQueryAuthentication implements SecurityAuthentication {
     public constructor(private apiKey: string) {}
 
     public getName(): string {
-        return "APIKeyQuery";
+        return 'APIKeyQuery'
     }
 
     public applySecurityAuthentication(context: RequestContext) {
-        context.setQueryParam("api_key", this.apiKey);
+        context.setQueryParam('apiKey', this.apiKey)
     }
 }
 
-
 export type AuthMethods = {
-    "default"?: SecurityAuthentication,
-    "APIKeyCookie"?: SecurityAuthentication,
-    "APIKeyHeader"?: SecurityAuthentication,
-    "APIKeyQuery"?: SecurityAuthentication
+    default?: SecurityAuthentication
+    APIKeyCookie?: SecurityAuthentication
+    APIKeyHeader?: SecurityAuthentication
+    APIKeyQuery?: SecurityAuthentication
 }
 
-export type ApiKeyConfiguration = string;
-export type HttpBasicConfiguration = { "username": string, "password": string };
-export type HttpBearerConfiguration = { tokenProvider: TokenProvider };
-export type OAuth2Configuration = { accessToken: string };
+export type ApiKeyConfiguration = string
+export type HttpBasicConfiguration = { username: string; password: string }
+export type HttpBearerConfiguration = { tokenProvider: TokenProvider }
+export type OAuth2Configuration = { accessToken: string }
 
 export type AuthMethodsConfiguration = {
-    "default"?: SecurityAuthentication,
-    "APIKeyCookie"?: ApiKeyConfiguration,
-    "APIKeyHeader"?: ApiKeyConfiguration,
-    "APIKeyQuery"?: ApiKeyConfiguration
+    default?: SecurityAuthentication
+    APIKeyCookie?: ApiKeyConfiguration
+    APIKeyHeader?: ApiKeyConfiguration
+    APIKeyQuery?: ApiKeyConfiguration
 }
 
 /**
  * Creates the authentication methods from a swagger description.
  *
  */
-export function configureAuthMethods(config: AuthMethodsConfiguration | undefined): AuthMethods {
-    let authMethods: AuthMethods = {}
+export function configureAuthMethods(
+    config: AuthMethodsConfiguration | undefined
+): AuthMethods {
+    const authMethods: AuthMethods = {}
 
     if (!config) {
-        return authMethods;
+        return authMethods
     }
-    authMethods["default"] = config["default"]
+    authMethods['default'] = config['default']
 
-    if (config["APIKeyCookie"]) {
-        authMethods["APIKeyCookie"] = new APIKeyCookieAuthentication(
-            config["APIKeyCookie"]
-        );
-    }
-
-    if (config["APIKeyHeader"]) {
-        authMethods["APIKeyHeader"] = new APIKeyHeaderAuthentication(
-            config["APIKeyHeader"]
-        );
+    if (config['APIKeyCookie']) {
+        authMethods['APIKeyCookie'] = new APIKeyCookieAuthentication(
+            config['APIKeyCookie']
+        )
     }
 
-    if (config["APIKeyQuery"]) {
-        authMethods["APIKeyQuery"] = new APIKeyQueryAuthentication(
-            config["APIKeyQuery"]
-        );
+    if (config['APIKeyHeader']) {
+        authMethods['APIKeyHeader'] = new APIKeyHeaderAuthentication(
+            config['APIKeyHeader']
+        )
     }
 
-    return authMethods;
+    if (config['APIKeyQuery']) {
+        authMethods['APIKeyQuery'] = new APIKeyQueryAuthentication(
+            config['APIKeyQuery']
+        )
+    }
+
+    return authMethods
 }

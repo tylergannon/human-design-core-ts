@@ -1,4 +1,4 @@
-import { type CenterMap, Center } from "./types"
+import { type CenterMap, Center } from './types'
 
 const centerFn: CenterMap<Center> = {
     head: Center.Head,
@@ -9,10 +9,16 @@ const centerFn: CenterMap<Center> = {
     root: Center.Root,
     spleen: Center.Spleen,
     will: Center.Will,
-    esp: Center.ESP
+    esp: Center.ESP,
 }
 
-export function mapCenters<T, U>(fn: (val: T) => U, map: CenterMap<T>) : CenterMap<U> {
+export const centerMap = <T>(fn: (center: Center) => T) =>
+    mapCenters<Center, T>(fn, centerFn)
+
+export function mapCenters<T, U>(
+    fn: (val: T) => U,
+    map: CenterMap<T>
+): CenterMap<U> {
     return {
         head: fn(map.head),
         ajna: fn(map.ajna),

@@ -1,5 +1,6 @@
-import type { HDChart } from "$lib/astro"
-import { Chart } from "./Chart"
+import type { HDChart } from '$astro'
+import { Chart } from './Chart'
+import { HDType } from './types'
 
 export class BirthChart {
     natal: Chart
@@ -10,10 +11,10 @@ export class BirthChart {
         this.natal = natal
     }
 
-    static fromApi(hdChart: HDChart) : BirthChart {
+    static fromApi(hdChart: HDChart): BirthChart {
         return new BirthChart(
             Chart.fromApi(hdChart.natal),
-            Chart.fromApi(hdChart.design),
+            Chart.fromApi(hdChart.design)
         )
     }
 }

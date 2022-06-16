@@ -1,11 +1,11 @@
-import type { ChartDate, Chart as ApiChart } from '$lib/astro';
-import type { IPlanetMap } from './types'
-import { PlanetMap } from './PlanetMap';
-import { Position } from './Position';
+import type { ChartDate, Chart as ApiChart } from '$astro'
+import type { HDPos, IPlanetMap } from './types'
+import { PlanetMap } from './PlanetMap'
+import { Position } from './Position'
 
 export class Chart {
-    chartDate: ChartDate;
-    planets: PlanetMap<Position>;
+    readonly chartDate: ChartDate
+    readonly planets: PlanetMap<HDPos>
 
     constructor(chartDate: ChartDate, planets: IPlanetMap<Position>) {
         this.chartDate = chartDate
@@ -13,8 +13,8 @@ export class Chart {
     }
 
     static fromApi(oldChart: ApiChart): Chart {
-        let northNode = Position.fromApi(oldChart.northNode)
-        let sun = Position.fromApi(oldChart.sun)
+        const northNode = Position.fromApi(oldChart.northNode)
+        const sun = Position.fromApi(oldChart.sun)
         return new Chart(oldChart.chartDate, {
             sun: sun,
             earth: sun.opposite(),

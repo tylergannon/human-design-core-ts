@@ -1,87 +1,110 @@
-
-import type { Angle as ApiAngle } from '$lib/astro'
+import type { Angle as ApiAngle } from '$astro'
 
 const radiansPerDegree = Math.PI / 180
 export class Angle {
-    private _radians?: number;
-    private _cos?: number;
-    private _sin?: number;
-    readonly deg: number;
-    readonly min: number;
-    readonly sec: number;
+    private _radians?: number
+    private _cos?: number
+    private _sin?: number
+    readonly deg: number
+    readonly min: number
+    readonly sec: number
 
-    public constructor (deg: number = 0, min: number = 0, sec: number = 0) {
+    public constructor(deg = 0, min = 0, sec = 0) {
         this.deg = deg
         this.min = min
         this.sec = sec
     }
 
-    public get radians() : number {
+    public get radians(): number {
         this._radians ||= this.toFloat() * radiansPerDegree
         return this._radians
     }
-    
-    public get sin() : number {
+
+    public get sin(): number {
         this._sin ||= Math.sin(this.radians)
         return this._sin
     }
 
-    public get cos() : number {
+    public get cos(): number {
         this._cos ||= Math.cos(this.radians)
         return this._cos
     }
-    
 
-    toFloat (): number { return this.deg + 60 * (this.min + 60 * this.sec)}
+    toFloat(): number {
+        return this.deg + (this.min + this.sec / 60) / 60
+    }
 
-    static of(deg: number, min: number = 0, sec: number = 0): Angle { return new Angle(deg, min, sec) }
+    static of(deg: number, min = 0, sec = 0): Angle {
+        return new Angle(deg, min, sec)
+    }
 
     static opposite: Angle = new Angle(180)
 
-    plus(other: Angle): Angle { return add(this, other) }
-    times(scale: number): Angle { return multiply(this, scale) }
-    negative(): Angle { return negate(this) }
-    minus(other: Angle): Angle { return subtract(this, other) }
-    div(other: Angle): number { return this.toFloat() / other.toFloat() }
+    plus(other: Angle): Angle {
+        return add(this, other)
+    }
+    times(scale: number): Angle {
+        return multiply(this, scale)
+    }
+    negative(): Angle {
+        return negate(this)
+    }
+    minus(other: Angle): Angle {
+        return subtract(this, other)
+    }
+    div(other: Angle): number {
+        return this.toFloat() / other.toFloat()
+    }
 
     static fromApi(apiAngle: ApiAngle): Angle {
         return new Angle(apiAngle.deg, apiAngle.min, apiAngle.sec)
     }
-
 }
 
-function orZero(value: number| undefined) : number {
-    return typeof(value) === "number" ? value : 0;
+function orZero(value: number | undefined): number {
+    return typeof value === 'number' ? value : 0
 }
 
-function normalizeAngle(deg: number) : number {
+function normalizeAngle(deg: number): number {
     return deg < 0 ? deg + 360 : deg
 }
 
-function reduceAngle(deg: number, min: number, sec: number) : Angle {
+function reduceAngle(deg: number, min: number, sec: number): Angle {
     if (sec >= 60) {
         return reduceAngle(deg, min + sec / 60, sec % 60)
     } else if (sec < 0) {
-        let carryOverMin = 1 + sec / 60
-        return reduceAngle(deg, min-carryOverMin, sec + 60 * carryOverMin)
+        const carryOverMin = 1 + sec / 60
+        return reduceAngle(deg, min - carryOverMin, sec + 60 * carryOverMin)
     } else if (min < 0) {
-        let carryOverDeg = 1 - min / 60
+        const carryOverDeg = 1 - min / 60
         return reduceAngle(deg - carryOverDeg, min + 60 * carryOverDeg, sec)
     } else {
         return new Angle(normalizeAngle((deg + min / 60) % 360), min % 60, sec)
     }
-} 
+}
 
 function add(one: Angle, other: Angle): Angle {
-    return reduceAngle(one.deg + other.deg, one.min + other.min, one.sec + other.sec)
+    return reduceAngle(
+        one.deg + other.deg,
+        one.min + other.min,
+        one.sec + other.sec
+    )
 }
 
 function multiply(angle: Angle, scalar: number): Angle {
-    return reduceAngle(angle.deg * scalar, angle.min* scalar, angle.sec * scalar)
+    return reduceAngle(
+        angle.deg * scalar,
+        angle.min * scalar,
+        angle.sec * scalar
+    )
 }
 function negate(angle: Angle): Angle {
     return reduceAngle(-angle.deg, -angle.min, -angle.sec)
 }
-function subtract(one: Angle, other: Angle):Angle {
-    return reduceAngle(one.deg - other.deg, one.min - other.min, one.sec - other.sec)
+function subtract(one: Angle, other: Angle): Angle {
+    return reduceAngle(
+        one.deg - other.deg,
+        one.min - other.min,
+        one.sec - other.sec
+    )
 }

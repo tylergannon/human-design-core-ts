@@ -1,7 +1,18 @@
-import type { Angle } from "./Angle"
+import type { Angle } from './Angle'
 
 export enum Zodiac {
-    Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces
+    Aries,
+    Taurus,
+    Gemini,
+    Cancer,
+    Leo,
+    Virgo,
+    Libra,
+    Scorpio,
+    Sagittarius,
+    Capricorn,
+    Aquarius,
+    Pisces,
 }
 
 export enum Planet {
@@ -18,7 +29,21 @@ export enum Planet {
     Chiron,
     Uranus,
     Neptune,
-    Pluto
+    Pluto,
+}
+
+/**
+ * A gate's status in a given chart:
+ *   - Defined in the Natal side,
+ *   - Defined in the Design side,
+ *   - Defined in both sides,
+ *   - Not defined.
+ */
+export enum GateDefType {
+    Natal,
+    Design,
+    Both,
+    Undefined,
 }
 
 export enum HDLine {
@@ -27,7 +52,7 @@ export enum HDLine {
     Line3 = 3,
     Line4 = 4,
     Line5 = 5,
-    Line6 = 6
+    Line6 = 6,
 }
 
 export interface HDProfile {
@@ -35,8 +60,16 @@ export interface HDProfile {
     readonly natal: HDLine
 }
 
+export interface HDPos {
+    readonly gate: Gate
+    readonly line: HDLine
+    readonly lng: Angle
+    readonly zodiac: Zodiac
+    readonly zodiacLng: Angle
+}
+
 export enum Center {
-    Head,
+    Head = 1,
     Ajna,
     Throat,
     Identity,
@@ -44,39 +77,41 @@ export enum Center {
     Root,
     Spleen,
     Will,
-    ESP
+    ESP,
 }
 
 export enum Authority {
-    Emotional,
+    Emotional = 1,
     Sacral,
     Splenic,
     Ego,
     Self,
     Mental,
-    NoAuthority
+    NoAuthority,
 }
 
 export enum HDType {
-    Generator,
+    Generator = 1,
     MGenerator,
     Manifestor,
     Projector,
-    Reflector
+    Reflector,
 }
 
 export interface ChartOverview {
     readonly type: HDType
     readonly authority: Authority
     readonly profile: HDProfile
-
 }
 
 export enum Motor {
-    Root, Sacral, Will, ESP
+    Root,
+    Sacral,
+    Will,
+    ESP,
 }
 
-export const AllCenters : Center[] = [
+export const AllCenters: Center[] = [
     Center.Head,
     Center.Ajna,
     Center.Throat,
@@ -85,12 +120,12 @@ export const AllCenters : Center[] = [
     Center.Root,
     Center.Spleen,
     Center.Will,
-    Center.ESP
+    Center.ESP,
 ]
 
 export interface YinYang {
-    readonly yin: boolean;
-    readonly yang: boolean;
+    readonly yin: boolean
+    readonly yang: boolean
     other(): YinYang
 }
 
@@ -114,28 +149,62 @@ export interface Gate {
     readonly angle: Angle
 }
 
+export enum DefState {
+    Defined = 1,
+    Undefined,
+}
+
+export interface Connectivity {
+    /**
+     * A map telling whether each center is defined.
+     */
+    readonly centers: CenterMap<DefState>
+    /**
+     * The connected components, as a list of lists.
+     */
+    readonly components: Center[][]
+    /**
+     * The Human Design type of the chart
+     */
+    readonly type: HDType
+    /**
+     * The Authority for the chart
+     */
+    readonly authority: Authority
+    /**
+     * The number of connected components
+     */
+    readonly rank: number
+
+    /**
+     * Solutions, if provided, are the set of shortest
+     * routes to connect the
+     */
+    readonly solutions?: Array<Gate[]>
+}
+
 export interface Hexagram {
-    num: number
-    ord: number
-    lines: Array<YinYang>
+    readonly num: number
+    readonly ord: number
+    readonly lines: Array<YinYang>
 }
 
 export interface IPlanetMap<T> {
-    readonly sun: T;
-    readonly earth: T;
-    readonly moon: T;
-    readonly northNode: T;
-    readonly southNode: T;
-    readonly mercury: T;
-    readonly venus: T;
-    readonly mars: T;
-    readonly jupiter: T;
-    readonly saturn: T;
-    readonly chiron: T;
-    readonly uranus: T;
-    readonly neptune: T;
-    readonly pluto: T;
-    [zodiac: string]: T;
+    readonly sun: T
+    readonly earth: T
+    readonly moon: T
+    readonly northNode: T
+    readonly southNode: T
+    readonly mercury: T
+    readonly venus: T
+    readonly mars: T
+    readonly jupiter: T
+    readonly saturn: T
+    readonly chiron: T
+    readonly uranus: T
+    readonly neptune: T
+    readonly pluto: T
+    [zodiac: string]: T
 }
 
 export interface ZodiacAngle {
