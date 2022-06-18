@@ -32,6 +32,7 @@ import {
 import type { Gate } from './models/all'
 import { unionFind, toConnectedGroups, findPath } from 'union-find-ts'
 import type { UnionFind } from 'union-find-ts/lib/src/UnionFind'
+import { Nothing } from 'purify-ts'
 
 const gateNum = ({ num }: Gate) => num
 
@@ -82,7 +83,7 @@ export function connectivity(gates: Gate[]): Connectivity {
     const rank = groups.length
     const solutions =
         rank !== 2
-            ? undefined
+            ? Nothing
             : findPath(
                   uf,
                   item => concat(findItemsByNum(item.connected), gatesByCenter[item.center.toString()]),

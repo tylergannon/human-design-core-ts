@@ -1,4 +1,5 @@
 import type { Angle } from './Angle'
+import type { Maybe } from 'purify-ts'
 
 export enum Zodiac {
     Aries,
@@ -180,7 +181,7 @@ export interface Connectivity {
      * Solutions, if provided, are the set of shortest
      * routes to connect the
      */
-    readonly solutions?: Array<Gate[]>
+    readonly solutions: Maybe<Gate[][]>
 }
 
 export interface Hexagram {
