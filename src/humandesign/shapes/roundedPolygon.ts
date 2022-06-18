@@ -1,15 +1,30 @@
-import { Angle } from '../models/Angle'
+import { Angle, ZERO_DEGREES } from '../models/Angle'
 import type { Offset, Size } from './types'
 import { add, sin, cos, transform } from './arithmetic'
 import type { Transformer } from './arithmetic'
 import { maxBy, tail, reduce, minBy, min, max } from 'ramda'
 import { path, type Path } from 'd3-path'
 
-export const roundedSquare = (size: Size, offsetCenter?: Offset, offsetTopLeft?: Offset) =>
-    roundedPolygon(size, offsetCenter, offsetTopLeft, PolygonAngles.square)
+enum OffsetFrom {
+    Center,
+    TopLeft,
+}
 
-export const roundedTriangle = (size: Size, offsetCenter?: Offset, offsetTopLeft?: Offset) =>
-    roundedPolygon(size, offsetCenter, offsetTopLeft, PolygonAngles.triangle)
+export const roundedSquare = (
+    size: Size,
+    offsetCenter: Offset = ORIGIN_POINT,
+    rotate: Angle = ZERO_DEGREES,
+    offsetFrom: OffsetFrom = OffsetFrom.Center
+) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.square, rotate))
+
+export const roundedTriangle = (
+    size: Size,
+    offsetCenter: Offset = ORIGIN_POINT,
+    rotate: Angle = ZERO_DEGREES,
+    offsetFrom: OffsetFrom = OffsetFrom.Center
+) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.triangle, rotate))
+
+const rotateAngles = (angles: Angle[], by: Angle) => angles.map(it => it.plus(by))
 
 interface Bounding {
     readonly minX: Angle
@@ -26,7 +41,7 @@ interface Polar2D {
 const RADIUS_RATIO = 0.6
 const RADIUS_RATIO2_T2 = RADIUS_RATIO * 2
 
-const polarToOffset = ({ Θ, r }: Polar2D): Offset => ({ x: r * Θ.cos, y: r * Θ.sin })
+const polarToOffset = ({ Θ, r }: Polar2D): Offset => ({ x: r * Θ.cos, y: -r * Θ.sin })
 
 const BoundingAngles: Transformer<Angle[], number, Bounding> = {
     minX: angles => reduce(minBy(cos), angles[0], tail(angles)).cos,
@@ -44,16 +59,6 @@ const PolygonAngles = {
     square: [0, 1, 2, 3].map(it => Angle.of(it * 90 + 45)),
 }
 
-/**
- * Wrapper for Path::arcTo, that receives Offset instead of x and y values for each point.
- * @param p Path object
- * @param p1 first offset
- * @param p2 second offset
- * @param r arc radius
- * @returns void
- */
-const pathArc = (p: Path, p1: Offset, p2: Offset, r: number) => p.arcTo(p1.x, p1.y, p2.x, p2.y, r)
-
 const last = <T>(arr: T[]): T => {
     if (arr.length == 0) {
         throw new Error('array should not be empty.')
@@ -63,8 +68,8 @@ const last = <T>(arr: T[]): T => {
 
 function roundedPolygon(
     size: Size,
-    offsetCenter?: Offset,
-    offsetTopLeft?: Offset,
+    offset: Offset = ORIGIN_POINT,
+    offsetFrom: OffsetFrom = OffsetFrom.Center,
     angles: Angle[] = PolygonAngles.triangle
 ): string {
     const width = min(size.height, size.width)
@@ -72,15 +77,18 @@ function roundedPolygon(
     const widthPerRadius = max(maxX - minX, minY - maxY) + RADIUS_RATIO2_T2
     const radius = width / widthPerRadius
     const cornerRadius = radius * RADIUS_RATIO
-    offsetCenter ||= add(offsetTopLeft ?? ORIGIN_POINT, {
-        x: cornerRadius - radius * minX,
-        y: cornerRadius + radius * minY,
-    })
+    offset =
+        offsetFrom === OffsetFrom.Center
+            ? offset
+            : add(offset, {
+                  x: cornerRadius - radius * minX,
+                  y: cornerRadius + radius * minY,
+              })
 
     const halfSweep = Angle.of(180 / angles.length)
 
     const initialPoint = add(
-        offsetCenter,
+        offset,
         add(
             polarToOffset({ r: radius, Θ: last(angles) }),
             polarToOffset({ r: cornerRadius, Θ: last(angles).plus(halfSweep) })
@@ -88,13 +96,12 @@ function roundedPolygon(
     )
 
     const p: Path = path()
-    const arcTo = (Θ: Angle) =>
-        pathArc(
-            p,
-            add(polarToOffset({ r: radius, Θ }), polarToOffset({ r: cornerRadius, Θ: Θ.minus(halfSweep) })),
-            add(polarToOffset({ r: radius, Θ }), polarToOffset({ r: cornerRadius, Θ: Θ.plus(halfSweep) })),
-            cornerRadius
-        )
+    const arcTo = (Θ: Angle) => {
+        const arc = (p: Path, point: Offset, radius: number, Θ1: Angle, Θ2: Angle) =>
+            p.arc(point.x, point.y, radius, -Θ1.radians, -Θ2.radians, true)
+
+        arc(p, polarToOffset({ r: radius, Θ }), cornerRadius, Θ.minus(halfSweep), Θ.plus(halfSweep))
+    }
     p.moveTo(initialPoint.x, initialPoint.y)
     angles.forEach(arcTo)
     return p.toString()

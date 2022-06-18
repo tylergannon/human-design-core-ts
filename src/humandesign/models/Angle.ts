@@ -92,3 +92,5 @@ function negate(angle: Angle): Angle {
 function subtract(one: Angle, other: Angle): Angle {
     return reduceAngle(one.deg - other.deg, one.min - other.min, one.sec - other.sec)
 }
+
+export const ZERO_DEGREES = Angle.of(0)
