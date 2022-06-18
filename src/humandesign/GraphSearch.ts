@@ -30,9 +30,9 @@ import {
     HDType,
 } from './models/all'
 import type { Gate } from './models/all'
+import { Nothing } from 'purify-ts'
 import { unionFind, toConnectedGroups, findPath } from 'union-find-ts'
 import type { UnionFind } from 'union-find-ts/lib/src/UnionFind'
-import { Nothing } from 'purify-ts'
 
 const gateNum = ({ num }: Gate) => num
 

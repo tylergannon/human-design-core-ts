@@ -29,12 +29,13 @@ specifiers:
   jsdom: ^19.0.0
   lint-staged: ^13.0.1
   prettier: ^2.7.0
+  purify-ts: ^1.2.2
   ramda: ^0.28.0
   semantic-release: ^19.0.2
   ts-jest: ^28.0.5
   ts-node: ^10.2.1
   typescript: ^4.2.4
-  union-find-ts: ^1.0.4
+  union-find-ts: ^1.0.5
   url-parse: ^1.5.10
   whatwg-fetch: ^3.6.2
 
@@ -45,8 +46,9 @@ dependencies:
   d3-path: 3.0.1
   es6-promise: 4.2.8
   jsdom: 19.0.0
+  purify-ts: 1.2.2
   ramda: 0.28.0
-  union-find-ts: 1.0.4
+  union-find-ts: 1.0.5
   url-parse: 1.5.10
   whatwg-fetch: 3.6.2
 
@@ -5816,8 +5818,8 @@ packages:
     dev: true
     optional: true
 
-  /union-find-ts/1.0.4:
-    resolution: {integrity: sha512-2apwxoivSW6CZ7KtaWougSbWiMRkyO0yqUBFjV5/L4NfjWvClVi4hNxZFbEstuiVIX6YKFYL2CZX8ndHnguIQQ==}
+  /union-find-ts/1.0.5:
+    resolution: {integrity: sha512-iaNDmExsMoeegc7i0ajeknO1SaoGqPBM7aNobdCfV8j1vjrE1pRTJGr+TXlxoRXAfOjJ8LI4D4wcF1Ai/4eJtw==}
     engines: {node: '>=12.0'}
     dependencies:
       purify-ts: 1.2.2

@@ -1,14 +1,16 @@
-import utils from 'ts-jest'
-import tsconfig from './tsconfig.json' assert { type: 'json' }
+// import utils from 'ts-jest'
+// import tsconfig from './tsconfig.json' assert { type: 'json' }
 
-console.log('yo yo yo')
-console.log(utils.pathsToModuleNameMapper(tsconfig.compilerOptions.paths))
-
+/** @type {import('jest').Config} */
 export default {
-    preset: 'ts-jest',
+    preset: 'ts-jest/presets/js-with-ts-esm',
     setupFiles: ['dotenv/config'],
     testEnvironment: 'node',
     testMatch: ['**/test/**/*.spec.ts'],
+    "transformIgnorePatterns": [
+        "node_modules/(?!(.*union-find-ts|.*d3-path)/)"
+    ],
+    extensionsToTreatAsEsm: ['.ts'],
     collectCoverageFrom: [
         '<rootDir>/src/**/*.ts',
         '!<rootDir>/src/astro/**/*.ts',
@@ -19,11 +21,13 @@ export default {
         '^\\$astro/(.*)$': '<rootDir>/src/astro/$1',
         '^\\$hd$': '<rootDir>/src/humandesign/index.ts',
         '^\\$hd/(.*)$': '<rootDir>/src/humandesign/$1',
+        '^(\\.{1,2}/.*)\\.js$': '$1',
     },
     globals: {
         'ts-jest': {
             diagnostics: false,
             isolatedModules: true,
+            useESM: true
         },
     },
 }
