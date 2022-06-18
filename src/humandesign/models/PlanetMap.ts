@@ -1,3 +1,4 @@
+import { toPairs } from 'ramda'
 import type { IPlanetMap } from './types'
 
 export class PlanetMap<T> implements IPlanetMap<T> {
@@ -23,16 +24,14 @@ export class PlanetMap<T> implements IPlanetMap<T> {
 
 /**
  *
- * @param param0 Planet Map
  * @returns the values for planets + pluto, excluding asteroids (chiron)
  */
-export const standardPlanets = <T>({ chiron: _, ...map }: PlanetMap<T>) =>
-    Object.values(map)
+export const standardPlanets = <T>(map: PlanetMap<T>) =>
+    toPairs(map)
+        .filter(it => it[0] !== 'chiron')
+        .map(it => it[1])
 
-export function mapPlanets<T, U>(
-    from: PlanetMap<T>,
-    transform: (val: T) => U
-): PlanetMap<U> {
+export function mapPlanets<T, U>(from: PlanetMap<T>, transform: (val: T) => U): PlanetMap<U> {
     return new PlanetMap<U>({
         sun: transform(from.sun),
         earth: transform(from.earth),

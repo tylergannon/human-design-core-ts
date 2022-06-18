@@ -21,7 +21,6 @@
 import { flatten, any, concat } from 'ramda'
 import {
     Authority,
-    byNumber,
     Center,
     centerMap,
     Connectivity,
@@ -31,8 +30,8 @@ import {
     HDType,
 } from './models/all'
 import type { Gate } from './models/all'
-import { unionFind, toConnectedGroups, connectGroups } from './UnionFind'
-import type { UnionFind } from './UnionFind'
+import { unionFind, toConnectedGroups, findPath } from 'union-find-ts'
+import type { UnionFind } from 'union-find-ts/lib/src/UnionFind'
 
 const gateNum = ({ num }: Gate) => num
 
@@ -54,25 +53,15 @@ export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
          * @param param0
          * @returns
          */
-        ({ item: gate }) =>
-            [
-                ...gate.connected,
-                ...gatesByCenter[gate.center].map(gateNum),
-            ].filter(defined)
+        ({ item: gate }) => [...gate.connected, ...gatesByCenter[gate.center].map(gateNum)].filter(defined)
     )
 }
 
-const defState = (defined: boolean) =>
-    defined ? DefState.Defined : DefState.Undefined
+const defState = (defined: boolean) => (defined ? DefState.Defined : DefState.Undefined)
 
 /**
- * The goal is to map possible routes to closing a single split.
- * Basically take one element k1 and k2 from each group, and try routes using BFS
- * until find(k1) == find(k2).
- *
- * We will use copies of the UnionFind in order to maintain state during recursion.
+ * Determine the connectivity information for the body graph described by the list of gates.
  * @param gates
- * @param uf
  */
 export function connectivity(gates: Gate[]): Connectivity {
     const uf: UnionFind<Gate> = buildBodyGraph(gates)
@@ -80,31 +69,25 @@ export function connectivity(gates: Gate[]): Connectivity {
     // Keep if any two gates in the component are on different centers.
     // That implies that there is at least one channel.
     const groups = toConnectedGroups(uf)
-        .filter(([{ center: head }, ...tail]) =>
-            any(({ center }) => center !== head, tail)
-        )
+        .filter(([{ center: head }, ...tail]) => any(({ center }) => center !== head, tail))
         .sort((left, right) => right.length - left.length)
     // Choose the unique centers associated with each group.
     const components = groups.map(gates =>
-        gates.reduce(
-            (acc, { center }) => (center in acc ? acc : [center, ...acc]),
-            [] as Center[]
-        )
+        gates.reduce((acc, { center }) => (center in acc ? acc : [center, ...acc]), [] as Center[])
     )
+    const _allGates = allGates()
+    const findItemsByNum = (nums: number[]) =>
+        nums.map(it => _allGates.find(g => g.num === it) ?? _allGates[0])
     const definedCenters = flatten(components)
     const rank = groups.length
     const solutions =
         rank !== 2
             ? undefined
-            : connectGroups(
+            : findPath(
                   uf,
-                  gate =>
-                      concat(
-                          gatesByCenter[gate.center],
-                          gate.connected.map(byNumber)
-                      ),
-                  groups[1],
-                  groups[0]
+                  item => concat(findItemsByNum(item.connected), gatesByCenter[item.center.toString()]),
+                  groups[1][0],
+                  groups[0][0]
               )
 
     return {
@@ -122,14 +105,10 @@ export function connectivity(gates: Gate[]): Connectivity {
  * @param centers A list of lists of centers
  * @returns A list of the centers that were not alone in their group.
  */
-const definedCenters = (centers: Center[][]) =>
-    new Set(flatten(centers.filter(it => it.length > 1)))
+const definedCenters = (centers: Center[][]) => new Set(flatten(centers.filter(it => it.length > 1)))
 
 function findAuthority(centers: Center[][]): Authority
-function findAuthority(
-    centers: Center[][],
-    defined: Set<Center> = definedCenters(centers)
-): Authority {
+function findAuthority(centers: Center[][], defined: Set<Center> = definedCenters(centers)): Authority {
     if (Center.ESP in defined) return Authority.Emotional
     if (Center.Sacral in defined) return Authority.Sacral
     if (Center.Spleen in defined) return Authority.Splenic
@@ -147,19 +126,14 @@ const motors = [Center.Root, Center.Will, Center.ESP, Center.Sacral]
  * @param defined
  * @returns
  */
-function findHDType(
-    centers: Center[][],
-    defined: Set<Center> = definedCenters(centers)
-): HDType {
+function findHDType(centers: Center[][], defined: Set<Center> = definedCenters(centers)): HDType {
     if (defined.size == 0) {
         return HDType.Reflector
     }
     if (Center.Throat in defined) {
         const group = centers.find(it => Center.Throat in it) ?? []
         if (motors.find(it => it in group)) {
-            return Center.Sacral in defined
-                ? HDType.MGenerator
-                : HDType.Manifestor
+            return Center.Sacral in defined ? HDType.MGenerator : HDType.Manifestor
         }
     }
     return Center.Sacral in defined ? HDType.Generator : HDType.Projector

@@ -61,10 +61,6 @@ export class Angle {
     }
 }
 
-function orZero(value: number | undefined): number {
-    return typeof value === 'number' ? value : 0
-}
-
 function normalizeAngle(deg: number): number {
     return deg < 0 ? deg + 360 : deg
 }
@@ -84,27 +80,15 @@ function reduceAngle(deg: number, min: number, sec: number): Angle {
 }
 
 function add(one: Angle, other: Angle): Angle {
-    return reduceAngle(
-        one.deg + other.deg,
-        one.min + other.min,
-        one.sec + other.sec
-    )
+    return reduceAngle(one.deg + other.deg, one.min + other.min, one.sec + other.sec)
 }
 
 function multiply(angle: Angle, scalar: number): Angle {
-    return reduceAngle(
-        angle.deg * scalar,
-        angle.min * scalar,
-        angle.sec * scalar
-    )
+    return reduceAngle(angle.deg * scalar, angle.min * scalar, angle.sec * scalar)
 }
 function negate(angle: Angle): Angle {
     return reduceAngle(-angle.deg, -angle.min, -angle.sec)
 }
 function subtract(one: Angle, other: Angle): Angle {
-    return reduceAngle(
-        one.deg - other.deg,
-        one.min - other.min,
-        one.sec - other.sec
-    )
+    return reduceAngle(one.deg - other.deg, one.min - other.min, one.sec - other.sec)
 }

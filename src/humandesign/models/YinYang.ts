@@ -1,13 +1,17 @@
-import type { YinYang } from "./types";
+import type { YinYang } from './types'
 
-export const Yin : YinYang = {
+export const Yin: YinYang = {
     yin: true,
     yang: false,
-    other() { return Yang; }
+    other() {
+        return Yang
+    },
 }
 
-export const Yang : YinYang = {
+export const Yang: YinYang = {
     yin: false,
     yang: true,
-    other() { return Yin; }
+    other() {
+        return Yin
+    },
 }

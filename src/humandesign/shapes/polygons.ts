@@ -1,9 +1,8 @@
-export const foo = "bar"
+export const foo = 'bar'
 
 // import type { CenterMap } from '$lib/humandesign'
 // import type { Point } from './types'
 // import { mapCenters } from '$lib/humandesign'
-
 
 // const drawPolygon = (points: Array<Point>) => points.map(p => p.toString()).join(' ')
 
@@ -250,4 +249,3 @@ export const foo = "bar"
 // 		]
 // 	}
 // )
-

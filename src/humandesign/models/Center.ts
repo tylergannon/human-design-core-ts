@@ -12,13 +12,9 @@ const centerFn: CenterMap<Center> = {
     esp: Center.ESP,
 }
 
-export const centerMap = <T>(fn: (center: Center) => T) =>
-    mapCenters<Center, T>(fn, centerFn)
+export const centerMap = <T>(fn: (center: Center) => T) => mapCenters<Center, T>(fn, centerFn)
 
-export function mapCenters<T, U>(
-    fn: (val: T) => U,
-    map: CenterMap<T>
-): CenterMap<U> {
+export function mapCenters<T, U>(fn: (val: T) => U, map: CenterMap<T>): CenterMap<U> {
     return {
         head: fn(map.head),
         ajna: fn(map.ajna),

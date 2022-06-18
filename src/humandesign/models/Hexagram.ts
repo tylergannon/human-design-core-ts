@@ -1,5 +1,5 @@
-import { Yin, Yang } from './YinYang'    
-import type { Hexagram } from './types';
+import { Yin, Yang } from './YinYang'
+import type { Hexagram } from './types'
 
 export const hexagrams: Array<Hexagram> = [
     { num: 2, lines: [Yin, Yin, Yin, Yin, Yin, Yin] },
@@ -23,9 +23,9 @@ export const hexagrams: Array<Hexagram> = [
     { num: 29, lines: [Yin, Yang, Yin, Yin, Yang, Yin] },
     { num: 59, lines: [Yang, Yang, Yin, Yin, Yang, Yin] },
     { num: 40, lines: [Yin, Yin, Yang, Yin, Yang, Yin] },
-    { num: 64, lines: [Yang, Yin, Yang, Yin,Yang, Yin] },
-    { num: 47, lines: [Yin, Yang, Yang, Yin,Yang, Yin] },
-    { num: 6, lines: [Yang, Yang, Yang, Yin,Yang, Yin] },
+    { num: 64, lines: [Yang, Yin, Yang, Yin, Yang, Yin] },
+    { num: 47, lines: [Yin, Yang, Yang, Yin, Yang, Yin] },
+    { num: 6, lines: [Yang, Yang, Yang, Yin, Yang, Yin] },
     { num: 46, lines: [Yin, Yin, Yin, Yang, Yang, Yin] },
     { num: 18, lines: [Yang, Yin, Yin, Yang, Yang, Yin] },
     { num: 48, lines: [Yin, Yang, Yin, Yang, Yang, Yin] },
@@ -66,15 +66,15 @@ export const hexagrams: Array<Hexagram> = [
     { num: 3, lines: [Yin, Yang, Yin, Yin, Yin, Yang] },
     { num: 27, lines: [Yang, Yin, Yin, Yin, Yin, Yang] },
     { num: 24, lines: [Yin, Yin, Yin, Yin, Yin, Yang] },
-].map((it, idx) => ({...it, ord: idx}));
+].map((it, idx) => ({ ...it, ord: idx }))
 
 /**
- * 
+ *
  * @param num Hexagram number (one-based)
  * @returns The corresponding Hexagram object
  */
-export function getHexagramByNumber(num: number) : Hexagram {
+export function getHexagramByNumber(num: number): Hexagram {
     return hexagrams[hexPositionMap[num - 1]]
 }
 
-const hexPositionMap = hexagrams.sort((a, b) => a.num - b.num).map(it => it.ord);
+const hexPositionMap = hexagrams.sort((a, b) => a.num - b.num).map(it => it.ord)

@@ -1,4 +1,3 @@
-
 export interface Point {
     x: number
     y: number
@@ -17,7 +16,7 @@ export interface Size extends Measurement {
 }
 
 export interface Arc extends Point {
-    type?: "bezier" | "line"
+    type?: 'bezier' | 'line'
     control: Point
 }
 
@@ -36,7 +35,7 @@ export interface ChannelData {
 }
 
 export interface QuadraticArc extends Arc {
-  control: Point
+    control: Point
 }
 
 export interface QuadraticData extends ChannelData {

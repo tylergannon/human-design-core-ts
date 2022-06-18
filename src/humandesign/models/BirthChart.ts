@@ -1,6 +1,5 @@
 import type { HDChart } from '$astro'
 import { Chart } from './Chart'
-import { HDType } from './types'
 
 export class BirthChart {
     natal: Chart
@@ -12,9 +11,6 @@ export class BirthChart {
     }
 
     static fromApi(hdChart: HDChart): BirthChart {
-        return new BirthChart(
-            Chart.fromApi(hdChart.natal),
-            Chart.fromApi(hdChart.design)
-        )
+        return new BirthChart(Chart.fromApi(hdChart.natal), Chart.fromApi(hdChart.design))
     }
 }

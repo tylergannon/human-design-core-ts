@@ -6,6 +6,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
+  ignorePatterns: ["src/astro/**"],
   extends: [
     'eslint:recommended',
     'plugin:node/recommended',

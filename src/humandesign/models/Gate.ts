@@ -2,6 +2,7 @@ import { Center, HDLine, type Gate } from './types'
 import { Angle } from './Angle'
 import { toAngle } from './ZodiacAngle'
 import { Zodiac } from './types'
+import { groupBy } from 'ramda'
 
 const gate41Angle = toAngle({ zodiac: Zodiac.Aquarius, angle: Angle.of(2) })
 
@@ -30,7 +31,7 @@ const allGates: Gate[] = [
     {
         num: 41,
         center: Center.Root,
-        connected: [0],
+        connected: [30],
         ord: 0,
         angle: gateAngle(0),
     },
@@ -477,11 +478,7 @@ const allGates: Gate[] = [
     },
 ]
 
-const gateNumbers = allGates
-    .sort((left, right) => left.num - right.num)
-    .map(it => it.ord)
-
-const centerValues: Center[] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+const gateNumbers = allGates.sort((left, right) => left.num - right.num).map(it => it.ord)
 
 /**
  * Return the gate by gave number.
@@ -492,14 +489,9 @@ export function byNumber(num: number): Gate {
     return allGates[gateNumbers[num]]
 }
 
-function centerMap<T>(fn: (center: Center) => T): Array<T> {
-    return centerValues.map(fn)
-}
+// const centerValues: Center[] = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+// function centerMap<T>(fn: (center: Center) => T): Array<T> {
+//     return centerValues.map(fn)
+// }
 
-export const gatesByCenter = allGates.reduce(
-    (acc, gate) => {
-        acc[gate.center].push(gate)
-        return acc
-    },
-    centerMap(it => [] as Array<Gate>)
-)
+export const gatesByCenter = groupBy(gate => gate.center.toString(), allGates)

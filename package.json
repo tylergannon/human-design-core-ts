@@ -3,7 +3,6 @@
   "version": "0.0.0-development",
   "description": "A template for creating npm packages using TypeScript and VSCode",
   "main": "./lib/src/index.js",
-  "type": "module",
   "files": [
     "lib/**/*"
   ],
@@ -136,6 +135,7 @@
     "es6-promise": "^4.2.8",
     "jsdom": "^19.0.0",
     "ramda": "^0.28.0",
+    "union-find-ts": "^1.0.4",
     "url-parse": "^1.5.10",
     "whatwg-fetch": "^3.6.2"
   }
