@@ -4,6 +4,7 @@ import { path } from 'd3-path'
 import type { Point, PointRel, ChannelData, QuadraticData, CubicData, Arc } from './types'
 
 import { channelData } from './channels'
+import { CenterRecord } from '$hd/models/types'
 
 const add = (p1: Point, p2: Point): Point => ({ x: p1.x + p2.x, y: p1.y + p2.y })
 
@@ -23,7 +24,7 @@ export interface ChartObject {
     readonly name: string
 }
 
-export const polygons = {
+export const polygons: CenterRecord<string> = {
     head: '-103,23 -103,200 99,200 98,24',
     ajna: '100,200 -107,200 -107,369 100,371',
     throat: '113,371 -115,369 -351,741 -232,780 -137,565 90,565 118,620 161,597 192,630 263,598',

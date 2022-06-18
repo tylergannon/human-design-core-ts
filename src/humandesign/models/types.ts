@@ -1,37 +1,151 @@
 import type { Angle } from './Angle'
 import type { Maybe } from 'purify-ts'
 
-export enum Zodiac {
-    Aries,
-    Taurus,
-    Gemini,
-    Cancer,
-    Leo,
-    Virgo,
-    Libra,
-    Scorpio,
-    Sagittarius,
-    Capricorn,
-    Aquarius,
-    Pisces,
-}
+export type Zodiac =
+    | 'aries'
+    | 'taurus'
+    | 'gemini'
+    | 'cancer'
+    | 'leo'
+    | 'virgo'
+    | 'libra'
+    | 'scorpio'
+    | 'sagittarius'
+    | 'capricorn'
+    | 'aquarius'
+    | 'pisces'
+export const zodiacNames: Zodiac[] = [
+    'aries',
+    'taurus',
+    'gemini',
+    'cancer',
+    'leo',
+    'virgo',
+    'libra',
+    'scorpio',
+    'sagittarius',
+    'capricorn',
+    'aquarius',
+    'pisces',
+]
+export type ZodiacRecord<T> = Record<Zodiac, T>
+export const zodiacRecord = <T>(fn: (zodiac: Zodiac) => T): ZodiacRecord<T> => ({
+    aries: fn('aries'),
+    taurus: fn('taurus'),
+    gemini: fn('gemini'),
+    cancer: fn('cancer'),
+    leo: fn('leo'),
+    virgo: fn('virgo'),
+    libra: fn('libra'),
+    scorpio: fn('scorpio'),
+    sagittarius: fn('sagittarius'),
+    capricorn: fn('capricorn'),
+    aquarius: fn('aquarius'),
+    pisces: fn('pisces'),
+})
 
-export enum Planet {
-    Sun,
-    Earth,
-    Moon,
-    NorthNode,
-    SouthNode,
-    Mercury,
-    Venus,
-    Mars,
-    Jupiter,
-    Saturn,
-    Chiron,
-    Uranus,
-    Neptune,
-    Pluto,
-}
+export type Planet =
+    | 'sun'
+    | 'earth'
+    | 'moon'
+    | 'northNode'
+    | 'southNode'
+    | 'mercury'
+    | 'venus'
+    | 'mars'
+    | 'jupiter'
+    | 'saturn'
+    | 'uranus'
+    | 'neptune'
+    | 'pluto'
+    | 'chiron'
+export const planetNames: Planet[] = [
+    'sun',
+    'earth',
+    'moon',
+    'northNode',
+    'southNode',
+    'mercury',
+    'venus',
+    'mars',
+    'jupiter',
+    'saturn',
+    'uranus',
+    'neptune',
+    'pluto',
+    'chiron',
+]
+export type PlanetRecord<T> = Record<Planet, T>
+
+export const planetRecord = <T>(fn: (planet: Planet) => T): PlanetRecord<T> => ({
+    sun: fn('sun'),
+    earth: fn('earth'),
+    moon: fn('moon'),
+    northNode: fn('northNode'),
+    southNode: fn('southNode'),
+    mercury: fn('mercury'),
+    venus: fn('venus'),
+    mars: fn('mars'),
+    jupiter: fn('jupiter'),
+    saturn: fn('saturn'),
+    uranus: fn('uranus'),
+    neptune: fn('neptune'),
+    pluto: fn('pluto'),
+    chiron: fn('chiron'),
+})
+
+export type Center = 'head' | 'ajna' | 'throat' | 'identity' | 'sacral' | 'spleen' | 'root' | 'will' | 'esp'
+export const centerNames: Center[] = [
+    'head',
+    'ajna',
+    'throat',
+    'identity',
+    'sacral',
+    'spleen',
+    'root',
+    'will',
+    'esp',
+]
+export type CenterRecord<T> = Record<Center, T>
+export const centerRecord = <T>(fn: (center: Center) => T): CenterRecord<T> => ({
+    head: fn('head'),
+    ajna: fn('ajna'),
+    throat: fn('throat'),
+    identity: fn('identity'),
+    sacral: fn('sacral'),
+    spleen: fn('spleen'),
+    root: fn('root'),
+    will: fn('will'),
+    esp: fn('esp'),
+})
+
+export type Authority = 'emotional' | 'sacral' | 'splenic' | 'ego' | 'self' | 'mental' | 'noAuthority'
+export const authorityNames: Authority[] = [
+    'emotional',
+    'sacral',
+    'splenic',
+    'ego',
+    'self',
+    'mental',
+    'noAuthority',
+]
+export type AuthorityRecord<T> = Record<Authority, T>
+export const authorityRecord = <T>(fn: (authority: Authority) => T): AuthorityRecord<T> => ({
+    emotional: fn('emotional'),
+    sacral: fn('sacral'),
+    splenic: fn('splenic'),
+    ego: fn('ego'),
+    self: fn('self'),
+    mental: fn('mental'),
+    noAuthority: fn('noAuthority'),
+})
+
+export type HDType = 'Generator' | 'Manifesting Generator' | 'Manifestor' | 'Projector' | 'Reflector'
+
+export type Motor = 'root' | 'sacral' | 'will' | 'esp'
+export const motorNames: Motor[] = ['root', 'sacral', 'will', 'esp']
+
+export type DefState = 'defined' | 'undefined'
 
 /**
  * A gate's status in a given chart:
@@ -40,21 +154,8 @@ export enum Planet {
  *   - Defined in both sides,
  *   - Not defined.
  */
-export enum GateDefType {
-    Natal,
-    Design,
-    Both,
-    Undefined,
-}
-
-export enum HDLine {
-    Line1 = 1,
-    Line2 = 2,
-    Line3 = 3,
-    Line4 = 4,
-    Line5 = 5,
-    Line6 = 6,
-}
+export type GateDefType = 'natal' | 'design' | 'both' | 'undefined'
+export type HDLine = '1' | '2' | '3' | '4' | '5' | '6'
 
 export interface HDProfile {
     readonly design: HDLine
@@ -69,77 +170,16 @@ export interface HDPos {
     readonly zodiacLng: Angle
 }
 
-export enum Center {
-    Head = 1,
-    Ajna,
-    Throat,
-    Identity,
-    Sacral,
-    Root,
-    Spleen,
-    Will,
-    ESP,
-}
-
-export enum Authority {
-    Emotional = 1,
-    Sacral,
-    Splenic,
-    Ego,
-    Self,
-    Mental,
-    NoAuthority,
-}
-
-export enum HDType {
-    Generator = 1,
-    MGenerator,
-    Manifestor,
-    Projector,
-    Reflector,
-}
-
 export interface ChartOverview {
     readonly type: HDType
     readonly authority: Authority
     readonly profile: HDProfile
 }
 
-export enum Motor {
-    Root,
-    Sacral,
-    Will,
-    ESP,
-}
-
-export const AllCenters: Center[] = [
-    Center.Head,
-    Center.Ajna,
-    Center.Throat,
-    Center.Identity,
-    Center.Sacral,
-    Center.Root,
-    Center.Spleen,
-    Center.Will,
-    Center.ESP,
-]
-
 export interface YinYang {
     readonly yin: boolean
     readonly yang: boolean
     other(): YinYang
-}
-
-export interface CenterMap<T> {
-    head: T
-    ajna: T
-    throat: T
-    identity: T
-    sacral: T
-    root: T
-    spleen: T
-    will: T
-    esp: T
 }
 
 export interface Gate {
@@ -150,16 +190,11 @@ export interface Gate {
     readonly angle: Angle
 }
 
-export enum DefState {
-    Defined = 1,
-    Undefined,
-}
-
 export interface Connectivity {
     /**
      * A map telling whether each center is defined.
      */
-    readonly centers: CenterMap<DefState>
+    readonly centers: CenterRecord<DefState>
     /**
      * The connected components, as a list of lists.
      */
@@ -188,24 +223,6 @@ export interface Hexagram {
     readonly num: number
     readonly ord: number
     readonly lines: Array<YinYang>
-}
-
-export interface IPlanetMap<T> {
-    readonly sun: T
-    readonly earth: T
-    readonly moon: T
-    readonly northNode: T
-    readonly southNode: T
-    readonly mercury: T
-    readonly venus: T
-    readonly mars: T
-    readonly jupiter: T
-    readonly saturn: T
-    readonly chiron: T
-    readonly uranus: T
-    readonly neptune: T
-    readonly pluto: T
-    [zodiac: string]: T
 }
 
 export interface ZodiacAngle {

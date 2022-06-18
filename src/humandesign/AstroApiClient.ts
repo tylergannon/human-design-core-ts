@@ -1,22 +1,29 @@
-import { createConfiguration, DefaultApi } from '$astro'
+import { Configuration, DefaultApi, DefaultApiFp, HDChart } from '$astro'
+import { AxiosPromise } from 'axios'
 import { BirthChart } from './models/BirthChart'
 
 export class AstroApiClient {
-    private readonly apiClient: DefaultApi
+    private readonly apiClient: ReturnType<typeof DefaultApiFp>
 
     async getChart(tz: string, date: string, time: string): Promise<BirthChart> {
-        return BirthChart.fromApi(await this.apiClient.chartGet(tz, date, time, 0, 0))
+        const req = await this.apiClient.chartGet(tz, date, time, 0, 0)
+        const response = await req()
+        return BirthChart.fromApi(response.data)
     }
 
     async getSaturnReturn(tz: string, date: string, time: string): Promise<BirthChart> {
-        return BirthChart.fromApi(await this.apiClient.saturnReturnGet(tz, date, time, 0, 0))
+        const req = await this.apiClient.saturnReturnGet(tz, date, time, 0, 0)
+        const response = await req()
+        return BirthChart.fromApi(response.data)
     }
 
     async getUranusOpposition(tz: string, date: string, time: string): Promise<BirthChart> {
-        return BirthChart.fromApi(await this.apiClient.uranusOppositionGet(tz, date, time, 0, 0))
+        const req = await this.apiClient.uranusOppositionGet(tz, date, time, 0, 0)
+        const response = await req()
+        return BirthChart.fromApi(response.data)
     }
 
     constructor(apiKey: string) {
-        this.apiClient = new DefaultApi(createConfiguration({ authMethods: { APIKeyHeader: apiKey } }))
+        this.apiClient = DefaultApiFp(new Configuration({ apiKey }))
     }
 }

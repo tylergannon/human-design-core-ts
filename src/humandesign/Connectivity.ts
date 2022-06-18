@@ -19,16 +19,8 @@
  *
  */
 import { flatten, any, concat } from 'ramda'
-import {
-    Authority,
-    Center,
-    centerMap,
-    Connectivity,
-    DefState,
-    gates as allGates,
-    gatesByCenter,
-    HDType,
-} from './models/all'
+import { centerRecord, gates as allGates, gatesByCenter, motorNames } from './models/all'
+import type { Authority, Center, CenterRecord, Connectivity, DefState, HDType, Motor } from './models/all'
 import type { Gate } from './models/all'
 import { Nothing } from 'purify-ts'
 import { unionFind, toConnectedGroups, findPath } from 'union-find-ts'
@@ -58,7 +50,7 @@ export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
     )
 }
 
-const defState = (defined: boolean) => (defined ? DefState.Defined : DefState.Undefined)
+const defState = (defined: boolean): DefState => (defined ? 'defined' : 'undefined')
 
 /**
  * Determine the connectivity information for the body graph described by the list of gates.
@@ -86,7 +78,7 @@ export function connectivity(gates: Gate[]): Connectivity {
             ? Nothing
             : findPath(
                   uf,
-                  item => concat(findItemsByNum(item.connected), gatesByCenter[item.center.toString()]),
+                  item => concat(findItemsByNum(item.connected), gatesByCenter[item.center]),
                   groups[1][0],
                   groups[0][0]
               )
@@ -94,7 +86,7 @@ export function connectivity(gates: Gate[]): Connectivity {
     return {
         rank,
         components,
-        centers: centerMap(center => defState(center in definedCenters)),
+        centers: centerRecord(center => defState(center in definedCenters)),
         authority: findAuthority(components),
         type: findHDType(components),
         solutions,
@@ -106,20 +98,26 @@ export function connectivity(gates: Gate[]): Connectivity {
  * @param centers A list of lists of centers
  * @returns A list of the centers that were not alone in their group.
  */
-const definedCenters = (centers: Center[][]) => new Set(flatten(centers.filter(it => it.length > 1)))
+const definedCenters = (centers: Center[][]): CenterRecord<boolean> =>
+    ((_centers: Center[]) => centerRecord(it => it in _centers))(flatten(centers.filter(it => it.length > 1)))
 
 function findAuthority(centers: Center[][]): Authority
-function findAuthority(centers: Center[][], defined: Set<Center> = definedCenters(centers)): Authority {
-    if (Center.ESP in defined) return Authority.Emotional
-    if (Center.Sacral in defined) return Authority.Sacral
-    if (Center.Spleen in defined) return Authority.Splenic
-    if (Center.Will in defined) return Authority.Ego
-    if (Center.Identity in defined) return Authority.Self
-    if (Center.Ajna in defined) return Authority.Mental
-    return Authority.NoAuthority
+function findAuthority(
+    centers: Center[][],
+    defined: CenterRecord<boolean> = definedCenters(centers)
+): Authority {
+    if (defined.esp) return 'emotional'
+    if (defined.sacral) return 'sacral'
+    if (defined.spleen) return 'splenic'
+    if (defined.will) return 'ego'
+    if (defined.identity) return 'self'
+    if (defined.ajna) return 'mental'
+    return 'noAuthority'
 }
 
-const motors = [Center.Root, Center.Will, Center.ESP, Center.Sacral]
+const isMotor = (center: Center): center is Motor => {
+    return center in motorNames
+}
 
 /**
  * Root, Sacral, Will, ESP
@@ -127,15 +125,13 @@ const motors = [Center.Root, Center.Will, Center.ESP, Center.Sacral]
  * @param defined
  * @returns
  */
-function findHDType(centers: Center[][], defined: Set<Center> = definedCenters(centers)): HDType {
-    if (defined.size == 0) {
-        return HDType.Reflector
+function findHDType(centers: Center[][], defined: CenterRecord<boolean> = definedCenters(centers)): HDType {
+    if (centers.length == 0) {
+        return 'Reflector'
     }
-    if (Center.Throat in defined) {
-        const group = centers.find(it => Center.Throat in it) ?? []
-        if (motors.find(it => it in group)) {
-            return Center.Sacral in defined ? HDType.MGenerator : HDType.Manifestor
-        }
+    const groupWithThroat = centers.find(group => 'throat' in group)
+    if (groupWithThroat && any(isMotor, groupWithThroat)) {
+        return defined.sacral ? 'Manifesting Generator' : 'Generator'
     }
-    return Center.Sacral in defined ? HDType.Generator : HDType.Projector
+    return defined.sacral ? 'Generator' : 'Projector'
 }

@@ -4,13 +4,17 @@
     "test/**/*.ts"
   ],
   "compilerOptions": {
+    "lib": [
+			"esnext",
+			"DOM"
+		],
     "target": "ESNext",
     "module": "ESNext",
     "declaration": true,
     "outDir": "./lib/",
     "strict": true,
     "moduleResolution": "node",
-    "baseUrl": "/Users/tyler/src/HumanDesign/web/human-design-core-ts",
+    "baseUrl": ".",
     "allowJs": true,
     "paths": {
       "$astro": [

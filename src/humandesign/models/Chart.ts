@@ -1,35 +1,35 @@
-import type { ChartDate, Chart as ApiChart } from '$astro'
-import type { HDPos, IPlanetMap } from './types'
-import { PlanetMap } from './PlanetMap'
+import type { ChartDate, Chart as ApiChart, Position as ApiPosition } from '$astro'
+import { HDPos, Planet, planetRecord, PlanetRecord } from './types'
 import { Position } from './Position'
 
+function apiChartPlanets(chart: ApiChart): PlanetRecord<Position> {
+    return {
+        sun: Position.fromApi(chart.sun),
+        earth: Position.fromApi(chart.sun).opposite(),
+        northNode: Position.fromApi(chart.north_node),
+        southNode: Position.fromApi(chart.north_node).opposite(),
+        moon: Position.fromApi(chart.moon),
+        mercury: Position.fromApi(chart.mercury),
+        venus: Position.fromApi(chart.venus),
+        mars: Position.fromApi(chart.mars),
+        jupiter: Position.fromApi(chart.jupiter),
+        saturn: Position.fromApi(chart.saturn),
+        uranus: Position.fromApi(chart.uranus),
+        neptune: Position.fromApi(chart.neptune),
+        pluto: Position.fromApi(chart.pluto),
+        chiron: Position.fromApi(chart.chiron),
+    }
+}
 export class Chart {
     readonly chartDate: ChartDate
-    readonly planets: PlanetMap<HDPos>
+    readonly planets: PlanetRecord<HDPos>
 
-    constructor(chartDate: ChartDate, planets: IPlanetMap<Position>) {
+    constructor(chartDate: ChartDate, planets: PlanetRecord<Position>) {
         this.chartDate = chartDate
-        this.planets = new PlanetMap(planets)
+        this.planets = planets
     }
 
-    static fromApi(oldChart: ApiChart): Chart {
-        const northNode = Position.fromApi(oldChart.northNode)
-        const sun = Position.fromApi(oldChart.sun)
-        return new Chart(oldChart.chartDate, {
-            sun: sun,
-            earth: sun.opposite(),
-            moon: Position.fromApi(oldChart.moon),
-            northNode: northNode,
-            southNode: northNode.opposite(),
-            mercury: Position.fromApi(oldChart.mercury),
-            venus: Position.fromApi(oldChart.venus),
-            mars: Position.fromApi(oldChart.mars),
-            jupiter: Position.fromApi(oldChart.jupiter),
-            saturn: Position.fromApi(oldChart.saturn),
-            uranus: Position.fromApi(oldChart.uranus),
-            neptune: Position.fromApi(oldChart.neptune),
-            pluto: Position.fromApi(oldChart.pluto),
-            chiron: Position.fromApi(oldChart.chiron),
-        })
+    static fromApi(apiResult: ApiChart): Chart {
+        return new Chart(apiResult.chart_date, apiChartPlanets(apiResult))
     }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "typescript-npm-package-template",
+  "name": "human-design-core-ts",
   "version": "0.0.0-development",
   "description": "A template for creating npm packages using TypeScript and VSCode",
   "main": "./lib/src/index.js",
@@ -21,32 +21,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryansonshine/typescript-npm-package-template.git"
+    "url": "git+https://github.com/tylergannon/human-design-core-ts.git"
   },
   "license": "MIT",
   "author": {
-    "name": "Ryan Sonshine",
-    "email": "ryansonshine@users.noreply.github.com",
-    "url": "https://github.com/ryansonshine"
+    "name": "Tyler Gannon",
+    "email": "tylergannon@users.noreply.github.com",
+    "url": "https://github.com/tylergannon"
   },
   "engines": {
-    "node": ">=18.0"
+    "node": ">=16.15.1"
   },
   "keywords": [
-    "boilerplate",
-    "template",
-    "typescript",
-    "vscode",
-    "jest",
-    "husky",
-    "commitizen",
-    "semantic-release",
-    "codecov"
+    "astrology", "human-design", "typescript"
   ],
   "bugs": {
-    "url": "https://github.com/ryansonshine/typescript-npm-package-template/issues"
+    "url": "https://github.com/tylergannon/human-design-core-ts/issues"
   },
-  "homepage": "https://github.com/ryansonshine/typescript-npm-package-template#readme",
+  "homepage": "https://github.com/tylergannon/human-design-core-ts#readme",
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
@@ -127,7 +119,6 @@
           }
         }
       ],
-      "@semantic-release/npm",
       "@semantic-release/github"
     ]
   },

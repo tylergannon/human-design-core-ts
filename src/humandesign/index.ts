@@ -1,2 +1,2 @@
 export * from './models/all'
-export { connectivity, buildBodyGraph } from './GraphSearch'
+export { connectivity, buildBodyGraph } from './Connectivity'

@@ -1,0 +1,33 @@
+name: Release
+on:
+  workflow_call:
+    secrets:
+      NPM_API_TOKEN:
+        required: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test
+        run: pnpm run test
+      - name: Build
+        run: pnpm run build
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_API_TOKEN: ${{ secrets.NPM_API_TOKEN }}
+        run: pnpx semantic-release
+      - name: Code Coverage
+        run: pnpm run coverage

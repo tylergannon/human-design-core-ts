@@ -14,15 +14,17 @@ export const roundedSquare = (
     size: Size,
     offsetCenter: Offset = ORIGIN_POINT,
     rotate: Angle = ZERO_DEGREES,
-    offsetFrom: OffsetFrom = OffsetFrom.Center
-) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.square, rotate))
+    offsetFrom: OffsetFrom = OffsetFrom.Center,
+    radiusRatio: number = DEFAULT_RADIUS_RATIO
+) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.square, rotate), radiusRatio)
 
 export const roundedTriangle = (
     size: Size,
     offsetCenter: Offset = ORIGIN_POINT,
     rotate: Angle = ZERO_DEGREES,
-    offsetFrom: OffsetFrom = OffsetFrom.Center
-) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.triangle, rotate))
+    offsetFrom: OffsetFrom = OffsetFrom.Center,
+    radiusRatio: number = DEFAULT_RADIUS_RATIO
+) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.triangle, rotate), radiusRatio)
 
 const rotateAngles = (angles: Angle[], by: Angle) => angles.map(it => it.plus(by))
 
@@ -38,8 +40,8 @@ interface Polar2D {
     r: number
 }
 
-const RADIUS_RATIO = 0.6
-const RADIUS_RATIO2_T2 = RADIUS_RATIO * 2
+const DEFAULT_RADIUS_RATIO = 0.6
+const RADIUS_RATIO2_T2 = DEFAULT_RADIUS_RATIO * 2
 
 const polarToOffset = ({ Θ, r }: Polar2D): Offset => ({ x: r * Θ.cos, y: -r * Θ.sin })
 
@@ -70,13 +72,14 @@ function roundedPolygon(
     size: Size,
     offset: Offset = ORIGIN_POINT,
     offsetFrom: OffsetFrom = OffsetFrom.Center,
-    angles: Angle[] = PolygonAngles.triangle
+    angles: Angle[] = PolygonAngles.triangle,
+    radiusRatio: number = DEFAULT_RADIUS_RATIO
 ): string {
     const width = min(size.height, size.width)
     const { maxX, maxY, minX, minY } = boundingAngles(angles)
     const widthPerRadius = max(maxX - minX, minY - maxY) + RADIUS_RATIO2_T2
     const radius = width / widthPerRadius
-    const cornerRadius = radius * RADIUS_RATIO
+    const cornerRadius = radius * radiusRatio
     offset =
         offsetFrom === OffsetFrom.Center
             ? offset

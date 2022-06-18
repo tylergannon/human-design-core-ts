@@ -11,11 +11,16 @@
  */
 
 import type { ObjectSpeed, Scientific, Position as ApiPosition } from '$astro'
+import type { Gate, HDLine, HDPos, Zodiac } from './types'
 import { Angle } from './Angle'
 import { SignedAngle } from '$astro'
-import { opposite } from './Zodiac'
-import { Gate, HDLine, HDPos, Zodiac } from './types'
+import { zodiacNames } from './types'
 import { angleToGate, getLine } from './Gate'
+import { concat } from 'ramda'
+
+const zodiacOpposites = concat(zodiacNames.slice(6), zodiacNames.slice(0, 6))
+
+const zodiacOpposite = (zodiac: Zodiac) => zodiacOpposites[zodiacNames.indexOf(zodiac)]
 
 export class Position implements HDPos {
     readonly lng: Angle
@@ -50,18 +55,19 @@ export class Position implements HDPos {
     }
 
     opposite(): Position {
-        const lat = new SignedAngle()
-        lat.deg = this.lat.deg
-        lat.min = this.lat.min
-        lat.sec = this.lat.sec
-        lat.sign = this.lat.sign * -1
+        const lat: SignedAngle = {
+            deg: this.lat.deg,
+            min: this.lat.min,
+            sec: this.lat.sec,
+            sign: this.lat.sign * -1,
+        }
 
         return new Position(
             this.lng.plus(Angle.opposite),
             lat,
             this.distance,
             this.speed,
-            opposite(this.zodiac),
+            zodiacOpposite(this.zodiac),
             this.zodiacLng
         )
     }
@@ -72,7 +78,7 @@ export class Position implements HDPos {
             position.lat,
             position.distance,
             position.speed,
-            Zodiac[position.zodiac],
+            position.zodiac.toLowerCase() as Zodiac,
             Angle.fromApi(position.zodiacLng)
         )
     }

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 #openapi-generator-cli \
-java -jar ~/Downloads/openapi-generator-cli-7.0.0-20220526.055920-1.jar \
+java -jar ~/Downloads/openapi-generator-cli-2.jar \
   generate \
-  --generator-name typescript \
+  --generator-name typescript-axios \
   --git-host github.com \
-  --git-repo-id astroapi-ts \
+  --git-repo-id human-design-core-ts \
   --git-user-id tylergannon \
   --input-spec https://astro.macdorfenburger.com/api/v1/openapi.json \
   --output ./src/astro \

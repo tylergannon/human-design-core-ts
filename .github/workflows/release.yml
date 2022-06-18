@@ -11,6 +11,6 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    uses: ryansonshine/ryansonshine/.github/workflows/release.yml@main
+    uses: tylergannon/human-design-core-ts/.github/workflows/common_release.yml@main
     secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_API_TOKEN: ${{ secrets.NPM_API_TOKEN }}

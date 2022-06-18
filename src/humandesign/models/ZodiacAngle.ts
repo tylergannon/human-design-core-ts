@@ -1,8 +1,9 @@
 import { Angle } from './Angle'
+import { zodiacNames } from './types'
 import type { ZodiacAngle } from './types'
 
 export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
-    return angle.plus(new Angle(zodiac * 30))
+    return angle.plus(new Angle(zodiacNames.indexOf(zodiac) * 30))
 }
 
 /**
@@ -12,7 +13,7 @@ export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
  */
 export function zodiacAngle(angle: Angle): ZodiacAngle {
     return {
-        zodiac: ~~((angle.deg % 360) / 30),
+        zodiac: zodiacNames[~~((angle.deg % 360) / 30)],
         angle: new Angle(angle.deg % 30, angle.min, angle.sec),
     }
 }
