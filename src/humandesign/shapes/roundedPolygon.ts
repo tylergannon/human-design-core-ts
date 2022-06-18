@@ -54,6 +54,13 @@ const PolygonAngles = {
  */
 const pathArc = (p: Path, p1: Offset, p2: Offset, r: number) => p.arcTo(p1.x, p1.y, p2.x, p2.y, r)
 
+const last = <T>(arr: T[]): T => {
+    if (arr.length == 0) {
+        throw new Error('array should not be empty.')
+    }
+    return arr[arr.length - 1]
+}
+
 function roundedPolygon(
     size: Size,
     offsetCenter?: Offset,
@@ -75,8 +82,8 @@ function roundedPolygon(
     const initialPoint = add(
         offsetCenter,
         add(
-            polarToOffset({ r: radius, Θ: angles[-1] }),
-            polarToOffset({ r: cornerRadius, Θ: angles[-1].plus(halfSweep) })
+            polarToOffset({ r: radius, Θ: last(angles) }),
+            polarToOffset({ r: cornerRadius, Θ: last(angles).plus(halfSweep) })
         )
     )
 

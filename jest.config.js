@@ -8,7 +8,7 @@ export default {
     testEnvironment: 'node',
     testMatch: ['**/test/**/*.spec.ts'],
     "transformIgnorePatterns": [
-        "node_modules/(?!(.*union-find-ts|.*d3-path)/)"
+        "node_modules/(?!(.*union-find-ts|.*internmap|.*d3-?(color|transition|timer|ease|chord|contour|delaunay|dsv|path|array|axis|brush|dispatch|drag|selection|interpolate)?)/)"
     ],
     extensionsToTreatAsEsm: ['.ts'],
     collectCoverageFrom: [
