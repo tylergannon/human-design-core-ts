@@ -1,5 +1,5 @@
 {
-  "name": "human-design-core-ts",
+  "name": "@tylergannon/human-design-core-ts",
   "version": "0.0.0-development",
   "description": "A template for creating npm packages using TypeScript and VSCode",
   "main": "./lib/src/index.js",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tylergannon/human-design-core-ts.git"
+    "url": "git://github.com/tylergannon/human-design-core-ts.git"
   },
   "license": "MIT",
   "author": {
@@ -78,6 +78,9 @@
   "lint-staged": {
     "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "release": {
     "branches": [
       "main"
@@ -119,6 +122,7 @@
           }
         }
       ],
+      "@semantic-release/npm",
       "@semantic-release/github"
     ]
   },
