@@ -33,17 +33,33 @@
     "node": ">=16.15.1"
   },
   "keywords": [
-    "astrology", "human-design", "typescript"
+    "astrology",
+    "human-design",
+    "typescript"
   ],
   "bugs": {
     "url": "https://github.com/tylergannon/human-design-core-ts/issues"
   },
   "homepage": "https://github.com/tylergannon/human-design-core-ts#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cookie": "^0.5.0",
+    "d3-path": "^3.0.1",
+    "d3-selection": "^3.0.0",
+    "es6-promise": "^4.2.8",
+    "jsdom": "^19.0.0",
+    "purify-ts": "^1.2.2",
+    "ramda": "^0.28.0",
+    "union-find-ts": "^1.0.5",
+    "url-parse": "^1.5.10",
+    "whatwg-fetch": "^3.6.2"
+  },
   "devDependencies": {
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "@types/cookie": "^0.5.1",
-    "@types/d3": "^7.4.0",
     "@types/d3-path": "^3.0.0",
     "@types/d3-selection": "^3.0.2",
     "@types/jest": "^28.1.1",
@@ -80,64 +96,5 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  },
-  "release": {
-    "branches": [
-      "main"
-    ],
-    "plugins": [
-      [
-        "@semantic-release/commit-analyzer",
-        {
-          "preset": "conventionalcommits",
-          "releaseRules": [
-            {
-              "type": "build",
-              "scope": "deps",
-              "release": "patch"
-            }
-          ]
-        }
-      ],
-      [
-        "@semantic-release/release-notes-generator",
-        {
-          "preset": "conventionalcommits",
-          "presetConfig": {
-            "types": [
-              {
-                "type": "feat",
-                "section": "Features"
-              },
-              {
-                "type": "fix",
-                "section": "Bug Fixes"
-              },
-              {
-                "type": "build",
-                "section": "Dependencies and Other Build Updates",
-                "hidden": false
-              }
-            ]
-          }
-        }
-      ],
-      "@semantic-release/npm",
-      "@semantic-release/github"
-    ]
-  },
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cookie": "^0.5.0",
-    "d3": "^7.4.4",
-    "d3-path": "^3.0.1",
-    "d3-selection": "^3.0.0",
-    "es6-promise": "^4.2.8",
-    "jsdom": "^19.0.0",
-    "purify-ts": "^1.2.2",
-    "ramda": "^0.28.0",
-    "union-find-ts": "^1.0.5",
-    "url-parse": "^1.5.10",
-    "whatwg-fetch": "^3.6.2"
   }
 }

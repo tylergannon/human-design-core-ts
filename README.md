@@ -1,117 +1,74 @@
-# Human Design Core Computations and Objects
+# @tylergannon/human-design-core-ts
 
-- Api Client for ASTROAPI
-
-
-
-
-## Features
-
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-- [Issue Templates](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/ISSUE_TEMPLATE)
-- [GitHub Actions](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/workflows)
-- [Codecov](https://about.codecov.io/)
-- [VSCode Launch Configurations](https://github.com/ryansonshine/typescript-npm-package-template/blob/main/.vscode/launch.json)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Husky](https://github.com/typicode/husky)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [Commitizen](https://github.com/search?q=commitizen)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-
-## Getting started
-
-### Set up your repository
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-package-template/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
-Replace `FULL_NAME`, `GITHUB_USER`, and `REPO_NAME` in the script below with your own details to personalize your new package:
-
-```bash
-FULL_NAME="John Smith"
-GITHUB_USER="johnsmith"
-REPO_NAME="my-cool-package"
-sed -i.mybak "s/ryansonshine/$GITHUB_USER/g; s/typescript-npm-package-template\|my-package-name/$REPO_NAME/g; s/Ryan Sonshine/$FULL_NAME/g" package.json package-lock.json README.md
-rm *.mybak
-```
-
-### Add NPM Token
-
-Add your npm token to your GitHub repository secrets as `NPM_TOKEN`.
-
-### Add Codecov integration
-
-Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
-
-**Remove everything from here and above**
-
----
-
-# my-package-name
-
-[![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
-[![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
+> Human Design Core Computations and Objects
+
 
 ## Install
 
 ```bash
-npm install my-package-name
+pnpm install @tylergannon/human-design-core-ts
 ```
 
 ## Usage
 
 ```ts
-import { myPackage } from 'my-package-name';
+import { myPackage } from '@tylergannon/human-design-core-ts';
 
 myPackage('hello');
 //=> 'hello from my package'
 ```
 
-## API
+## Contributing
 
-### myPackage(input, options?)
+Open a pull request.
 
-#### input
+Commit format is [eslint][build-format]. Here is a copy of a part of the guideline.
 
-Type: `string`
+```
+Tag: Short description (fixes #1234)
 
-Lorem ipsum.
+Longer description here if necessary
+```
+The first line of the commit message (the summary) must have a specific format. This format is checked by our build tools.
 
-#### options
+The `Tag` is one of the following:
 
-Type: `object`
+* `Fix` - for a bug fix.
+* `Update` - either for a backwards-compatible enhancement or for a rule change that adds reported problems.
+* `New` - implemented a new feature.
+* `Breaking` - for a backwards-incompatible enhancement or feature.
+* `Docs` - changes to documentation only.
+* `Build` - changes to build process only.
+* `Upgrade` - for a dependency upgrade.
+* `Chore` - for refactoring, adding tests, etc. (anything that isn't user-facing).
 
-##### postfix
+Use the [labels of the issue you are working on](working-on-issues.md#issue-labels) to determine the best tag.
 
-Type: `string`
-Default: `rainbows`
+The message summary should be a one-sentence description of the change, and it must be 72 characters in length or shorter. If the pull request addresses an issue, then the issue number should be mentioned at the end. If the commit doesn't completely fix the issue, then use `(refs #1234)` instead of `(fixes #1234)`.
 
-Lorem ipsum.
+Here are some good commit message summary examples:
 
-[build-img]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]:https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]:https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]:https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]:https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]:https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]:https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]:https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]:https://codecov.io/gh/ryansonshine/typescript-npm-package-template
+```
+Build: Update Travis to only test Node 0.10 (refs #734)
+Fix: Semi rule incorrectly flagging extra semicolon (fixes #840)
+Upgrade: Esprima to 1.2, switch to using comment attachment (fixes #730)
+```
+
+The commit message format is important because these messages are used to create a changelog for each release. The tag and issue number help to create more consistent and useful changelogs.
+
+[build-format]:https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint
+[build-img]:https://github.com/tylergannon/human-design-core-ts/actions/workflows/release.yml/badge.svg
+[build-url]:https://github.com/tylergannon/human-design-core-ts/actions/workflows/release.yml
+[issues-img]:https://img.shields.io/github/issues/tylergannon/human-design-core-ts
+[issues-url]:https://github.com/tylergannon/human-design-core-ts/issues
+[codecov-img]:https://codecov.io/gh/tylergannon/human-design-core-ts/branch/main/graph/badge.svg
+[codecov-url]:https://codecov.io/gh/tylergannon/human-design-core-ts
 [semantic-release-img]:https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]:https://github.com/semantic-release/semantic-release
 [commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
