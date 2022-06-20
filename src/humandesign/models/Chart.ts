@@ -1,4 +1,4 @@
-import type { ChartDate, Chart as ApiChart, Position as ApiPosition } from '$astro'
+import type { ChartDate, Chart as ApiChart, Position as ApiPosition } from '../../astro'
 import { HDPos, Planet, planetRecord, PlanetRecord } from './types'
 import { Position } from './Position'
 

@@ -1,4 +1,4 @@
-import type { Angle as ApiAngle } from '$astro'
+import type { Angle as ApiAngle } from '../../astro'
 
 const radiansPerDegree = Math.PI / 180
 export class Angle {

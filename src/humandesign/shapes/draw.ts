@@ -4,7 +4,7 @@ import { path } from 'd3-path'
 import type { Point, PointRel, ChannelData, QuadraticData, CubicData, Arc } from './types'
 
 import { channelData } from './channels'
-import { CenterRecord } from '$hd/models/types'
+import { CenterRecord } from '../models/types'
 
 const add = (p1: Point, p2: Point): Point => ({ x: p1.x + p2.x, y: p1.y + p2.y })
 

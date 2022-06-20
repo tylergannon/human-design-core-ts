@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import type { ObjectSpeed, Scientific, Position as ApiPosition } from '$astro'
+import type { ObjectSpeed, Scientific, Position as ApiPosition } from '../../astro'
 import type { Gate, HDLine, HDPos, Zodiac } from './types'
 import { Angle } from './Angle'
-import { SignedAngle } from '$astro'
+import { SignedAngle } from '../../astro'
 import { zodiacNames } from './types'
 import { angleToGate, getLine } from './Gate'
 import { concat } from 'ramda'

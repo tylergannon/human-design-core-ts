@@ -1,4 +1,4 @@
-import type { HDChart } from '$astro'
+import type { HDChart } from '../../astro'
 import { Chart } from './Chart'
 
 export class BirthChart {

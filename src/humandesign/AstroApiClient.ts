@@ -1,5 +1,4 @@
-import { Configuration, DefaultApi, DefaultApiFp, HDChart } from '$astro'
-import { AxiosPromise } from 'axios'
+import { Configuration, DefaultApiFp } from '../astro'
 import { BirthChart } from './models/BirthChart'
 
 export class AstroApiClient {

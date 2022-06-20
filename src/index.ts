@@ -1,1 +1,1 @@
-export * from '$hd'
+export * from './humandesign'
