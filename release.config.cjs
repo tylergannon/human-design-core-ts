@@ -13,6 +13,7 @@ module.exports = {
             '@semantic-release/git',
             {
                 assets: ['CHANGELOG.md', 'package.json'],
+                message: "Chore: semantic-release (${nextRelease.version})\n\n${nextRelease.notes}"
             },
         ]
     ],
