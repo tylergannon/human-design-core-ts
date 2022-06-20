@@ -29,3 +29,4 @@ export interface ChartObject {
     readonly path: string
     readonly name: string
 }
+
