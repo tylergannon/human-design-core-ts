@@ -70,7 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
     "codecov": "^3.8.3",
-    "conventional-changelog-conventionalcommits": "^5.0.0",
+    "conventional-changelog-eslint": "^3.0.9",
     "dotenv": "^16.0.1",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.3.0",
