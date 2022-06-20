@@ -8,11 +8,7 @@ module.exports = {
         '@semantic-release/release-notes-generator',
         '@semantic-release/changelog',
         '@semantic-release/npm',
-        ["@semantic-release/github", {
-            "assets": [
-              {"path": "lib/**/*.{ts,js}", "label": "JavaScript Distribution"}
-            ]
-        }],
+        ["@semantic-release/github", { "assets": [ ] }],
         [
             '@semantic-release/git',
             {
