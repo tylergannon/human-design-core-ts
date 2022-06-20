@@ -1,7 +1,7 @@
-import type { HDLine, Gate } from './types'
+import type { HDLine, Gate, CenterRecord, GateRecord, GateNum } from './types'
 import { Angle } from './Angle'
 import { toAngle } from './ZodiacAngle'
-import { groupBy } from 'ramda'
+import { groupBy, values } from 'ramda'
 
 const gate41Angle = toAngle({ zodiac: 'aquarius', angle: Angle.of(2) })
 
@@ -21,471 +21,473 @@ export function getLine(angle: Angle): HDLine {
 }
 
 export function angleToGate(angle: Angle): Gate {
-    return allGates[~~(normalizeF(angle) / gateArcF)]
+    return byOrdinal(~~(normalizeF(angle) / gateArcF))
 }
 
-export const gates = () => [...allGates]
+export const gates: () => GateRecord<Gate> = () => ({ ...allGates })
 
-const allGates: Gate[] = [
-    {
-        num: 41,
+const allGates: GateRecord<Gate> = {
+    '41': {
+        num: '41',
         center: 'root',
-        connected: [30],
+        connected: ['30'],
         ord: 0,
         angle: gateAngle(0),
     },
-    {
-        num: 19,
+    '19': {
+        num: '19',
         center: 'root',
-        connected: [49],
+        connected: ['49'],
         ord: 1,
         angle: gateAngle(1),
     },
-    {
-        num: 13,
+    '13': {
+        num: '13',
         center: 'identity',
-        connected: [33],
+        connected: ['33'],
         ord: 2,
         angle: gateAngle(2),
     },
-    {
-        num: 49,
+    '49': {
+        num: '49',
         center: 'esp',
-        connected: [19],
+        connected: ['19'],
         ord: 3,
         angle: gateAngle(3),
     },
-    {
-        num: 30,
+    '30': {
+        num: '30',
         center: 'esp',
-        connected: [41],
+        connected: ['41'],
         ord: 4,
         angle: gateAngle(4),
     },
-    {
-        num: 55,
+    '55': {
+        num: '55',
         center: 'esp',
-        connected: [39],
+        connected: ['39'],
         ord: 5,
         angle: gateAngle(5),
     },
-    {
-        num: 37,
+    '37': {
+        num: '37',
         center: 'esp',
-        connected: [40],
+        connected: ['40'],
         ord: 6,
         angle: gateAngle(6),
     },
-    {
-        num: 63,
+    '63': {
+        num: '63',
         center: 'head',
-        connected: [4],
+        connected: ['4'],
         ord: 7,
         angle: gateAngle(7),
     },
-    {
-        num: 22,
+    '22': {
+        num: '22',
         center: 'esp',
-        connected: [12],
+        connected: ['12'],
         ord: 8,
         angle: gateAngle(8),
     },
-    {
-        num: 36,
+    '36': {
+        num: '36',
         center: 'esp',
-        connected: [35],
+        connected: ['35'],
         ord: 9,
         angle: gateAngle(9),
     },
-    {
-        num: 25,
+    '25': {
+        num: '25',
         center: 'identity',
-        connected: [51],
+        connected: ['51'],
         ord: 10,
         angle: gateAngle(10),
     },
-    {
-        num: 17,
+    '17': {
+        num: '17',
         center: 'ajna',
-        connected: [62],
+        connected: ['62'],
         ord: 11,
         angle: gateAngle(11),
     },
-    {
-        num: 21,
+    '21': {
+        num: '21',
         center: 'will',
-        connected: [45],
+        connected: ['45'],
         ord: 12,
         angle: gateAngle(12),
     },
-    {
-        num: 51,
+    '51': {
+        num: '51',
         center: 'will',
-        connected: [26],
+        connected: ['26'],
         ord: 13,
         angle: gateAngle(13),
     },
-    {
-        num: 42,
+    '42': {
+        num: '42',
         center: 'sacral',
-        connected: [53],
+        connected: ['53'],
         ord: 14,
         angle: gateAngle(14),
     },
-    {
-        num: 3,
+    '3': {
+        num: '3',
         center: 'sacral',
-        connected: [60],
+        connected: ['60'],
         ord: 15,
         angle: gateAngle(15),
     },
-    {
-        num: 27,
+    '27': {
+        num: '27',
         center: 'sacral',
-        connected: [50],
+        connected: ['50'],
         ord: 16,
         angle: gateAngle(16),
     },
-    {
-        num: 24,
+    '24': {
+        num: '24',
         center: 'ajna',
-        connected: [61],
+        connected: ['61'],
         ord: 17,
         angle: gateAngle(17),
     },
-    {
-        num: 2,
+    '2': {
+        num: '2',
         center: 'identity',
-        connected: [14],
+        connected: ['14'],
         ord: 18,
         angle: gateAngle(18),
     },
-    {
-        num: 23,
+    '23': {
+        num: '23',
         center: 'throat',
-        connected: [43],
+        connected: ['43'],
         ord: 19,
         angle: gateAngle(19),
     },
-    {
-        num: 8,
+    '8': {
+        num: '8',
         center: 'throat',
-        connected: [1],
+        connected: ['1'],
         ord: 20,
         angle: gateAngle(20),
     },
-    {
-        num: 20,
+    '20': {
+        num: '20',
         center: 'throat',
-        connected: [10, 57, 34],
+        connected: ['10', '57', '34'],
         ord: 21,
         angle: gateAngle(21),
     },
-    {
-        num: 16,
+    '16': {
+        num: '16',
         center: 'throat',
-        connected: [48],
+        connected: ['48'],
         ord: 22,
         angle: gateAngle(22),
     },
-    {
-        num: 35,
+    '35': {
+        num: '35',
         center: 'throat',
-        connected: [36],
+        connected: ['36'],
         ord: 23,
         angle: gateAngle(23),
     },
-    {
-        num: 45,
+    '45': {
+        num: '45',
         center: 'throat',
-        connected: [21],
+        connected: ['21'],
         ord: 24,
         angle: gateAngle(24),
     },
-    {
-        num: 12,
+    '12': {
+        num: '12',
         center: 'throat',
-        connected: [22],
+        connected: ['22'],
         ord: 25,
         angle: gateAngle(25),
     },
-    {
-        num: 15,
+    '15': {
+        num: '15',
         center: 'identity',
-        connected: [5],
+        connected: ['5'],
         ord: 26,
         angle: gateAngle(26),
     },
-    {
-        num: 52,
+    '52': {
+        num: '52',
         center: 'root',
-        connected: [9],
+        connected: ['9'],
         ord: 27,
         angle: gateAngle(27),
     },
-    {
-        num: 39,
+    '39': {
+        num: '39',
         center: 'root',
-        connected: [55],
+        connected: ['55'],
         ord: 28,
         angle: gateAngle(28),
     },
-    {
-        num: 53,
+    '53': {
+        num: '53',
         center: 'root',
-        connected: [42],
+        connected: ['42'],
         ord: 29,
         angle: gateAngle(29),
     },
-    {
-        num: 62,
+    '62': {
+        num: '62',
         center: 'throat',
-        connected: [17],
+        connected: ['17'],
         ord: 30,
         angle: gateAngle(30),
     },
-    {
-        num: 56,
+    '56': {
+        num: '56',
         center: 'throat',
-        connected: [11],
+        connected: ['11'],
         ord: 31,
         angle: gateAngle(31),
     },
-    {
-        num: 31,
+    '31': {
+        num: '31',
         center: 'throat',
-        connected: [7],
+        connected: ['7'],
         ord: 32,
         angle: gateAngle(32),
     },
-    {
-        num: 33,
+    '33': {
+        num: '33',
         center: 'throat',
-        connected: [13],
+        connected: ['13'],
         ord: 33,
         angle: gateAngle(33),
     },
-    {
-        num: 7,
+    '7': {
+        num: '7',
         center: 'identity',
-        connected: [31],
+        connected: ['31'],
         ord: 34,
         angle: gateAngle(34),
     },
-    {
-        num: 4,
+    '4': {
+        num: '4',
         center: 'ajna',
-        connected: [63],
+        connected: ['63'],
         ord: 35,
         angle: gateAngle(35),
     },
-    {
-        num: 29,
+    '29': {
+        num: '29',
         center: 'sacral',
-        connected: [46],
+        connected: ['46'],
         ord: 36,
         angle: gateAngle(36),
     },
-    {
-        num: 59,
+    '59': {
+        num: '59',
         center: 'sacral',
-        connected: [6],
+        connected: ['6'],
         ord: 37,
         angle: gateAngle(37),
     },
-    {
-        num: 40,
+    '40': {
+        num: '40',
         center: 'will',
-        connected: [37],
+        connected: ['37'],
         ord: 38,
         angle: gateAngle(38),
     },
-    {
-        num: 64,
+    '64': {
+        num: '64',
         center: 'head',
-        connected: [47],
+        connected: ['47'],
         ord: 39,
         angle: gateAngle(39),
     },
-    {
-        num: 47,
+    '47': {
+        num: '47',
         center: 'ajna',
-        connected: [64],
+        connected: ['64'],
         ord: 40,
         angle: gateAngle(40),
     },
-    {
-        num: 6,
+    '6': {
+        num: '6',
         center: 'esp',
-        connected: [59],
+        connected: ['59'],
         ord: 41,
         angle: gateAngle(41),
     },
-    {
-        num: 46,
+    '46': {
+        num: '46',
         center: 'identity',
-        connected: [29],
+        connected: ['29'],
         ord: 42,
         angle: gateAngle(42),
     },
-    {
-        num: 18,
+    '18': {
+        num: '18',
         center: 'spleen',
-        connected: [58],
+        connected: ['58'],
         ord: 43,
         angle: gateAngle(43),
     },
-    {
-        num: 48,
+    '48': {
+        num: '48',
         center: 'spleen',
-        connected: [16],
+        connected: ['16'],
         ord: 44,
         angle: gateAngle(44),
     },
-    {
-        num: 57,
+    '57': {
+        num: '57',
         center: 'spleen',
-        connected: [34, 10, 20],
+        connected: ['34', '10', '20'],
         ord: 45,
         angle: gateAngle(45),
     },
-    {
-        num: 32,
+    '32': {
+        num: '32',
         center: 'spleen',
-        connected: [54],
+        connected: ['54'],
         ord: 46,
         angle: gateAngle(46),
     },
-    {
-        num: 50,
+    '50': {
+        num: '50',
         center: 'spleen',
-        connected: [27],
+        connected: ['27'],
         ord: 47,
         angle: gateAngle(47),
     },
-    {
-        num: 28,
+    '28': {
+        num: '28',
         center: 'spleen',
-        connected: [36],
+        connected: ['36'],
         ord: 48,
         angle: gateAngle(48),
     },
-    {
-        num: 44,
+    '44': {
+        num: '44',
         center: 'spleen',
-        connected: [26],
+        connected: ['26'],
         ord: 49,
         angle: gateAngle(49),
     },
-    {
-        num: 1,
+    '1': {
+        num: '1',
         center: 'identity',
-        connected: [8],
+        connected: ['8'],
         ord: 50,
         angle: gateAngle(50),
     },
-    {
-        num: 43,
+    '43': {
+        num: '43',
         center: 'ajna',
-        connected: [23],
+        connected: ['23'],
         ord: 51,
         angle: gateAngle(51),
     },
-    {
-        num: 14,
+    '14': {
+        num: '14',
         center: 'sacral',
-        connected: [2],
+        connected: ['2'],
         ord: 52,
         angle: gateAngle(52),
     },
-    {
-        num: 34,
+    '34': {
+        num: '34',
         center: 'sacral',
-        connected: [57, 10, 20],
+        connected: ['57', '10', '20'],
         ord: 53,
         angle: gateAngle(53),
     },
-    {
-        num: 9,
+    '9': {
+        num: '9',
         center: 'sacral',
-        connected: [52],
+        connected: ['52'],
         ord: 54,
         angle: gateAngle(54),
     },
-    {
-        num: 5,
+    '5': {
+        num: '5',
         center: 'sacral',
-        connected: [15],
+        connected: ['15'],
         ord: 55,
         angle: gateAngle(55),
     },
-    {
-        num: 26,
+    '26': {
+        num: '26',
         center: 'will',
-        connected: [44],
+        connected: ['44'],
         ord: 56,
         angle: gateAngle(56),
     },
-    {
-        num: 11,
+    '11': {
+        num: '11',
         center: 'ajna',
-        connected: [56],
+        connected: ['56'],
         ord: 57,
         angle: gateAngle(57),
     },
-    {
-        num: 10,
+    '10': {
+        num: '10',
         center: 'identity',
-        connected: [20, 57, 34],
+        connected: ['20', '57', '34'],
         ord: 58,
         angle: gateAngle(58),
     },
-    {
-        num: 58,
+    '58': {
+        num: '58',
         center: 'root',
-        connected: [18],
+        connected: ['18'],
         ord: 59,
         angle: gateAngle(59),
     },
-    {
-        num: 38,
+    '38': {
+        num: '38',
         center: 'root',
-        connected: [28],
+        connected: ['28'],
         ord: 60,
         angle: gateAngle(60),
     },
-    {
-        num: 54,
+    '54': {
+        num: '54',
         center: 'root',
-        connected: [32],
+        connected: ['32'],
         ord: 61,
         angle: gateAngle(61),
     },
-    {
-        num: 61,
+    '61': {
+        num: '61',
         center: 'head',
-        connected: [24],
+        connected: ['24'],
         ord: 62,
         angle: gateAngle(62),
     },
-    {
-        num: 60,
+    '60': {
+        num: '60',
         center: 'root',
-        connected: [3],
+        connected: ['3'],
         ord: 63,
         angle: gateAngle(63),
     },
-]
+}
 
-const gateNumbers = allGates.sort((left, right) => left.num - right.num).map(it => it.ord)
+const ordinals: GateNum[] = values(allGates)
+    .sort((left, right) => left.ord - right.ord)
+    .map(({ num }) => num.toString() as GateNum)
 
 /**
  * Return the gate by gave number.
  * @param num Gate number
  * @returns Gate
  */
-export function byNumber(num: number): Gate {
-    return allGates[gateNumbers[num]]
+export function byOrdinal(num: number): Gate {
+    return allGates[ordinals[num]]
 }
 
-export const gatesByCenter = groupBy(gate => gate.center, allGates)
+export const gatesByCenter: CenterRecord<Gate[]> = groupBy(gate => gate.center, values(allGates))

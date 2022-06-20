@@ -25,7 +25,7 @@ export interface PointRel {
     half: Point
 }
 
-export interface ChannelData {
+export interface SimpleChannel {
     name: string
     point1: Point
     arc2: Point
@@ -38,7 +38,7 @@ export interface QuadraticArc extends Arc {
     control: Point
 }
 
-export interface QuadraticData extends ChannelData {
+export interface QuadraticData extends SimpleChannel {
     arc2: Arc
     control2Rel: PointRel
 }
@@ -47,3 +47,5 @@ export interface CubicData extends QuadraticData {
     cubicPoint1: Point
     cubicPoint2Rel: PointRel
 }
+
+export type ChannelData = SimpleChannel | QuadraticData | CubicData

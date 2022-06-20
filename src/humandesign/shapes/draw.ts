@@ -1,10 +1,11 @@
 import { flatten } from 'ramda'
 import type { Path } from 'd3-path'
 import { path } from 'd3-path'
-import type { Point, PointRel, ChannelData, QuadraticData, CubicData, Arc } from './types'
+import type { Point, PointRel, ChannelData, QuadraticData, CubicData, Arc, Offset } from './types'
 
 import { channelData } from './channels'
 import { CenterRecord } from '../models/types'
+import { GateRecord } from '$hd/models/Gate'
 
 const add = (p1: Point, p2: Point): Point => ({ x: p1.x + p2.x, y: p1.y + p2.y })
 
@@ -38,6 +39,73 @@ export const polygons: CenterRecord<string> = {
 
 function toArray(channel: ChannelDraw<ChannelData>): Array<ChartObject> {
     return channel.hasMirror ? [channel, channel.reversed()] : [channel]
+}
+
+const allPips: GateRecord<Offset> = {
+    '64': { x: -34, y: 164 },
+    '61': { x: 0, y: 164 },
+    '63': { x: 34, y: 164 },
+    '43': { x: 1, y: 334 },
+    '17': { x: -24, y: 309 },
+    '11': { x: 24, y: 309 },
+    '47': { x: -34, y: 233 },
+    '24': { x: 0, y: 233 },
+    '4': { x: 34, y: 233 },
+    '31': { x: -34, y: 521 },
+    '8': { x: 0, y: 521 },
+    '33': { x: 31, y: 520 },
+    '45': { x: 58, y: 506 },
+    '20': { x: -56, y: 481 },
+    '12': { x: 57, y: 475 },
+    '16': { x: -56, y: 446 },
+    '35': { x: 56, y: 441 },
+    '62': { x: -29, y: 408 },
+    '56': { x: 31, y: 408 },
+    '23': { x: 2, y: 407 },
+    '2': { x: 0, y: 756 },
+    '46': { x: 28, y: 737 },
+    '15': { x: -28, y: 736 },
+    '25': { x: 76, y: 681 },
+    '10': { x: -70, y: 678 },
+    '13': { x: 27, y: 625 },
+    '7': { x: -27, y: 624 },
+    '1': { x: 0, y: 603 },
+    '42': { x: -31, y: 997 },
+    '3': { x: 0, y: 997 },
+    '9': { x: 31, y: 997 },
+    '27': { x: -57, y: 970 },
+    '59': { x: 56, y: 970 },
+    '34': { x: -56, y: 906 },
+    '5': { x: -30, y: 884 },
+    '14': { x: -1, y: 884 },
+    '29': { x: 31, y: 883 },
+    '58': { x: -56, y: 1170 },
+    '41': { x: 56, y: 1169 },
+    '38': { x: -56, y: 1136 },
+    '39': { x: 57, y: 1136 },
+    '19': { x: 56, y: 1104 },
+    '54': { x: -56, y: 1102 },
+    '53': { x: -33, y: 1077 },
+    '60': { x: 0, y: 1076 },
+    '52': { x: 33, y: 1076 },
+    '18': { x: -323, y: 993 },
+    '28': { x: -294, y: 976 },
+    '32': { x: -264, y: 959 },
+    '50': { x: -224, y: 931 },
+    '44': { x: -271, y: 894 },
+    '57': { x: -300, y: 879 },
+    '48': { x: -329, y: 863 },
+    '40': { x: 216, y: 806 },
+    '26': { x: 115, y: 791 },
+    '51': { x: 153, y: 738 },
+    '21': { x: 178, y: 713 },
+    '30': { x: 323, y: 994 },
+    '55': { x: 293, y: 978 },
+    '49': { x: 261, y: 961 },
+    '6': { x: 224, y: 932 },
+    '37': { x: 271, y: 894 },
+    '22': { x: 303, y: 879 },
+    '36': { x: 330, y: 865 },
 }
 
 export function buildPaths(): Array<ChartObject> {
