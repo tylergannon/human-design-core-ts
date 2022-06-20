@@ -1,6 +1,6 @@
-import type { ChannelData, QuadraticData, CubicData } from './types'
+import type { ChannelData } from './types'
 
-export const channelData: Array<ChannelData | QuadraticData | CubicData> = [
+export const channelData: ChannelData[] = [
     {
         name: 'center',
         arc2: {
