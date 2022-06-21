@@ -63,6 +63,7 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "^7.25.2",
     "@rollup/plugin-typescript": "^8.3.3",
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
