@@ -1,5 +1,8 @@
 import { CenterRecord } from '../models/types'
 
+/**
+ * @public
+ */
 export const polygons: CenterRecord<string> = {
     head: '-103,23 -103,200 99,200 98,24',
     ajna: '100,200 -107,200 -107,369 100,371',

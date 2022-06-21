@@ -1,25 +1,30 @@
 import type { ChartDate, Chart as ApiChart } from '../../astro'
 import { HDPos, PlanetRecord } from './types'
-import { Position } from './Position'
+import type { Position } from './Position'
+import { fromApi as positionFromApi } from './Position'
 
 function apiChartPlanets(chart: ApiChart): PlanetRecord<Position> {
     return {
-        sun: Position.fromApi(chart.sun),
-        earth: Position.fromApi(chart.sun).opposite(),
-        northNode: Position.fromApi(chart.north_node),
-        southNode: Position.fromApi(chart.north_node).opposite(),
-        moon: Position.fromApi(chart.moon),
-        mercury: Position.fromApi(chart.mercury),
-        venus: Position.fromApi(chart.venus),
-        mars: Position.fromApi(chart.mars),
-        jupiter: Position.fromApi(chart.jupiter),
-        saturn: Position.fromApi(chart.saturn),
-        uranus: Position.fromApi(chart.uranus),
-        neptune: Position.fromApi(chart.neptune),
-        pluto: Position.fromApi(chart.pluto),
-        chiron: Position.fromApi(chart.chiron),
+        sun: positionFromApi(chart.sun),
+        earth: positionFromApi(chart.sun).opposite(),
+        northNode: positionFromApi(chart.north_node),
+        southNode: positionFromApi(chart.north_node).opposite(),
+        moon: positionFromApi(chart.moon),
+        mercury: positionFromApi(chart.mercury),
+        venus: positionFromApi(chart.venus),
+        mars: positionFromApi(chart.mars),
+        jupiter: positionFromApi(chart.jupiter),
+        saturn: positionFromApi(chart.saturn),
+        uranus: positionFromApi(chart.uranus),
+        neptune: positionFromApi(chart.neptune),
+        pluto: positionFromApi(chart.pluto),
+        chiron: positionFromApi(chart.chiron),
     }
 }
+/**
+ * Represents the planetary positions on a given date/time.
+ * @public
+ */
 export class Chart {
     readonly chartDate: ChartDate
     readonly planets: PlanetRecord<HDPos>
@@ -28,8 +33,13 @@ export class Chart {
         this.chartDate = chartDate
         this.planets = planets
     }
+}
 
-    static fromApi(apiResult: ApiChart): Chart {
-        return new Chart(apiResult.chart_date, apiChartPlanets(apiResult))
-    }
+/**
+ * @internal
+ * @param apiResult
+ * @returns
+ */
+export const fromApi = (apiResult: ApiChart): Chart => {
+    return new Chart(apiResult.chart_date, apiChartPlanets(apiResult))
 }

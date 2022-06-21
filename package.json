@@ -13,7 +13,7 @@
       "request": "./dist/human-design.umd.js"
     }
   },
-  "types": "./dist/human-design.d.ts",
+  "types": "./dist/human-design-public.d.ts",
   "type": "module",
   "scripts": {
     "build": "vite build",

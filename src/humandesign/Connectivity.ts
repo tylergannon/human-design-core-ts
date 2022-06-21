@@ -31,7 +31,7 @@ const gateNumStr = (gate: Gate) => parseInt(gateNum(gate))
 const gateNum = ({ num }: Gate) => num
 
 /**
- *
+ * @internal
  * @param gates List of the gates in the chart
  * @returns
  */
@@ -65,6 +65,7 @@ const linker =
 const defState = (defined: boolean): DefState => (defined ? 'defined' : 'undefined')
 
 /**
+ * @public
  * Determine the connectivity information for the body graph described by the list of gates.
  * @param gates
  */

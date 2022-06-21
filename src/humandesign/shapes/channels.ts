@@ -1,15 +1,20 @@
 import { path } from 'd3-path'
 import type { Path } from 'd3-path'
 import { GateNum, GateRecord } from '../models/types'
-import type { Point, PointRel, Arc, ChartObject } from './types'
-
-type WidthType = 'full' | 'half'
+import type { Point, PointRel, Arc, ChartObject, WidthType } from './types'
 
 const pointFinders: Record<WidthType, (x: PointRel) => Point> = {
     half: ({ half }: PointRel) => half,
     full: ({ full }: PointRel) => full,
 }
 
+/**
+ * @public
+ * Get the ChartObject representing the channel path of the gate.
+ * @param type "full" or "half" to denote the width of the channel to create
+ * @param gate The gate whose channel to retrieve
+ * @returns ChartObject representing the channel path of the gate.
+ */
 export function getPath(type: WidthType, gate: GateNum): ChartObject {
     const data = Channels[gate]
     const klass = isCubicCurve(data) ? CubicDraw : isQuadraticCurve(data) ? QuadraticDraw : LineDraw
