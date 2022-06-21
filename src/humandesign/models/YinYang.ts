@@ -1,5 +1,8 @@
 import type { YinYang } from './types'
 
+/**
+ * @public
+ */
 export const Yin: YinYang = {
     yin: true,
     yang: false,
@@ -8,6 +11,9 @@ export const Yin: YinYang = {
     },
 }
 
+/**
+ * @public
+ */
 export const Yang: YinYang = {
     yin: false,
     yang: true,

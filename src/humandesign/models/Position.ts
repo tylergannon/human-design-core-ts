@@ -12,7 +12,7 @@
 
 import type { ObjectSpeed, Scientific, Position as ApiPosition } from '../../astro'
 import type { Gate, HDLine, HDPos, Zodiac } from './types'
-import { Angle } from './Angle'
+import { fromApi as angleFromApi, Angle } from './Angle'
 import { SignedAngle } from '../../astro'
 import { zodiacNames } from './types'
 import { angleToGate, getLine } from './Gate'
@@ -22,6 +22,9 @@ const zodiacOpposites = concat(zodiacNames.slice(6), zodiacNames.slice(0, 6))
 
 const zodiacOpposite = (zodiac: Zodiac) => zodiacOpposites[zodiacNames.indexOf(zodiac)]
 
+/**
+ * @public
+ */
 export class Position implements HDPos {
     readonly lng: Angle
     readonly lat: SignedAngle
@@ -71,15 +74,21 @@ export class Position implements HDPos {
             this.zodiacLng
         )
     }
+}
 
-    static fromApi(position: ApiPosition): Position {
-        return new Position(
-            Angle.fromApi(position.lng),
-            position.lat,
-            position.distance,
-            position.speed,
-            position.zodiac.toLowerCase() as Zodiac,
-            Angle.fromApi(position.zodiacLng)
-        )
-    }
+/**
+ * @internal
+ * Get a Position object from the type returned by the Api Client
+ * @param position position returned by the API client
+ * @returns Human Design Position object for the equivalent data
+ */
+export const fromApi = (position: ApiPosition): Position => {
+    return new Position(
+        angleFromApi(position.lng),
+        position.lat,
+        position.distance,
+        position.speed,
+        position.zodiac.toLowerCase() as Zodiac,
+        angleFromApi(position.zodiacLng)
+    )
 }

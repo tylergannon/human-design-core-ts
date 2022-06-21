@@ -1,6 +1,9 @@
 import type { Angle } from './Angle'
 import type { Maybe } from 'purify-ts'
 
+/**
+ * @public
+ */
 export type Zodiac =
     | 'aries'
     | 'taurus'
@@ -14,6 +17,10 @@ export type Zodiac =
     | 'capricorn'
     | 'aquarius'
     | 'pisces'
+
+/**
+ * @internal
+ */
 export const zodiacNames: Zodiac[] = [
     'aries',
     'taurus',
@@ -28,7 +35,15 @@ export const zodiacNames: Zodiac[] = [
     'aquarius',
     'pisces',
 ]
+
+/**
+ * @public
+ */
 export type ZodiacRecord<T> = Record<Zodiac, T>
+
+/**
+ * @public
+ */
 export const zodiacRecord = <T>(fn: (zodiac: Zodiac) => T): ZodiacRecord<T> => ({
     aries: fn('aries'),
     taurus: fn('taurus'),
@@ -44,6 +59,9 @@ export const zodiacRecord = <T>(fn: (zodiac: Zodiac) => T): ZodiacRecord<T> => (
     pisces: fn('pisces'),
 })
 
+/**
+ * @public
+ */
 export type Planet =
     | 'sun'
     | 'earth'
@@ -59,6 +77,10 @@ export type Planet =
     | 'neptune'
     | 'pluto'
     | 'chiron'
+
+/**
+ * @internal
+ */
 export const planetNames: Planet[] = [
     'sun',
     'earth',
@@ -75,8 +97,15 @@ export const planetNames: Planet[] = [
     'pluto',
     'chiron',
 ]
+
+/**
+ * @public
+ */
 export type PlanetRecord<T> = Record<Planet, T>
 
+/**
+ * @public
+ */
 export const planetRecord = <T>(fn: (planet: Planet) => T): PlanetRecord<T> => ({
     sun: fn('sun'),
     earth: fn('earth'),
@@ -94,7 +123,13 @@ export const planetRecord = <T>(fn: (planet: Planet) => T): PlanetRecord<T> => (
     chiron: fn('chiron'),
 })
 
+/**
+ * @public
+ */
 export type Center = 'head' | 'ajna' | 'throat' | 'identity' | 'sacral' | 'spleen' | 'root' | 'will' | 'esp'
+/**
+ * @internal
+ */
 export const centerNames: Center[] = [
     'head',
     'ajna',
@@ -106,7 +141,15 @@ export const centerNames: Center[] = [
     'will',
     'esp',
 ]
+
+/**
+ * @public
+ */
 export type CenterRecord<T> = Record<Center, T>
+
+/**
+ * @public
+ */
 export const centerRecord = <T>(fn: (center: Center) => T): CenterRecord<T> => ({
     head: fn('head'),
     ajna: fn('ajna'),
@@ -119,7 +162,14 @@ export const centerRecord = <T>(fn: (center: Center) => T): CenterRecord<T> => (
     esp: fn('esp'),
 })
 
+/**
+ * @public
+ */
 export type Authority = 'emotional' | 'sacral' | 'splenic' | 'ego' | 'self' | 'mental' | 'noAuthority'
+
+/**
+ * @internal
+ */
 export const authorityNames: Authority[] = [
     'emotional',
     'sacral',
@@ -129,7 +179,15 @@ export const authorityNames: Authority[] = [
     'mental',
     'noAuthority',
 ]
+
+/**
+ * @public
+ */
 export type AuthorityRecord<T> = Record<Authority, T>
+
+/**
+ * @public
+ */
 export const authorityRecord = <T>(fn: (authority: Authority) => T): AuthorityRecord<T> => ({
     emotional: fn('emotional'),
     sacral: fn('sacral'),
@@ -140,11 +198,24 @@ export const authorityRecord = <T>(fn: (authority: Authority) => T): AuthorityRe
     noAuthority: fn('noAuthority'),
 })
 
+/**
+ * @public
+ */
 export type HDType = 'Generator' | 'Manifesting Generator' | 'Manifestor' | 'Projector' | 'Reflector'
 
+/**
+ * @public
+ */
 export type Motor = 'root' | 'sacral' | 'will' | 'esp'
+
+/**
+ * @internal
+ */
 export const motorNames: Motor[] = ['root', 'sacral', 'will', 'esp']
 
+/**
+ * @public
+ */
 export type DefState = 'defined' | 'undefined'
 
 /**
@@ -153,15 +224,26 @@ export type DefState = 'defined' | 'undefined'
  *   - Defined in the Design side,
  *   - Defined in both sides,
  *   - Not defined.
+ * @public
  */
 export type GateDefType = 'natal' | 'design' | 'both' | 'undefined'
+
+/**
+ * @public
+ */
 export type HDLine = '1' | '2' | '3' | '4' | '5' | '6'
 
+/**
+ * @public
+ */
 export interface HDProfile {
     readonly design: HDLine
     readonly natal: HDLine
 }
 
+/**
+ * @public
+ */
 export interface HDPos {
     readonly gate: Gate
     readonly line: HDLine
@@ -170,18 +252,18 @@ export interface HDPos {
     readonly zodiacLng: Angle
 }
 
-export interface ChartOverview {
-    readonly type: HDType
-    readonly authority: Authority
-    readonly profile: HDProfile
-}
-
+/**
+ * @public
+ */
 export interface YinYang {
     readonly yin: boolean
     readonly yang: boolean
     other(): YinYang
 }
 
+/**
+ * @public
+ */
 export type GateNum =
     | '1'
     | '2'
@@ -247,7 +329,15 @@ export type GateNum =
     | '62'
     | '63'
     | '64'
+
+/**
+ * @public
+ */
 export type GateRecord<T> = Record<GateNum, T>
+
+/**
+ * @public
+ */
 export interface Gate {
     readonly num: GateNum
     readonly ord: number
@@ -255,6 +345,10 @@ export interface Gate {
     readonly connected: Array<GateNum>
     readonly angle: Angle
 }
+
+/**
+ * @public
+ */
 
 export interface Connectivity {
     /**
@@ -285,12 +379,19 @@ export interface Connectivity {
     readonly solutions: Maybe<Gate[][]>
 }
 
+/**
+ * @public
+ */
+
 export interface Hexagram {
     readonly num: number
     readonly ord: number
     readonly lines: Array<YinYang>
 }
 
+/**
+ * @public
+ */
 export interface ZodiacAngle {
     zodiac: Zodiac
     angle: Angle

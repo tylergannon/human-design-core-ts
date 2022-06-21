@@ -1,6 +1,9 @@
 import type { GateRecord } from '../models/types'
 import type { Offset } from './types'
 
+/**
+ * @public
+ */
 export const allPips: GateRecord<Offset> = {
     '64': { x: -34, y: 164 },
     '61': { x: 0, y: 164 },

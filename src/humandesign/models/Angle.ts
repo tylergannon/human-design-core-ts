@@ -1,6 +1,9 @@
 import type { Angle as ApiAngle } from '../../astro'
 
 const radiansPerDegree = Math.PI / 180
+/**
+ * @public
+ */
 export class Angle {
     private _radians?: number
     private _cos?: number
@@ -55,10 +58,16 @@ export class Angle {
     div(other: Angle): number {
         return this.toFloat() / other.toFloat()
     }
+}
 
-    static fromApi(apiAngle: ApiAngle): Angle {
-        return new Angle(apiAngle.deg, apiAngle.min, apiAngle.sec)
-    }
+/**
+ * Get an Angle object from the Angle interface provided by the API client.
+ * @internal
+ * @param apiAngle
+ * @returns
+ */
+export const fromApi = (apiAngle: ApiAngle): Angle => {
+    return new Angle(apiAngle.deg, apiAngle.min, apiAngle.sec)
 }
 
 function normalizeAngle(deg: number): number {
@@ -93,4 +102,8 @@ function subtract(one: Angle, other: Angle): Angle {
     return reduceAngle(one.deg - other.deg, one.min - other.min, one.sec - other.sec)
 }
 
+/**
+ * An angle of zero degrees
+ * @public
+ */
 export const ZERO_DEGREES = Angle.of(0)

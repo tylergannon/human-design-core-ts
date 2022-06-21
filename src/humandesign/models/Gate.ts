@@ -16,14 +16,29 @@ function gateAngle(ord: number): Angle {
     return gate41Angle.plus(gateArc.times(ord))
 }
 
+/**
+ * @internal
+ * @param angle
+ * @returns
+ */
 export function getLine(angle: Angle): HDLine {
     return (1 + ~~((normalizeF(angle) % gateArcF) % lineArcF)).toString() as HDLine
 }
 
+/**
+ * Returns the Gate corresponding to the longitudinal position of the given angle.
+ * @internal
+ * @param angle
+ * @returns
+ */
 export function angleToGate(angle: Angle): Gate {
     return byOrdinal(~~(normalizeF(angle) / gateArcF))
 }
 
+/**
+ * @public
+ * @returns GateRecord mapping gate numbers to the Gate configuration object.
+ */
 export const gates: () => GateRecord<Gate> = () => ({ ...allGates })
 
 const allGates: GateRecord<Gate> = {
@@ -483,6 +498,7 @@ const ordinals: GateNum[] = values(allGates)
 
 /**
  * Return the gate by gave number.
+ * @internal
  * @param num Gate number
  * @returns Gate
  */
@@ -490,4 +506,8 @@ export function byOrdinal(num: number): Gate {
     return allGates[ordinals[num]]
 }
 
+/**
+ * Maps each center to the gates that are attached to it in the body graph.
+ * @public
+ */
 export const gatesByCenter: CenterRecord<Gate[]> = groupBy(gate => gate.center, values(allGates))

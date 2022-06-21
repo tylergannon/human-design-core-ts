@@ -1,6 +1,9 @@
 import { Yin, Yang } from './YinYang'
 import type { Hexagram } from './types'
 
+/**
+ * @internal
+ */
 export const hexagrams: Array<Hexagram> = [
     { num: 2, lines: [Yin, Yin, Yin, Yin, Yin, Yin] },
     { num: 23, lines: [Yang, Yin, Yin, Yin, Yin, Yin] },
@@ -69,7 +72,7 @@ export const hexagrams: Array<Hexagram> = [
 ].map((it, idx) => ({ ...it, ord: idx }))
 
 /**
- *
+ * @internal
  * @param num Hexagram number (one-based)
  * @returns The corresponding Hexagram object
  */

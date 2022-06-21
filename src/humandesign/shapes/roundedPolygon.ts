@@ -1,28 +1,43 @@
 import { Angle, ZERO_DEGREES } from '../models/Angle'
-import type { Offset, Size } from './types'
+import type { Offset, OffsetFrom, Size } from './types'
 import { add, sin, cos, transform } from './arithmetic'
 import type { Transformer } from './arithmetic'
 import { maxBy, tail, reduce, minBy, min, max } from 'ramda'
 import { path, type Path } from 'd3-path'
 
-enum OffsetFrom {
-    Center,
-    TopLeft,
-}
-
+/**
+ * Creates an SVG path for a square with rounded corners.
+ * @public
+ * @param size Size of object to create.  Should be square.
+ * @param offset Position in the field, where the object will be rendered.
+ * @param rotate Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
+ * @param offsetFrom Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
+ * @param radiusRatio The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
+ * @returns string svg path.
+ */
 export const roundedSquare = (
     size: Size,
-    offsetCenter: Offset = ORIGIN_POINT,
+    offset: Offset = ORIGIN_POINT,
     rotate: Angle = ZERO_DEGREES,
-    offsetFrom: OffsetFrom = OffsetFrom.Center,
+    offsetFrom: OffsetFrom = 'center',
     radiusRatio: number = DEFAULT_RADIUS_RATIO
-) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.square, rotate), radiusRatio)
+) => roundedPolygon(size, offset, offsetFrom, rotateAngles(PolygonAngles.square, rotate), radiusRatio)
 
+/**
+ * Creates an SVG path for a triangle with rounded corners.
+ * @public
+ * @param size Size of object to create.  Should be square.
+ * @param offset Position in the field, where the object will be rendered.
+ * @param rotate Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
+ * @param offsetFrom Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
+ * @param radiusRatio The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
+ * @returns string svg path.
+ */
 export const roundedTriangle = (
     size: Size,
     offsetCenter: Offset = ORIGIN_POINT,
     rotate: Angle = ZERO_DEGREES,
-    offsetFrom: OffsetFrom = OffsetFrom.Center,
+    offsetFrom: OffsetFrom = 'center',
     radiusRatio: number = DEFAULT_RADIUS_RATIO
 ) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.triangle, rotate), radiusRatio)
 
@@ -71,7 +86,7 @@ const last = <T>(arr: T[]): T => {
 function roundedPolygon(
     size: Size,
     offset: Offset = ORIGIN_POINT,
-    offsetFrom: OffsetFrom = OffsetFrom.Center,
+    offsetFrom: OffsetFrom = 'center',
     angles: Angle[] = PolygonAngles.triangle,
     radiusRatio: number = DEFAULT_RADIUS_RATIO
 ): string {
@@ -81,7 +96,7 @@ function roundedPolygon(
     const radius = width / widthPerRadius
     const cornerRadius = radius * radiusRatio
     offset =
-        offsetFrom === OffsetFrom.Center
+        offsetFrom === 'center'
             ? offset
             : add(offset, {
                   x: cornerRadius - radius * minX,
