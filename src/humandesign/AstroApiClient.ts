@@ -1,4 +1,4 @@
-import { Configuration, DefaultApiFp } from '../astro'
+import { CityGeoFacts, Configuration, DefaultApiFp } from '../astro'
 import type { BirthChart } from './models/BirthChart'
 import { fromApi } from './models/BirthChart'
 
@@ -7,6 +7,12 @@ import { fromApi } from './models/BirthChart'
  */
 export class AstroApiClient {
     private readonly apiClient: ReturnType<typeof DefaultApiFp>
+
+    async searchCities(q: string): Promise<CityGeoFacts[]> {
+        const req = await this.apiClient.searchCitiesCitiesGet(q)
+        const res = await req()
+        return res.data
+    }
 
     /**
      * @public

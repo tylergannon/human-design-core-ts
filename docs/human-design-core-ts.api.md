@@ -51,6 +51,8 @@ export class AstroApiClient {
     getSaturnReturn(tz: string, date: string, time: string): Promise<BirthChart>;
     // (undocumented)
     getUranusOpposition(tz: string, date: string, time: string): Promise<BirthChart>;
+    // (undocumented)
+    searchCities(q: string): Promise<CityGeoFacts[]>;
 }
 
 // @public (undocumented)
@@ -94,6 +96,28 @@ export interface ChartObject {
     readonly name: string;
     // (undocumented)
     readonly path: string;
+}
+
+// @public (undocumented)
+export interface CityGeoFacts {
+    // (undocumented)
+    'admin_name': string;
+    // (undocumented)
+    'ascii_name': string;
+    // (undocumented)
+    'country': string;
+    // (undocumented)
+    'id': number;
+    // (undocumented)
+    'iso3': string;
+    // (undocumented)
+    'lat': number;
+    // (undocumented)
+    'lng': number;
+    // (undocumented)
+    'name': string;
+    // (undocumented)
+    'zone': string;
 }
 
 // @public (undocumented)
@@ -146,8 +170,6 @@ export interface HDPos {
     readonly line: HDLine;
     // (undocumented)
     readonly lng: Angle;
-    // Warning: (ae-forgotten-export) The symbol "Zodiac" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly zodiac: Zodiac;
     // (undocumented)
@@ -183,6 +205,16 @@ export type Measurement = Record<string, number>;
 // @public (undocumented)
 export type Motor = 'root' | 'sacral' | 'will' | 'esp';
 
+// @public (undocumented)
+export interface ObjectSpeed {
+    // (undocumented)
+    'distance': Scientific;
+    // (undocumented)
+    'lat': Scientific;
+    // (undocumented)
+    'lng': Scientific;
+}
+
 // Warning: (ae-incompatible-release-tags) The symbol "Offset" is marked as @public, but its signature references "Measurement" which is marked as @internal
 //
 // @public (undocumented)
@@ -208,14 +240,10 @@ export const polygons: CenterRecord<string>;
 // @public (undocumented)
 export class Position implements HDPos {
     constructor(lng: Angle, lat: SignedAngle, distance: Scientific, speed: ObjectSpeed, zodiac: Zodiac, zodiacLng: Angle);
-    // Warning: (ae-forgotten-export) The symbol "Scientific" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly distance: Scientific;
     // (undocumented)
     get gate(): Gate;
-    // Warning: (ae-forgotten-export) The symbol "SignedAngle" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly lat: SignedAngle;
     // (undocumented)
@@ -224,8 +252,6 @@ export class Position implements HDPos {
     readonly lng: Angle;
     // (undocumented)
     opposite(): Position;
-    // Warning: (ae-forgotten-export) The symbol "ObjectSpeed" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly speed: ObjectSpeed;
     // (undocumented)
@@ -239,6 +265,26 @@ export const roundedSquare: (size: Size, offset?: Offset, rotate?: Angle, offset
 
 // @public
 export const roundedTriangle: (size: Size, offsetCenter?: Offset, rotate?: Angle, offsetFrom?: OffsetFrom, radiusRatio?: number) => string;
+
+// @public (undocumented)
+export interface Scientific {
+    // (undocumented)
+    'e': number;
+    // (undocumented)
+    'qty': number;
+}
+
+// @public (undocumented)
+export interface SignedAngle {
+    // (undocumented)
+    'deg': number;
+    // (undocumented)
+    'min': number;
+    // (undocumented)
+    'sec': number;
+    // (undocumented)
+    'sign': number;
+}
 
 // Warning: (ae-incompatible-release-tags) The symbol "Size" is marked as @public, but its signature references "Measurement" which is marked as @internal
 //
@@ -268,6 +314,9 @@ export interface YinYang {
     // (undocumented)
     readonly yin: boolean;
 }
+
+// @public (undocumented)
+export type Zodiac = 'aries' | 'taurus' | 'gemini' | 'cancer' | 'leo' | 'virgo' | 'libra' | 'scorpio' | 'sagittarius' | 'capricorn' | 'aquarius' | 'pisces';
 
 // (No @packageDocumentation comment for this package)
 

@@ -23,324 +23,115 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 
 /**
  * 
- * 
- *  Angle
  */
 export interface Angle {
-    /**
-     * 
-     * 
-     * 
-     */
     'deg': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'min': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'sec': number;
 }
 /**
  * 
- * 
- *  Chart
  */
 export interface Chart {
-    /**
-     * 
-     * 
-     * 
-     */
     'chart_date': ChartDate;
-    /**
-     * 
-     * 
-     * 
-     */
     'sun': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'moon': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'north_node': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'mercury': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'venus': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'mars': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'jupiter': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'saturn': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'chiron': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'uranus': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'neptune': Position;
-    /**
-     * 
-     * 
-     * 
-     */
     'pluto': Position;
 }
 /**
  * 
- * 
- *  ChartDate
  */
 export interface ChartDate {
-    /**
-     * 
-     * 
-     * 
-     */
     'date': string;
-    /**
-     * 
-     * 
-     * 
-     */
     'time': string;
-    /**
-     * 
-     * 
-     * 
-     */
     'tz': string;
 }
 /**
+ * @public
+ */
+export interface CityGeoFacts {
+    'id': number;
+    'name': string;
+    'ascii_name': string;
+    'lat': number;
+    'lng': number;
+    'country': string;
+    'iso3': string;
+    'admin_name': string;
+    'zone': string;
+}
+/**
  * 
- * 
- *  HDChart
  */
 export interface HDChart {
-    /**
-     * 
-     * 
-     * 
-     */
     'design': Chart;
-    /**
-     * 
-     * 
-     * 
-     */
     'natal': Chart;
 }
 /**
  * 
- * 
- *  HTTPValidationError
  */
 export interface HTTPValidationError {
-    /**
-     * 
-     * 
-     * 
-     */
     'detail'?: Array<ValidationError>;
 }
 /**
  * 
- * 
- *  LocationInner
  */
 export interface LocationInner {
 }
 /**
- * 
- * 
- *  ObjectSpeed
+ * @public
  */
 export interface ObjectSpeed {
-    /**
-     * 
-     * 
-     * 
-     */
     'lng': Scientific;
-    /**
-     * 
-     * 
-     * 
-     */
     'lat': Scientific;
-    /**
-     * 
-     * 
-     * 
-     */
     'distance': Scientific;
 }
 /**
  * 
- * 
- *  Position
  */
 export interface Position {
-    /**
-     * 
-     * 
-     * 
-     */
     'lng': Angle;
-    /**
-     * 
-     * 
-     * 
-     */
     'lat': SignedAngle;
-    /**
-     * 
-     * 
-     * 
-     */
     'distance': Scientific;
-    /**
-     * 
-     * 
-     * 
-     */
     'speed': ObjectSpeed;
-    /**
-     * 
-     * 
-     * 
-     */
     'zodiac': Zodiac;
-    /**
-     * 
-     * 
-     * 
-     */
     'zodiacLng': Angle;
 }
 /**
- * 
- * 
- *  Scientific
+ * @public
  */
 export interface Scientific {
-    /**
-     * 
-     * 
-     * 
-     */
     'qty': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'e': number;
 }
 /**
- * 
- * 
- *  SignedAngle
+ * @public
  */
 export interface SignedAngle {
-    /**
-     * 
-     * 
-     * 
-     */
     'sign': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'deg': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'min': number;
-    /**
-     * 
-     * 
-     * 
-     */
     'sec': number;
 }
 /**
  * 
- * 
- *  ValidationError
  */
 export interface ValidationError {
-    /**
-     * 
-     * 
-     * 
-     */
     'loc': Array<LocationInner>;
-    /**
-     * 
-     * 
-     * 
-     */
     'msg': string;
-    /**
-     * 
-     * 
-     * 
-     */
     'type': string;
 }
 /**
  * An enumeration.
- * 
  * @enum {string}
  */
 
@@ -365,7 +156,6 @@ export type Zodiac = typeof Zodiac[keyof typeof Zodiac];
 
 /**
  * DefaultApi - axios parameter creator
- * 
  */
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -520,6 +310,51 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 
+         * @summary Search Cities
+         * @param {string} q 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCitiesCitiesGet: async (q: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'q' is not null or undefined
+            assertParamExists('searchCitiesCitiesGet', 'q', q)
+            const localVarPath = `/cities`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication APIKeyCookie required
+
+            // authentication APIKeyHeader required
+            await setApiKeyToObject(localVarHeaderParameter, "Api-Key", configuration)
+
+            // authentication APIKeyQuery required
+            await setApiKeyToObject(localVarQueryParameter, "apiKey", configuration)
+
+            if (q !== undefined) {
+                localVarQueryParameter['q'] = q;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
          * @summary 
          * @param {string} tz 
@@ -599,7 +434,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * DefaultApi - functional programming interface
- * 
  */
 export const DefaultApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
@@ -635,6 +469,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 
+         * @summary Search Cities
+         * @param {string} q 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchCitiesCitiesGet(q: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CityGeoFacts>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchCitiesCitiesGet(q, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
          * @summary 
          * @param {string} tz 
@@ -654,7 +499,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 
 /**
  * DefaultApi - factory interface
- * 
  */
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DefaultApiFp(configuration)
@@ -688,6 +532,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.saturnReturnGet(tz, localDate, localTime, lat, lng, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @summary Search Cities
+         * @param {string} q 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCitiesCitiesGet(q: string, options?: any): AxiosPromise<Array<CityGeoFacts>> {
+            return localVarFp.searchCitiesCitiesGet(q, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
          * @summary 
          * @param {string} tz 
@@ -706,7 +560,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * DefaultApi - object-oriented interface
- * 
  * @class DefaultApi
  * @extends {BaseAPI}
  */
@@ -721,7 +574,6 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * 
      */
     public chartGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).chartGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
@@ -737,10 +589,20 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * 
      */
     public saturnReturnGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).saturnReturnGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Search Cities
+     * @param {string} q 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public searchCitiesCitiesGet(q: string, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).searchCitiesCitiesGet(q, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -753,7 +615,6 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * 
      */
     public uranusOppositionGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).uranusOppositionGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));

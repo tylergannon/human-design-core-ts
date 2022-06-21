@@ -24,6 +24,8 @@ export type {
     PlanetRecord,
     Position,
     YinYang,
+    Zodiac,
 } from './models/index'
+
 export { Yang, Yin } from './models/index'
 export type { Measurement, ChartObject, WidthType, Size, Offset, OffsetFrom } from './shapes/index'
