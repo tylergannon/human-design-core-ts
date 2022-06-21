@@ -1,3 +1,20 @@
+# [2.1.0](https://github.com/tylergannon/human-design-core-ts/compare/v2.0.0...v2.1.0) (2022-06-21)
+
+
+### Chore
+
+* semantic-release (2.0.1) ([ffaf950](https://github.com/tylergannon/human-design-core-ts/commit/ffaf9509a7937855289e720277fdab46ed4d574b))
+
+### Fix
+
+* add missing dev dependency (api-extractor) ([c534d96](https://github.com/tylergannon/human-design-core-ts/commit/c534d960235878df990d477f7b9e5ffd967fe727))
+* types not included in build ([09ce519](https://github.com/tylergannon/human-design-core-ts/commit/09ce519a11c717c35bee55d01fb7bea0daa172d4))
+* Types should now be exported by build. ([c145b40](https://github.com/tylergannon/human-design-core-ts/commit/c145b4081bfdb726af4030a26490d520c276c1c6))
+
+### New
+
+* Search cities using AstroApiClient. ([c3a57b6](https://github.com/tylergannon/human-design-core-ts/commit/c3a57b624ce8c52de9e3f725c60c7cbe426ada37))
+
 ## [2.0.1](https://github.com/tylergannon/human-design-core-ts/compare/v2.0.0...v2.0.1) (2022-06-21)
 
 
