@@ -1,3 +1,14 @@
+# [2.0.0](https://github.com/tylergannon/human-design-core-ts/compare/v1.4.0...v2.0.0) (2022-06-21)
+
+
+### Breaking
+
+* Rewrite API contract ([f3cae0c](https://github.com/tylergannon/human-design-core-ts/commit/f3cae0c63dcb7c0ce82732845e64c15ca00dc585))
+
+### Build
+
+* Vite+Rollup now manages bundling. ([22f3592](https://github.com/tylergannon/human-design-core-ts/commit/22f3592c5b2040951a64d842d25273194533dc40))
+
 # [1.4.0](https://github.com/tylergannon/human-design-core-ts/compare/v1.3.2...v1.4.0) (2022-06-21)
 
 
