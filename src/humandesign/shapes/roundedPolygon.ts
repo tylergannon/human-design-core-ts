@@ -8,11 +8,11 @@ import { path, type Path } from 'd3-path'
 /**
  * Creates an SVG path for a square with rounded corners.
  * @public
- * @param size Size of object to create.  Should be square.
- * @param offset Position in the field, where the object will be rendered.
- * @param rotate Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
- * @param offsetFrom Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
- * @param radiusRatio The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
+ * @param size -  Size of object to create.  Should be square.
+ * @param offset -  Position in the field, where the object will be rendered.
+ * @param rotate -  Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
+ * @param offsetFrom -  Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
+ * @param radiusRatio -  The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
  * @returns string svg path.
  */
 export const roundedSquare = (
@@ -26,11 +26,11 @@ export const roundedSquare = (
 /**
  * Creates an SVG path for a triangle with rounded corners.
  * @public
- * @param size Size of object to create.  Should be square.
- * @param offset Position in the field, where the object will be rendered.
- * @param rotate Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
- * @param offsetFrom Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
- * @param radiusRatio The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
+ * @param size -  Size of object to create.  Should be square.
+ * @param offset -  Position in the field, where the object will be rendered.
+ * @param rotate -  Angle of rotation.  Angle is counter-clockwise and zero is to the right of the origin.
+ * @param offsetFrom -  Anchor for the offset.  "center" means that `offset` provides the coordinates for the center of the object.  "topLeft" indicates that `offset` should be interpreted as the location of the top left corner of the object.
+ * @param radiusRatio -  The radius of the corners, as a ratio of it to the radius of the "circle".  Default 0.6.
  * @returns string svg path.
  */
 export const roundedTriangle = (

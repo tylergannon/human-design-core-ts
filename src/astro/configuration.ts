@@ -26,7 +26,7 @@ export interface ConfigurationParameters {
 export class Configuration {
     /**
      * parameter for apiKey security
-     * @param name security name
+     * @param name -  security name
      * @memberof Configuration
      */
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
@@ -46,8 +46,8 @@ export class Configuration {
     password?: string;
     /**
      * parameter for oauth2 security
-     * @param name security name
-     * @param scopes oauth2 scope
+     * @param name -  security name
+     * @param scopes -  oauth2 scope
      * @memberof Configuration
      */
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
@@ -91,7 +91,7 @@ export class Configuration {
      *   application/json; charset=UTF8
      *   APPLICATION/JSON
      *   application/vnd.company+json
-     * @param mime - MIME (Multipurpose Internet Mail Extensions)
+     * @param mime -  - MIME (Multipurpose Internet Mail Extensions)
      * @return True if the given MIME is JSON, false otherwise.
      */
     public isJsonMime(mime: string): boolean {

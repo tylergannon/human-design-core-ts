@@ -18,7 +18,7 @@ function gateAngle(ord: number): Angle {
 
 /**
  * @internal
- * @param angle
+ * @param angle -
  * @returns
  */
 export function getLine(angle: Angle): HDLine {
@@ -28,7 +28,7 @@ export function getLine(angle: Angle): HDLine {
 /**
  * Returns the Gate corresponding to the longitudinal position of the given angle.
  * @internal
- * @param angle
+ * @param angle -
  * @returns
  */
 export function angleToGate(angle: Angle): Gate {
@@ -499,7 +499,7 @@ const ordinals: GateNum[] = values(allGates)
 /**
  * Return the gate by gave number.
  * @internal
- * @param num Gate number
+ * @param num -  Gate number
  * @returns Gate
  */
 export function byOrdinal(num: number): Gate {

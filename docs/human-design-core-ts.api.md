@@ -194,7 +194,7 @@ export interface Offset extends Measurement {
 }
 
 // @public (undocumented)
-export type OffsetFrom = "center" | "topLeft";
+export type OffsetFrom = 'center' | 'topLeft';
 
 // @public (undocumented)
 export type Planet = 'sun' | 'earth' | 'moon' | 'northNode' | 'southNode' | 'mercury' | 'venus' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune' | 'pluto' | 'chiron';

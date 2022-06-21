@@ -16,7 +16,7 @@
   "types": "./dist/human-design-public.d.ts",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && api-extractor run",
     "clean": "rm -rf ./dist/",
     "cm": "cz",
     "coverage": "codecov",

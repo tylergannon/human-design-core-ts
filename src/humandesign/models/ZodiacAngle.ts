@@ -4,7 +4,7 @@ import type { ZodiacAngle } from './types'
 
 /**
  * @internal
- * @param param0
+ * @param param0 -
  * @returns
  */
 export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
@@ -14,7 +14,7 @@ export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
 /**
  * Convert an Angle into a ZodiacAngle
  * @internal
- * @param angle angle to convert
+ * @param angle -  angle to convert
  * @returns the given angle represented by an angle within a Zodiac sign.
  */
 export function zodiacAngle(angle: Angle): ZodiacAngle {

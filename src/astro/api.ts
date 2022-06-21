@@ -23,324 +23,324 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 
 /**
  * 
- * @export
- * @interface Angle
+ * 
+ *  Angle
  */
 export interface Angle {
     /**
      * 
-     * @type {number}
-     * @memberof Angle
+     * 
+     * 
      */
     'deg': number;
     /**
      * 
-     * @type {number}
-     * @memberof Angle
+     * 
+     * 
      */
     'min': number;
     /**
      * 
-     * @type {number}
-     * @memberof Angle
+     * 
+     * 
      */
     'sec': number;
 }
 /**
  * 
- * @export
- * @interface Chart
+ * 
+ *  Chart
  */
 export interface Chart {
     /**
      * 
-     * @type {ChartDate}
-     * @memberof Chart
+     * 
+     * 
      */
     'chart_date': ChartDate;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'sun': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'moon': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'north_node': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'mercury': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'venus': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'mars': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'jupiter': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'saturn': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'chiron': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'uranus': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'neptune': Position;
     /**
      * 
-     * @type {Position}
-     * @memberof Chart
+     * 
+     * 
      */
     'pluto': Position;
 }
 /**
  * 
- * @export
- * @interface ChartDate
+ * 
+ *  ChartDate
  */
 export interface ChartDate {
     /**
      * 
-     * @type {string}
-     * @memberof ChartDate
+     * 
+     * 
      */
     'date': string;
     /**
      * 
-     * @type {string}
-     * @memberof ChartDate
+     * 
+     * 
      */
     'time': string;
     /**
      * 
-     * @type {string}
-     * @memberof ChartDate
+     * 
+     * 
      */
     'tz': string;
 }
 /**
  * 
- * @export
- * @interface HDChart
+ * 
+ *  HDChart
  */
 export interface HDChart {
     /**
      * 
-     * @type {Chart}
-     * @memberof HDChart
+     * 
+     * 
      */
     'design': Chart;
     /**
      * 
-     * @type {Chart}
-     * @memberof HDChart
+     * 
+     * 
      */
     'natal': Chart;
 }
 /**
  * 
- * @export
- * @interface HTTPValidationError
+ * 
+ *  HTTPValidationError
  */
 export interface HTTPValidationError {
     /**
      * 
-     * @type {Array<ValidationError>}
-     * @memberof HTTPValidationError
+     * 
+     * 
      */
     'detail'?: Array<ValidationError>;
 }
 /**
  * 
- * @export
- * @interface LocationInner
+ * 
+ *  LocationInner
  */
 export interface LocationInner {
 }
 /**
  * 
- * @export
- * @interface ObjectSpeed
+ * 
+ *  ObjectSpeed
  */
 export interface ObjectSpeed {
     /**
      * 
-     * @type {Scientific}
-     * @memberof ObjectSpeed
+     * 
+     * 
      */
     'lng': Scientific;
     /**
      * 
-     * @type {Scientific}
-     * @memberof ObjectSpeed
+     * 
+     * 
      */
     'lat': Scientific;
     /**
      * 
-     * @type {Scientific}
-     * @memberof ObjectSpeed
+     * 
+     * 
      */
     'distance': Scientific;
 }
 /**
  * 
- * @export
- * @interface Position
+ * 
+ *  Position
  */
 export interface Position {
     /**
      * 
-     * @type {Angle}
-     * @memberof Position
+     * 
+     * 
      */
     'lng': Angle;
     /**
      * 
-     * @type {SignedAngle}
-     * @memberof Position
+     * 
+     * 
      */
     'lat': SignedAngle;
     /**
      * 
-     * @type {Scientific}
-     * @memberof Position
+     * 
+     * 
      */
     'distance': Scientific;
     /**
      * 
-     * @type {ObjectSpeed}
-     * @memberof Position
+     * 
+     * 
      */
     'speed': ObjectSpeed;
     /**
      * 
-     * @type {Zodiac}
-     * @memberof Position
+     * 
+     * 
      */
     'zodiac': Zodiac;
     /**
      * 
-     * @type {Angle}
-     * @memberof Position
+     * 
+     * 
      */
     'zodiacLng': Angle;
 }
 /**
  * 
- * @export
- * @interface Scientific
+ * 
+ *  Scientific
  */
 export interface Scientific {
     /**
      * 
-     * @type {number}
-     * @memberof Scientific
+     * 
+     * 
      */
     'qty': number;
     /**
      * 
-     * @type {number}
-     * @memberof Scientific
+     * 
+     * 
      */
     'e': number;
 }
 /**
  * 
- * @export
- * @interface SignedAngle
+ * 
+ *  SignedAngle
  */
 export interface SignedAngle {
     /**
      * 
-     * @type {number}
-     * @memberof SignedAngle
+     * 
+     * 
      */
     'sign': number;
     /**
      * 
-     * @type {number}
-     * @memberof SignedAngle
+     * 
+     * 
      */
     'deg': number;
     /**
      * 
-     * @type {number}
-     * @memberof SignedAngle
+     * 
+     * 
      */
     'min': number;
     /**
      * 
-     * @type {number}
-     * @memberof SignedAngle
+     * 
+     * 
      */
     'sec': number;
 }
 /**
  * 
- * @export
- * @interface ValidationError
+ * 
+ *  ValidationError
  */
 export interface ValidationError {
     /**
      * 
-     * @type {Array<LocationInner>}
-     * @memberof ValidationError
+     * 
+     * 
      */
     'loc': Array<LocationInner>;
     /**
      * 
-     * @type {string}
-     * @memberof ValidationError
+     * 
+     * 
      */
     'msg': string;
     /**
      * 
-     * @type {string}
-     * @memberof ValidationError
+     * 
+     * 
      */
     'type': string;
 }
 /**
  * An enumeration.
- * @export
+ * 
  * @enum {string}
  */
 
@@ -365,7 +365,7 @@ export type Zodiac = typeof Zodiac[keyof typeof Zodiac];
 
 /**
  * DefaultApi - axios parameter creator
- * @export
+ * 
  */
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
@@ -599,7 +599,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 
 /**
  * DefaultApi - functional programming interface
- * @export
+ * 
  */
 export const DefaultApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DefaultApiAxiosParamCreator(configuration)
@@ -654,7 +654,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 
 /**
  * DefaultApi - factory interface
- * @export
+ * 
  */
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = DefaultApiFp(configuration)
@@ -706,7 +706,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 
 /**
  * DefaultApi - object-oriented interface
- * @export
+ * 
  * @class DefaultApi
  * @extends {BaseAPI}
  */
@@ -721,7 +721,7 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * 
      */
     public chartGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).chartGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
@@ -737,7 +737,7 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * 
      */
     public saturnReturnGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).saturnReturnGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
@@ -753,7 +753,7 @@ export class DefaultApi extends BaseAPI {
      * @param {number} lng 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof DefaultApi
+     * 
      */
     public uranusOppositionGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).uranusOppositionGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));

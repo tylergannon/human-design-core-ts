@@ -32,7 +32,7 @@ const gateNum = ({ num }: Gate) => num
 
 /**
  * @internal
- * @param gates List of the gates in the chart
+ * @param gates -  List of the gates in the chart
  * @returns
  */
 export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
@@ -45,7 +45,7 @@ export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
          * This is where we define which gates each one is connected to.
          * Each gate is connected to the other items on its center,
          * as well as the channel connection.
-         * @param param0
+         * @param param0 -
          * @returns
          */
         linker(defined)
@@ -67,7 +67,7 @@ const defState = (defined: boolean): DefState => (defined ? 'defined' : 'undefin
 /**
  * @public
  * Determine the connectivity information for the body graph described by the list of gates.
- * @param gates
+ * @param gates -
  */
 export function connectivity(gates: Gate[]): Connectivity {
     const uf: UnionFind<Gate> = buildBodyGraph(gates)
@@ -107,7 +107,7 @@ export function connectivity(gates: Gate[]): Connectivity {
 
 /**
  *
- * @param centers A list of lists of centers
+ * @param centers -  A list of lists of centers
  * @returns A list of the centers that were not alone in their group.
  */
 const definedCenters = (centers: Center[][]): CenterRecord<boolean> =>
@@ -133,8 +133,8 @@ const isMotor = (center: Center): center is Motor => {
 
 /**
  * Root, Sacral, Will, ESP
- * @param centers
- * @param defined
+ * @param centers -
+ * @param defined -
  * @returns
  */
 function findHDType(centers: Center[][], defined: CenterRecord<boolean> = definedCenters(centers)): HDType {

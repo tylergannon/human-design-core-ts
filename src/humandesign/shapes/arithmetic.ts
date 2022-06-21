@@ -4,8 +4,8 @@ import type { Offset, Measurement } from './types'
 
 /**
  * @internal
- * @param arg1
- * @param arg2
+ * @param arg1 -
+ * @param arg2 -
  * @returns
  */
 export function add<T extends Measurement>(arg1: T, arg2: T): T {
@@ -15,8 +15,8 @@ export function add<T extends Measurement>(arg1: T, arg2: T): T {
 /**
  * Multiply x and y of offset by the scalar amount.
  * @public
- * @param offset The offset to scale
- * @param scale The scale by which to multiply offset
+ * @param offset -  The offset to scale
+ * @param scale -  The scale by which to multiply offset
  */
 export function scale(offset: Offset, scale: number): Offset
 export function scale<T extends Measurement>(obj: Measurement, scale: number): T {
@@ -43,8 +43,8 @@ export function transformObj<T, U, V extends Record<string, T>>(
 
 /**
  * Fans out properties of [value]
- * @param value
- * @param transformer
+ * @param value -
+ * @param transformer -
  * @returns an object with the same key as [transformer], where values are mapped from its functions.
  * @internal
  */
@@ -54,13 +54,13 @@ export function transform<T, U, V>(value: T, transformer: Transformer<T, U, V>):
 
 /**
  * @internal
- * @param it
+ * @param it -
  * @returns
  */
 export const sin = (it: Angle) => it.sin
 /**
  * @internal
- * @param it
+ * @param it -
  * @returns
  */
 export const cos = (it: Angle) => it.cos

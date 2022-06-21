@@ -63,7 +63,7 @@ export class Angle {
 /**
  * Get an Angle object from the Angle interface provided by the API client.
  * @internal
- * @param apiAngle
+ * @param apiAngle -
  * @returns
  */
 export const fromApi = (apiAngle: ApiAngle): Angle => {

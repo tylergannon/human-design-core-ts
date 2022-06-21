@@ -73,7 +73,7 @@ export const hexagrams: Array<Hexagram> = [
 
 /**
  * @internal
- * @param num Hexagram number (one-based)
+ * @param num -  Hexagram number (one-based)
  * @returns The corresponding Hexagram object
  */
 export function getHexagramByNumber(num: number): Hexagram {

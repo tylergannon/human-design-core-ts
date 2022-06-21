@@ -10,9 +10,9 @@ export class AstroApiClient {
 
     /**
      * @public
-     * @param tz
-     * @param date
-     * @param time
+     * @param tz -
+     * @param date -
+     * @param time -
      * @returns
      */
     async getChart(tz: string, date: string, time: string): Promise<BirthChart> {
@@ -23,9 +23,9 @@ export class AstroApiClient {
 
     /**
      * @public
-     * @param tz
-     * @param date
-     * @param time
+     * @param tz -
+     * @param date -
+     * @param time -
      * @returns
      */
     async getSaturnReturn(tz: string, date: string, time: string): Promise<BirthChart> {
@@ -36,9 +36,9 @@ export class AstroApiClient {
 
     /**
      * @public
-     * @param tz
-     * @param date
-     * @param time
+     * @param tz -
+     * @param date -
+     * @param time -
      * @returns
      */
     async getUranusOpposition(tz: string, date: string, time: string): Promise<BirthChart> {
@@ -49,7 +49,7 @@ export class AstroApiClient {
 
     /**
      * @public
-     * @param apiKey
+     * @param apiKey -
      */
     constructor(apiKey: string) {
         this.apiClient = DefaultApiFp(new Configuration({ apiKey }))

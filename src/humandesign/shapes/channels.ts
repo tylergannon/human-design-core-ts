@@ -11,8 +11,8 @@ const pointFinders: Record<WidthType, (x: PointRel) => Point> = {
 /**
  * @public
  * Get the ChartObject representing the channel path of the gate.
- * @param type "full" or "half" to denote the width of the channel to create
- * @param gate The gate whose channel to retrieve
+ * @param type -  "full" or "half" to denote the width of the channel to create
+ * @param gate -  The gate whose channel to retrieve
  * @returns ChartObject representing the channel path of the gate.
  */
 export function getPath(type: WidthType, gate: GateNum): ChartObject {

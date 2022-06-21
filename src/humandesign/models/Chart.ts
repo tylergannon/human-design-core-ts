@@ -37,7 +37,7 @@ export class Chart {
 
 /**
  * @internal
- * @param apiResult
+ * @param apiResult -
  * @returns
  */
 export const fromApi = (apiResult: ApiChart): Chart => {
