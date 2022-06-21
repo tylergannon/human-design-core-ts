@@ -1,5 +1,4 @@
-import { Chart, Configuration, DefaultApiFp, HDChart } from '$astro'
-import { Zodiac } from '$hd'
+import { Configuration, DefaultApiFp, HDChart } from '$astro'
 
 import type { AxiosPromise } from 'axios'
 
