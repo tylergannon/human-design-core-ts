@@ -1,6 +1,6 @@
 {
   "name": "@tylergannon/human-design-core-ts",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "Core functionality for retrieving and analyzing human design fortunes.",
   "main": "./lib/src/index.js",
   "files": [

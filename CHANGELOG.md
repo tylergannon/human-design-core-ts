@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/tylergannon/human-design-core-ts/compare/v1.3.2...v1.4.0) (2022-06-21)
+
+
+### New
+
+* Redesigned export structure. ([21175ea](https://github.com/tylergannon/human-design-core-ts/commit/21175ead7f67d3984091ad5b3d13a24484158f84))
+* Redesigned export structure. ([998b525](https://github.com/tylergannon/human-design-core-ts/commit/998b52502a062ab802215447597c27ad3b344b05))
+
+### Update
+
+* Gate numbers are type-checked strings. ([a511ed7](https://github.com/tylergannon/human-design-core-ts/commit/a511ed73b566040fd39a11d0dd556b90c867aac2))
+
 ## [1.3.2](https://github.com/tylergannon/human-design-core-ts/compare/v1.3.1...v1.3.2) (2022-06-21)
 
 
