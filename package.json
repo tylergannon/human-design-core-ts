@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "Core functionality for retrieving and analyzing human design fortunes.",
   "files": [
-    "dist"
+    "./dist/**/*.{ts,js}"
   ],
   "main": "./dist/human-design.umd.js",
   "module": "./dist/human-design.es.js",
