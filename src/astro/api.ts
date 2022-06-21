@@ -31,9 +31,33 @@ export interface Angle {
 }
 /**
  * 
+ * @export
+ * @interface Ascendant
+ */
+export interface Ascendant {
+    /**
+     * 
+     * @type {Angle}
+     * @memberof Ascendant
+     */
+    'lng': Angle;
+    /**
+     * 
+     * @type {Zodiac}
+     * @memberof Ascendant
+     */
+    'zodiac': Zodiac;
+    /**
+     * 
+     * @type {Angle}
+     * @memberof Ascendant
+     */
+    'zodiacLng': Angle;
+}
  */
 export interface Chart {
     'chart_date': ChartDate;
+    'ascendant': Ascendant;
     'sun': Position;
     'moon': Position;
     'north_node': Position;
@@ -54,6 +78,7 @@ export interface ChartDate {
     'date': string;
     'time': string;
     'tz': string;
+    'sid': number;
 }
 /**
  * @public
