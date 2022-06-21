@@ -54,7 +54,7 @@ export interface Ascendant {
      */
     'zodiacLng': Angle;
 }
- */
+
 export interface Chart {
     'chart_date': ChartDate;
     'ascendant': Ascendant;
