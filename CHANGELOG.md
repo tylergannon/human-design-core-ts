@@ -1,3 +1,18 @@
+## [1.3.2](https://github.com/tylergannon/human-design-core-ts/compare/v1.3.1...v1.3.2) (2022-06-21)
+
+
+### Build
+
+* don't release to Github (already releasing NPM) ([31ac1d3](https://github.com/tylergannon/human-design-core-ts/commit/31ac1d348c9935dbbf8fa1d8e0db2725eccdcb87))
+
+### Chore
+
+* Change CI commit message ([2b12682](https://github.com/tylergannon/human-design-core-ts/commit/2b12682409476913e8d7aac798b6a083e3d4df73))
+
+### Fix
+
+* Use correct shared workflow for PR. ([3345bad](https://github.com/tylergannon/human-design-core-ts/commit/3345bad0022a7628b6691f7d19c3230a2ecb11fe))
+
 ## [1.3.1](https://github.com/tylergannon/human-design-core-ts/compare/v1.3.0...v1.3.1) (2022-06-20)
 
 
