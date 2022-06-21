@@ -6,7 +6,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ["src/astro/**"],
+  ignorePatterns: ["src/astro/**", "vite.config.ts"],
   extends: [
     'eslint:recommended',
     'plugin:node/recommended',
