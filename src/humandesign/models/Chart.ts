@@ -1,5 +1,5 @@
-import type { ChartDate, Chart as ApiChart, Position as ApiPosition } from '../../astro'
-import { HDPos, Planet, planetRecord, PlanetRecord } from './types'
+import type { ChartDate, Chart as ApiChart } from '../../astro'
+import { HDPos, PlanetRecord } from './types'
 import { Position } from './Position'
 
 function apiChartPlanets(chart: ApiChart): PlanetRecord<Position> {

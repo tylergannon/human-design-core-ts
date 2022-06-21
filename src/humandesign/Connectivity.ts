@@ -18,14 +18,16 @@
  *   - A list of the gates activated in the chart.
  *
  */
-import { flatten, any, concat } from 'ramda'
-import { centerRecord, gates as allGates, gatesByCenter, motorNames } from './models/all'
-import type { Authority, Center, CenterRecord, Connectivity, DefState, HDType, Motor } from './models/all'
-import type { Gate } from './models/all'
+import { flatten, any, concat, values } from 'ramda'
+import { centerRecord, GateNum, motorNames } from './models'
+import { gates as allGates, gatesByCenter } from './models/Gate'
+import type { Authority, Center, CenterRecord, Connectivity, DefState, HDType, Motor } from './models'
+import type { Gate } from './models'
 import { Nothing } from 'purify-ts'
 import { unionFind, toConnectedGroups, findPath } from 'union-find-ts'
-import type { UnionFind } from 'union-find-ts/lib/src/UnionFind'
+import type { UnionFind, Linker } from 'union-find-ts'
 
+const gateNumStr = (gate: Gate) => parseInt(gateNum(gate))
 const gateNum = ({ num }: Gate) => num
 
 /**
@@ -34,11 +36,11 @@ const gateNum = ({ num }: Gate) => num
  * @returns
  */
 export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
-    const gateNumbers: Set<number> = new Set(gates.map(it => it.num))
+    const gateNumbers: Set<GateNum> = new Set(gates.map(it => it.num))
     const defined = gateNumbers.has.bind(gateNumbers)
     return unionFind(
-        allGates(),
-        gateNum,
+        values(allGates()),
+        gateNumStr,
         /**
          * This is where we define which gates each one is connected to.
          * Each gate is connected to the other items on its center,
@@ -46,9 +48,19 @@ export function buildBodyGraph(gates: Gate[]): UnionFind<Gate> {
          * @param param0
          * @returns
          */
-        ({ item: gate }) => [...gate.connected, ...gatesByCenter[gate.center].map(gateNum)].filter(defined)
+        linker(defined)
     )
 }
+
+const linker =
+    (defined: (num: GateNum) => boolean): Linker<Gate> =>
+    ({ item: gate }) =>
+        concat(
+            gate.connected,
+            gatesByCenter[gate.center].map(it => it.num)
+        )
+            .filter(defined)
+            .map(parseInt)
 
 const defState = (defined: boolean): DefState => (defined ? 'defined' : 'undefined')
 
@@ -69,8 +81,7 @@ export function connectivity(gates: Gate[]): Connectivity {
         gates.reduce((acc, { center }) => (center in acc ? acc : [center, ...acc]), [] as Center[])
     )
     const _allGates = allGates()
-    const findItemsByNum = (nums: number[]) =>
-        nums.map(it => _allGates.find(g => g.num === it) ?? _allGates[0])
+    const findItemsByNum = (nums: GateNum[]) => nums.map(it => _allGates[it])
     const definedCenters = flatten(components)
     const rank = groups.length
     const solutions =
