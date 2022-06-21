@@ -1,4 +1,4 @@
-import { Angle } from '$hd'
+import { Angle } from '$hd/models'
 
 describe('Angle', () => {
     it('Computes its decimal value', () => {

@@ -1,7 +1,7 @@
 import { select } from 'd3-selection'
 import { JSDOM } from 'jsdom'
 import { roundedSquare } from '$hd/shapes/roundedPolygon'
-import { Angle } from '$hd'
+import { Angle } from '$hd/models'
 
 describe('roundedTriangle', () => {
     it('Draws correctly', () => {

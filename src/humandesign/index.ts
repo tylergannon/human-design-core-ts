@@ -1,2 +1,2 @@
-export * from './models/all'
+export { AstroApiClient } from './AstroApiClient'
 export { connectivity, buildBodyGraph } from './Connectivity'

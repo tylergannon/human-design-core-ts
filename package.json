@@ -6,6 +6,15 @@
   "files": [
     "lib/**/*"
   ],
+  "exports": {
+    ".": "./lib/src/index.js",
+    "./shapes": {
+      "default": "./lib/src/humandesign/shapes/index.js"
+    },
+    "./models": {
+      "default": "./lib/src/humandesign/models/index.js"
+    }
+  },
   "type": "module",
   "scripts": {
     "build": "tsc",
@@ -50,7 +59,7 @@
     "jsdom": "^19.0.0",
     "purify-ts": "^1.2.2",
     "ramda": "^0.28.0",
-    "union-find-ts": "^1.0.5",
+    "union-find-ts": "^1.0.7",
     "url-parse": "^1.5.10",
     "whatwg-fetch": "^3.6.2"
   },
