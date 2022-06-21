@@ -46,6 +46,10 @@ jobs:
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
-        run: pnpx semantic-release
+        run: |
+          export CI=true
+          export HUSKY_SKIP_HOOKS=1
+          export HUSKY=0
+          pnpx semantic-release
       - name: Code Coverage
         run: pnpm run coverage
