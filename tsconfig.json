@@ -4,6 +4,7 @@
     "test/**/*.ts"
   ],
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "lib": [
 			"esnext",
 			"DOM"
@@ -11,7 +12,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "declaration": true,
-    "outDir": "./lib/",
+    "outDir": "./dist/",
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": ".",

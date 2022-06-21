@@ -120,3 +120,4 @@ lib/
 .DS_DTORE
 build
 test.html
+.DS_Store

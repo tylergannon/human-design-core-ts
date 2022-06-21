@@ -2,23 +2,22 @@
   "name": "@tylergannon/human-design-core-ts",
   "version": "1.4.0",
   "description": "Core functionality for retrieving and analyzing human design fortunes.",
-  "main": "./lib/src/index.js",
   "files": [
-    "lib/**/*"
+    "dist"
   ],
+  "main": "./dist/human-design.umd.js",
+  "module": "./dist/human-design.es.js",
   "exports": {
-    ".": "./lib/src/index.js",
-    "./shapes": {
-      "default": "./lib/src/humandesign/shapes/index.js"
-    },
-    "./models": {
-      "default": "./lib/src/humandesign/models/index.js"
+    ".": {
+      "import": "./dist/human-design.es.js",
+      "request": "./dist/human-design.umd.js"
     }
   },
+  "types": "./dist/human-design.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf ./lib/",
+    "build": "vite build",
+    "clean": "rm -rf ./dist/",
     "cm": "cz",
     "coverage": "codecov",
     "lint": "eslint ./src/ --fix",
@@ -64,6 +63,7 @@
     "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.3.3",
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
     "@semantic-release/changelog": "^6.0.1",
@@ -90,10 +90,13 @@
     "lint-staged": "^13.0.1",
     "node-notifier": "^10.0.1",
     "prettier": "^2.7.0",
+    "rollup": "^2.75.7",
+    "rollup-plugin-dts": "^4.2.2",
     "semantic-release": "^19.0.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.2.1",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "vite": "^2.9.12"
   },
   "config": {
     "commitizen": {
