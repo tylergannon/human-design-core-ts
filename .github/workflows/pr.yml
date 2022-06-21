@@ -6,4 +6,4 @@ on: [pull_request]
 
 jobs:
   build:
-    uses: ryansonshine/ryansonshine/.github/workflows/pr.yml@main
+    uses: tylergannon/human-design-core-ts/.github/workflows/common_pr.yml@main
