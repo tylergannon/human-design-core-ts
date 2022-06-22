@@ -1,7 +1,7 @@
 import { Configuration, DefaultApiFp } from '../astro'
-import type { CityGeoFacts } from '../astro'
-import type { BirthChart } from './models/BirthChart'
 import { fromApi } from './models/BirthChart'
+import type { BirthChart } from './models/types'
+import type { CityGeoFacts } from '../astro'
 
 /**
  * @public
