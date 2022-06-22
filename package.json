@@ -58,7 +58,7 @@
     "jsdom": "^19.0.0",
     "purify-ts": "^1.2.2",
     "ramda": "^0.28.0",
-    "union-find-ts": "^1.0.7",
+    "union-find-ts": "^1.0.9",
     "url-parse": "^1.5.10",
     "whatwg-fetch": "^3.6.2"
   },

@@ -1,16 +1,19 @@
-import { Angle } from '$hd/models'
+import { angle as _angle } from '$hd/models'
+import { Just } from 'purify-ts'
+
+const { add, cos, sin, toFloat, angle } = _angle
 
 describe('Angle', () => {
     it('Computes its decimal value', () => {
-        expect(Angle.of(27, 6, 0).toFloat()).toBe(27.1)
+        expect(Just(angle(27, 6, 0)).map(toFloat).extract()).toBe(27.1)
     })
     it('Can be added', () => {
-        expect(Angle.of(27, 3, 1).plus(Angle.of(12, 56, 59)).toFloat()).toBe(40)
+        expect([angle(27, 3, 1), angle(12, 56, 59)].reduce(add)).toEqual(angle(40))
     })
     it('Computes the cosine', () => {
-        expect(Angle.of(60).cos).toBeCloseTo(0.5, 5)
+        expect(cos(angle(60))).toBeCloseTo(0.5, 5)
     })
     it('Computes the sine', () => {
-        expect(Angle.of(30).sin).toBeCloseTo(0.5, 5)
+        expect(sin(angle(30))).toBeCloseTo(0.5, 5)
     })
 })

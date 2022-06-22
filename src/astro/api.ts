@@ -21,37 +21,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from './base';
 
-/**
- * 
- */
+
 export interface Angle {
     'deg': number;
     'min': number;
     'sec': number;
 }
+
 /**
- * 
- * @export
- * @interface Ascendant
+ * @public
  */
 export interface Ascendant {
-    /**
-     * 
-     * @type {Angle}
-     * @memberof Ascendant
-     */
     'lng': Angle;
-    /**
-     * 
-     * @type {Zodiac}
-     * @memberof Ascendant
-     */
     'zodiac': Zodiac;
-    /**
-     * 
-     * @type {Angle}
-     * @memberof Ascendant
-     */
     'zodiacLng': Angle;
 }
 
@@ -71,6 +53,7 @@ export interface Chart {
     'neptune': Position;
     'pluto': Position;
 }
+
 /**
  * 
  */

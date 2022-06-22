@@ -43,7 +43,7 @@ specifiers:
   ts-jest: ^28.0.5
   ts-node: ^10.2.1
   typescript: ^4.2.4
-  union-find-ts: ^1.0.7
+  union-find-ts: ^1.0.9
   url-parse: ^1.5.10
   vite: ^2.9.12
   whatwg-fetch: ^3.6.2
@@ -57,7 +57,7 @@ dependencies:
   jsdom: 19.0.0
   purify-ts: 1.2.2
   ramda: 0.28.0
-  union-find-ts: 1.0.7
+  union-find-ts: 1.0.9
   url-parse: 1.5.10
   whatwg-fetch: 3.6.2
 
@@ -5922,8 +5922,8 @@ packages:
     dev: true
     optional: true
 
-  /union-find-ts/1.0.7:
-    resolution: {integrity: sha512-09j9AiCB/iLDllKeXfXlpLvGJmSdT5EEI4UuLNClry6dZ+J9dIfocpAuinigku75Wup4qX8ZQKewuBtSCWjJoQ==}
+  /union-find-ts/1.0.9:
+    resolution: {integrity: sha512-8tfjnFRXfRVHJtQvNWKHJQtx1rOI0zj01KpIB9i33j9kBRcFDqrrD2EVM+QWwQ5Ka/sdxzJp7vdj+zKxJI+lDA==}
     engines: {node: '>=12.0'}
     dependencies:
       purify-ts: 1.2.2

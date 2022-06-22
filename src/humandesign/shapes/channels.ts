@@ -1,6 +1,6 @@
 import { path } from 'd3-path'
 import type { Path } from 'd3-path'
-import { GateNum, GateRecord } from '../models/types'
+import type { GateNum, GateRecord } from '../models/types'
 import type { Point, PointRel, Arc, ChartObject, WidthType } from './types'
 
 const pointFinders: Record<WidthType, (x: PointRel) => Point> = {

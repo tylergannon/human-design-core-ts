@@ -1,4 +1,3 @@
-import type { Angle } from './Angle'
 import type { Maybe } from 'purify-ts'
 
 /**
@@ -241,11 +240,17 @@ export interface HDProfile {
     readonly natal: HDLine
 }
 
+export interface Angle {
+    readonly deg: number
+    readonly min: number
+    readonly sec: number
+}
+
 /**
  * @public
  */
 export interface HDPos {
-    readonly gate: Gate
+    readonly gate: GateNum
     readonly line: HDLine
     readonly lng: Angle
     readonly zodiac: Zodiac
@@ -376,7 +381,7 @@ export interface Connectivity {
      * Solutions, if provided, are the set of shortest
      * routes to connect the
      */
-    readonly solutions: Maybe<Gate[][]>
+    readonly solutions: Maybe<GateNum[][]>
 }
 
 /**

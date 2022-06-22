@@ -1,5 +1,5 @@
-import type { ChartDate, Chart as ApiChart } from '../../astro'
-import { HDPos, PlanetRecord } from './types'
+import type { ChartDate, Chart as ApiChart, Ascendant } from '../../astro'
+import type { HDPos, PlanetRecord } from './types'
 import type { Position } from './Position'
 import { fromApi as positionFromApi } from './Position'
 
@@ -27,10 +27,12 @@ function apiChartPlanets(chart: ApiChart): PlanetRecord<Position> {
  */
 export class Chart {
     readonly chartDate: ChartDate
+    readonly ascendant: Ascendant
     readonly planets: PlanetRecord<HDPos>
 
-    constructor(chartDate: ChartDate, planets: PlanetRecord<Position>) {
+    constructor(chartDate: ChartDate, ascendant: Ascendant, planets: PlanetRecord<Position>) {
         this.chartDate = chartDate
+        this.ascendant = ascendant
         this.planets = planets
     }
 }
@@ -41,5 +43,5 @@ export class Chart {
  * @returns
  */
 export const fromApi = (apiResult: ApiChart): Chart => {
-    return new Chart(apiResult.chart_date, apiChartPlanets(apiResult))
+    return new Chart(apiResult.chart_date, apiResult.ascendant, apiChartPlanets(apiResult))
 }

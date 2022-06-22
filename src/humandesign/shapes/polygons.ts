@@ -1,4 +1,4 @@
-import { CenterRecord } from '../models/types'
+import type { CenterRecord } from '../models/types'
 
 /**
  * @public
