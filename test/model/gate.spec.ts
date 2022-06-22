@@ -5,7 +5,6 @@ import { angleToGate } from '$hd/models/Gate'
 describe('Angle to gate conversion', () => {
     const angles: Angle[] = [angle(17, 46, 55), angle(197, 46, 55)]
     it('adds', () => {
-        console.log(`WAHAHAHAHAHA ${JSON.stringify(add(angles[0], OPPOSITE))}`)
         expect(add(angles[0], OPPOSITE)).toEqual(angles[1])
     })
 
