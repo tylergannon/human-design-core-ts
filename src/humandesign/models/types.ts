@@ -258,10 +258,24 @@ export interface HDPos {
     readonly zodiacLng: Angle
 }
 
+/**
+ * @public
+ */
 export interface Chart {
     readonly chartDate: ChartDate
     readonly ascendant: Ascendant
     readonly planets: PlanetRecord<HDPos>
+}
+
+/**
+ * @public
+ */
+export interface BirthChart {
+    readonly natal: Chart
+    readonly design: Chart
+    readonly definedGates: GateNum[]
+    readonly connectivity: Connectivity
+    readonly allGates: GateRecord<GateDefType>
 }
 
 /**
