@@ -1,14 +1,13 @@
 import type { ChartDate, Chart as ApiChart, Ascendant } from '../../astro'
 import type { HDPos, PlanetRecord } from './types'
-import type { Position } from './Position'
-import { fromApi as positionFromApi } from './Position'
+import { fromApi as positionFromApi, opposite } from './Position'
 
-function apiChartPlanets(chart: ApiChart): PlanetRecord<Position> {
+function apiChartPlanets(chart: ApiChart): PlanetRecord<HDPos> {
     return {
         sun: positionFromApi(chart.sun),
-        earth: positionFromApi(chart.sun).opposite(),
+        earth: opposite(positionFromApi(chart.sun)),
         northNode: positionFromApi(chart.north_node),
-        southNode: positionFromApi(chart.north_node).opposite(),
+        southNode: opposite(positionFromApi(chart.north_node)),
         moon: positionFromApi(chart.moon),
         mercury: positionFromApi(chart.mercury),
         venus: positionFromApi(chart.venus),
@@ -30,7 +29,7 @@ export class Chart {
     readonly ascendant: Ascendant
     readonly planets: PlanetRecord<HDPos>
 
-    constructor(chartDate: ChartDate, ascendant: Ascendant, planets: PlanetRecord<Position>) {
+    constructor(chartDate: ChartDate, ascendant: Ascendant, planets: PlanetRecord<HDPos>) {
         this.chartDate = chartDate
         this.ascendant = ascendant
         this.planets = planets
