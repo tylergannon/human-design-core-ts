@@ -1,3 +1,14 @@
+# [2.2.0](https://github.com/tylergannon/human-design-core-ts/compare/v2.1.0...v2.2.0) (2022-06-22)
+
+
+### Build
+
+* Try disabling husky via HUSKY_SKIP_HOOKS ([dd5daa4](https://github.com/tylergannon/human-design-core-ts/commit/dd5daa46de3b91c5adf3d08d1ba757bc5714fdab))
+
+### New
+
+* Charts include ascendant and sidereal time. ([f3b93a4](https://github.com/tylergannon/human-design-core-ts/commit/f3b93a49584dc3f72f5d9697911f7c4e79c0d95f))
+
 # [2.1.0](https://github.com/tylergannon/human-design-core-ts/compare/v2.0.0...v2.1.0) (2022-06-21)
 
 
