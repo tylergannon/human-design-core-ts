@@ -1,3 +1,4 @@
+import { Ascendant, ChartDate } from '$astro'
 import type { Maybe } from 'purify-ts'
 
 /**
@@ -255,6 +256,12 @@ export interface HDPos {
     readonly lng: Angle
     readonly zodiac: Zodiac
     readonly zodiacLng: Angle
+}
+
+export interface Chart {
+    readonly chartDate: ChartDate
+    readonly ascendant: Ascendant
+    readonly planets: PlanetRecord<HDPos>
 }
 
 /**
