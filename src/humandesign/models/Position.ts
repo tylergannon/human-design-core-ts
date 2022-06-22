@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import type { SignedAngle, ObjectSpeed, Scientific, Position as ApiPosition } from '../../astro'
-import type { HDLine, HDPos, Zodiac, Angle, GateNum } from './types'
+import type { Position as ApiPosition } from '../../astro'
+import type { HDPos, Zodiac } from './types'
 import * as angle from './Angle'
 import { zodiacNames } from './types'
 import { angleToGate, getLine } from './Gate'
@@ -22,56 +22,23 @@ const zodiacOpposites = concat(zodiacNames.slice(6), zodiacNames.slice(0, 6))
 const zodiacOpposite = (zodiac: Zodiac) => zodiacOpposites[zodiacNames.indexOf(zodiac)]
 
 /**
- * @public
+ *
+ * @param position - operand
+ * @returns The position opposite in the sky from the one given.
  */
-export class Position implements HDPos {
-    readonly lng: Angle
-    readonly lat: SignedAngle
-    readonly distance: Scientific
-    readonly speed: ObjectSpeed
-    readonly zodiac: Zodiac
-    readonly zodiacLng: Angle
-
-    public get gate(): GateNum {
-        return angleToGate(this.lng)
-    }
-
-    public get line(): HDLine {
-        return getLine(this.lng)
-    }
-
-    public constructor(
-        lng: Angle,
-        lat: SignedAngle,
-        distance: Scientific,
-        speed: ObjectSpeed,
-        zodiac: Zodiac,
-        zodiacLng: Angle
-    ) {
-        this.lng = lng
-        this.lat = lat
-        this.distance = distance
-        this.speed = speed
-        this.zodiac = zodiac
-        this.zodiacLng = zodiacLng
-    }
-
-    opposite(): Position {
-        const lat: SignedAngle = {
-            deg: this.lat.deg,
-            min: this.lat.min,
-            sec: this.lat.sec,
-            sign: this.lat.sign * -1,
-        }
-
-        return new Position(
-            angle.add(this.lng, angle.OPPOSITE),
-            lat,
-            this.distance,
-            this.speed,
-            zodiacOpposite(this.zodiac),
-            this.zodiacLng
-        )
+export const opposite: (position: HDPos) => HDPos = ({
+    zodiacLng,
+    zodiac,
+    line,
+    lng: oldLng,
+}: HDPos): HDPos => {
+    const lng = angle.add(oldLng, angle.OPPOSITE)
+    return {
+        lng,
+        zodiacLng,
+        zodiac: zodiacOpposite(zodiac),
+        gate: angleToGate(lng),
+        line,
     }
 }
 
@@ -81,13 +48,12 @@ export class Position implements HDPos {
  * @param position position returned by the API client
  * @returns Human Design Position object for the equivalent data
  */
-export const fromApi = (position: ApiPosition): Position => {
-    return new Position(
-        position.lng,
-        position.lat,
-        position.distance,
-        position.speed,
-        position.zodiac.toLowerCase() as Zodiac,
-        position.zodiacLng
-    )
+export const fromApi = ({ zodiacLng, lng, zodiac }: ApiPosition): HDPos => {
+    return {
+        lng,
+        zodiacLng,
+        zodiac: zodiac.toLowerCase() as Zodiac,
+        gate: angleToGate(lng),
+        line: getLine(lng),
+    }
 }
