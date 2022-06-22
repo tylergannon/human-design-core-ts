@@ -51,10 +51,8 @@ describe('AstroApiClient', () => {
         ((x: AstroApiClient) => x.getChart.bind(x))(new AstroApiClient(apiKey))
     it('can get the graph and connectivity', async () => {
         const graph = await callApi(apiClient())
-        console.log(`${JSON.stringify(graph.natal)}`)
-        console.log('ZORG?????', JSON.stringify(graph.definedGates))
         expect(graph.allGates[51]).toBe('natal')
-        // expect(graph.definedGates).toHaveLength(17)
+        expect(graph.definedGates).toHaveLength(17)
         // const dorth = buildBodyGraph(graph.definedGates)
 
         // console.log("ROOTS!", dorth.roots)

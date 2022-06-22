@@ -79,7 +79,6 @@ const defState = (defined: boolean): DefState => (defined ? 'defined' : 'undefin
  */
 export function connectivity(gates: GateNum[]): Connectivity {
     const uf: UnionFind<GateNum> = buildBodyGraph(gates)
-    console.log(uf.roots)
     const findItemsByNum = lift(byGateNum)
 
     // First clean groups to remove groups connected only within one center.

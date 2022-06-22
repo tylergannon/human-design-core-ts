@@ -8,7 +8,6 @@ const gate41Angle = toAngle({ zodiac: 'aquarius', angle: angle.angle(2) })
 
 const lineArc = angle.angle(0, 56, 15)
 const gateArc = angle.multiply(lineArc, 6)
-console.log(`Gate Arc: ${JSON.stringify(gateArc)}`)
 const gateArcF = angle.toFloat(gateArc)
 const lineArcF = angle.toFloat(lineArc)
 const gate41F = angle.toFloat(gate41Angle)
@@ -40,9 +39,6 @@ export function getLine(angle: Angle): HDLine {
  * @returns
  */
 export function angleToGate(a: Angle): GateNum {
-    console.log(`The angle is ${angle.toFloat(a)}, normalized is ${normalizeF(a)} / ${gateArcF}
-    gate41 is at ${gate41F}.  My guess is going to be ${ordinals[intDiv(normalizeF(a), gateArcF)]}
-    the value is something like ~~[${normalizeF(a) / gateArcF}] == ${intDiv(normalizeF(a), gateArcF)}`)
     return ordinals[intDiv(normalizeF(a), gateArcF)]
 }
 
@@ -509,7 +505,6 @@ const allGates: GateRecord<Gate> = {
 const ordinals: GateNum[] = values(allGates)
     .sort((left, right) => left.ord - right.ord)
     .map(({ num }) => num.toString() as GateNum)
-console.log(ordinals)
 /**
  * Return the gate by gate number.
  * @public
