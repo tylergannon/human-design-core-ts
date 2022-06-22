@@ -1,10 +1,10 @@
 import { concat, mapObjIndexed, toPairs, uniq } from 'ramda'
 
 import type { HDChart } from '../../astro'
-import type { GateNum, HDPos, GateDefType, GateRecord, PlanetRecord, Connectivity } from './types'
+import type { Chart, GateNum, HDPos, GateDefType, GateRecord, PlanetRecord, Connectivity } from './types'
 
 import { connectivity as chartConnectivity } from './Connectivity'
-import { Chart, fromApi as chartFromApi } from './Chart'
+import { fromApi as chartFromApi } from './Chart'
 import { gates } from './Gate'
 
 const notChiron = <T>(data: PlanetRecord<T>): T[] =>
