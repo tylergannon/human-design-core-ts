@@ -10,10 +10,9 @@
  * Do not edit the class manually.
  */
 
-import type { ObjectSpeed, Scientific, Position as ApiPosition } from '../../astro'
-import type { Gate, HDLine, HDPos, Zodiac } from './types'
-import { fromApi as angleFromApi, Angle } from './Angle'
-import { SignedAngle } from '../../astro'
+import type { SignedAngle, ObjectSpeed, Scientific, Position as ApiPosition } from '../../astro'
+import type { HDLine, HDPos, Zodiac, Angle, GateNum } from './types'
+import * as angle from './Angle'
 import { zodiacNames } from './types'
 import { angleToGate, getLine } from './Gate'
 import { concat } from 'ramda'
@@ -33,7 +32,7 @@ export class Position implements HDPos {
     readonly zodiac: Zodiac
     readonly zodiacLng: Angle
 
-    public get gate(): Gate {
+    public get gate(): GateNum {
         return angleToGate(this.lng)
     }
 
@@ -66,7 +65,7 @@ export class Position implements HDPos {
         }
 
         return new Position(
-            this.lng.plus(Angle.opposite),
+            angle.add(this.lng, angle.OPPOSITE),
             lat,
             this.distance,
             this.speed,
@@ -84,11 +83,11 @@ export class Position implements HDPos {
  */
 export const fromApi = (position: ApiPosition): Position => {
     return new Position(
-        angleFromApi(position.lng),
+        position.lng,
         position.lat,
         position.distance,
         position.speed,
         position.zodiac.toLowerCase() as Zodiac,
-        angleFromApi(position.zodiacLng)
+        position.zodiacLng
     )
 }

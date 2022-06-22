@@ -1,6 +1,5 @@
-export { AstroApiClient } from './AstroApiClient'
-
 export { allPips, getPath, polygons, roundedSquare, roundedTriangle } from './shapes'
+export { AstroApiClient } from './AstroApiClient'
 export type {
     Angle,
     Authority,

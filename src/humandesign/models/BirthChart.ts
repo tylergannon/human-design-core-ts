@@ -1,29 +1,16 @@
-import { connectivity as chartConnectivity } from '../Connectivity'
-import { concat, mapObjIndexed, values } from 'ramda'
+import { concat, mapObjIndexed, toPairs, uniq } from 'ramda'
+
 import type { HDChart } from '../../astro'
+import type { GateNum, HDPos, GateDefType, GateRecord, PlanetRecord, Connectivity } from './types'
+
+import { connectivity as chartConnectivity } from './Connectivity'
 import { Chart, fromApi as chartFromApi } from './Chart'
 import { gates } from './Gate'
-import { Gate, HDPos, GateDefType, GateRecord, PlanetRecord, Connectivity } from './types'
 
-const toGate = ({ gate }: HDPos) => gate
-
-/**
- * @internal
- */
-export type FromPlanets = {
-    (chart: PlanetRecord<HDPos>): Partial<GateRecord<undefined>>
-}
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-const fromPlanets: FromPlanets = ({
-    chiron: _,
-    ...planets
-}: PlanetRecord<HDPos>): Partial<GateRecord<undefined>> =>
-    values(planets).reduce(
-        (acc, { gate: { num } }) => ({ ...acc, [num]: undefined }),
-        {} as Partial<GateRecord<undefined>>
-    )
-/* eslint-enable */
+const notChiron = <T>(data: PlanetRecord<T>): T[] =>
+    toPairs(data)
+        .filter(it => it[0] !== 'chiron')
+        .map(it => it[1])
 
 /**
  * The primary data structure for handling human design charts.
@@ -36,8 +23,8 @@ export class BirthChart {
     /**
      * @public
      */
-    public get definedGates(): Gate[] {
-        return concat(values(this.natal.planets), values(this.design.planets)).map(toGate)
+    public get definedGates(): GateNum[] {
+        return uniq(concat(notChiron(this.natal.planets), notChiron(this.design.planets)).map(it => it.gate))
     }
 
     public get connectivity(): Connectivity {
@@ -48,15 +35,16 @@ export class BirthChart {
      * @public
      */
     public get allGates(): GateRecord<GateDefType> {
-        const natal = fromPlanets(this.natal.planets)
-        const design = fromPlanets(this.design.planets)
+        const toSet = (x: PlanetRecord<HDPos>) => new Set(notChiron(x).map(it => it.gate))
+        const definedNatal = toSet(this.natal.planets)
+        const definedDesign = toSet(this.design.planets)
 
         return mapObjIndexed((_, gateNum): GateDefType => {
-            return gateNum in natal
-                ? gateNum in design
+            return definedNatal.has(gateNum)
+                ? definedDesign.has(gateNum)
                     ? 'both'
                     : 'natal'
-                : gateNum in design
+                : definedDesign.has(gateNum)
                 ? 'design'
                 : 'undefined'
         }, gates())

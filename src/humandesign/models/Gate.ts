@@ -1,19 +1,27 @@
-import type { HDLine, Gate, CenterRecord, GateRecord, GateNum } from './types'
-import { Angle } from './Angle'
+import type { Angle, HDLine, Gate, CenterRecord, GateRecord, GateNum } from './types'
+import * as angle from './Angle'
 import { toAngle } from './ZodiacAngle'
 import { groupBy, values } from 'ramda'
+import { angleModulus, intDiv } from './arithmetic'
 
-const gate41Angle = toAngle({ zodiac: 'aquarius', angle: Angle.of(2) })
+const gate41Angle = toAngle({ zodiac: 'aquarius', angle: angle.angle(2) })
 
-const lineArc = Angle.of(0, 56, 15)
-const gateArc = lineArc.times(6)
-const gateArcF = gateArc.toFloat()
-const lineArcF = lineArc.toFloat()
-const gate41F = gate41Angle.toFloat()
-const normalizeF = (angle: Angle) => angle.toFloat() - gate41F
+const lineArc = angle.angle(0, 56, 15)
+const gateArc = angle.multiply(lineArc, 6)
+console.log(`Gate Arc: ${JSON.stringify(gateArc)}`)
+const gateArcF = angle.toFloat(gateArc)
+const lineArcF = angle.toFloat(lineArc)
+const gate41F = angle.toFloat(gate41Angle)
+
+/**
+ * Gets the number of degrees from the start of gate 41.
+ * @param a - an angle
+ * @returns
+ */
+const normalizeF = (a: Angle) => angleModulus(angle.toFloat(a) - gate41F)
 
 function gateAngle(ord: number): Angle {
-    return gate41Angle.plus(gateArc.times(ord))
+    return angle.add(gate41Angle, angle.multiply(gateArc, ord))
 }
 
 /**
@@ -31,8 +39,11 @@ export function getLine(angle: Angle): HDLine {
  * @param angle -
  * @returns
  */
-export function angleToGate(angle: Angle): Gate {
-    return byOrdinal(~~(normalizeF(angle) / gateArcF))
+export function angleToGate(a: Angle): GateNum {
+    console.log(`The angle is ${angle.toFloat(a)}, normalized is ${normalizeF(a)} / ${gateArcF}
+    gate41 is at ${gate41F}.  My guess is going to be ${ordinals[intDiv(normalizeF(a), gateArcF)]}
+    the value is something like ~~[${normalizeF(a) / gateArcF}] == ${intDiv(normalizeF(a), gateArcF)}`)
+    return ordinals[intDiv(normalizeF(a), gateArcF)]
 }
 
 /**
@@ -136,7 +147,7 @@ const allGates: GateRecord<Gate> = {
     '51': {
         num: '51',
         center: 'will',
-        connected: ['26'],
+        connected: ['25'],
         ord: 13,
         angle: gateAngle(13),
     },
@@ -492,17 +503,46 @@ const allGates: GateRecord<Gate> = {
     },
 }
 
+/**
+ * The gate numbers, ordered by their position in the sky.
+ */
 const ordinals: GateNum[] = values(allGates)
     .sort((left, right) => left.ord - right.ord)
     .map(({ num }) => num.toString() as GateNum)
+console.log(ordinals)
+/**
+ * Return the gate by gate number.
+ * @public
+ * @param num -  Gate number
+ * @returns Gate
+ */
+export function byNumber(num: number): Gate {
+    if (num < 1 || num > 64) {
+        throw new Error(`hm I got ${num}`)
+    }
+    return allGates[num.toString() as GateNum]
+}
 
 /**
- * Return the gate by gave number.
- * @internal
+ * Return the gate by gate number.
+ * @public
+ * @param num -  Gate number
+ * @returns Gate
+ */
+export function byGateNum(num: GateNum): Gate {
+    return allGates[num]
+}
+
+/**
+ * Return the gate by gate number.
+ * @public
  * @param num -  Gate number
  * @returns Gate
  */
 export function byOrdinal(num: number): Gate {
+    if (num < 0 || num > 63) {
+        throw new Error(`hm I got ${num}`)
+    }
     return allGates[ordinals[num]]
 }
 

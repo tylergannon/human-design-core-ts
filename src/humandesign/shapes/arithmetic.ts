@@ -1,5 +1,4 @@
 import { mapObjIndexed, multiply } from 'ramda'
-import type { Angle } from '../models/Angle'
 import type { Offset, Measurement } from './types'
 
 /**
@@ -51,16 +50,3 @@ export function transformObj<T, U, V extends Record<string, T>>(
 export function transform<T, U, V>(value: T, transformer: Transformer<T, U, V>): Record<keyof V, U> {
     return mapObjIndexed(fn => fn(value), transformer) as Record<keyof V, U>
 }
-
-/**
- * @internal
- * @param it -
- * @returns
- */
-export const sin = (it: Angle) => it.sin
-/**
- * @internal
- * @param it -
- * @returns
- */
-export const cos = (it: Angle) => it.cos

@@ -1,14 +1,15 @@
-import { Angle } from './Angle'
+import * as angle from './Angle'
 import { zodiacNames } from './types'
-import type { ZodiacAngle } from './types'
+import type { ZodiacAngle, Angle } from './types'
 
 /**
  * @internal
- * @param param0 -
- * @returns
+ * @param zodiacAngle - zodiacAngle to convert to angle
+ * @returns the simple angle corresponding to the zodiac + zodiacAngle.
  */
-export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
-    return angle.plus(new Angle(zodiacNames.indexOf(zodiac) * 30))
+export function toAngle(zodiacAngle: ZodiacAngle): Angle
+export function toAngle({ angle: a, zodiac }: ZodiacAngle): Angle {
+    return angle.add(a, angle.angle(zodiacNames.indexOf(zodiac) * 30))
 }
 
 /**
@@ -17,9 +18,9 @@ export function toAngle({ angle, zodiac }: ZodiacAngle): Angle {
  * @param angle -  angle to convert
  * @returns the given angle represented by an angle within a Zodiac sign.
  */
-export function zodiacAngle(angle: Angle): ZodiacAngle {
+export function zodiacAngle(a: Angle): ZodiacAngle {
     return {
-        zodiac: zodiacNames[~~((angle.deg % 360) / 30)],
-        angle: new Angle(angle.deg % 30, angle.min, angle.sec),
+        zodiac: angle.zodiac(a),
+        angle: angle.zodiacAngle(a),
     }
 }

@@ -1,4 +1,4 @@
-export { Angle } from './Angle'
+export * as angle from './Angle'
 export { BirthChart } from './BirthChart'
 export { Chart } from './Chart'
 export { Position } from './Position'

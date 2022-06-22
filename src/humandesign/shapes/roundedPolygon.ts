@@ -1,9 +1,11 @@
-import { Angle, ZERO_DEGREES } from '../models/Angle'
+import type { Angle } from '../models/types'
+import * as angle from '../models/Angle'
 import type { Offset, OffsetFrom, Size } from './types'
-import { add, sin, cos, transform } from './arithmetic'
+import { add, transform } from './arithmetic'
 import type { Transformer } from './arithmetic'
 import { maxBy, tail, reduce, minBy, min, max } from 'ramda'
-import { path, type Path } from 'd3-path'
+import { path } from 'd3-path'
+import type { Path } from 'd3-path'
 
 /**
  * Creates an SVG path for a square with rounded corners.
@@ -18,7 +20,7 @@ import { path, type Path } from 'd3-path'
 export const roundedSquare = (
     size: Size,
     offset: Offset = ORIGIN_POINT,
-    rotate: Angle = ZERO_DEGREES,
+    rotate: Angle = angle.ZERO_DEGREES,
     offsetFrom: OffsetFrom = 'center',
     radiusRatio: number = DEFAULT_RADIUS_RATIO
 ) => roundedPolygon(size, offset, offsetFrom, rotateAngles(PolygonAngles.square, rotate), radiusRatio)
@@ -36,12 +38,12 @@ export const roundedSquare = (
 export const roundedTriangle = (
     size: Size,
     offsetCenter: Offset = ORIGIN_POINT,
-    rotate: Angle = ZERO_DEGREES,
+    rotate: Angle = angle.ZERO_DEGREES,
     offsetFrom: OffsetFrom = 'center',
     radiusRatio: number = DEFAULT_RADIUS_RATIO
 ) => roundedPolygon(size, offsetCenter, offsetFrom, rotateAngles(PolygonAngles.triangle, rotate), radiusRatio)
 
-const rotateAngles = (angles: Angle[], by: Angle) => angles.map(it => it.plus(by))
+const rotateAngles = (angles: Angle[], by: Angle) => angles.map(it => angle.add(it, by))
 
 interface Bounding {
     readonly minX: Angle
@@ -58,13 +60,13 @@ interface Polar2D {
 const DEFAULT_RADIUS_RATIO = 0.6
 const RADIUS_RATIO2_T2 = DEFAULT_RADIUS_RATIO * 2
 
-const polarToOffset = ({ Θ, r }: Polar2D): Offset => ({ x: r * Θ.cos, y: -r * Θ.sin })
+const polarToOffset = ({ Θ, r }: Polar2D): Offset => ({ x: r * angle.cos(Θ), y: -r * angle.cos(Θ) })
 
 const BoundingAngles: Transformer<Angle[], number, Bounding> = {
-    minX: angles => reduce(minBy(cos), angles[0], tail(angles)).cos,
-    maxX: angles => reduce(maxBy(cos), angles[0], tail(angles)).cos,
-    minY: angles => reduce(minBy(sin), angles[0], tail(angles)).sin,
-    maxY: angles => reduce(maxBy(sin), angles[0], tail(angles)).sin,
+    minX: angles => angle.cos(reduce(minBy(angle.cos), angles[0], tail(angles))),
+    maxX: angles => angle.cos(reduce(maxBy(angle.cos), angles[0], tail(angles))),
+    minY: angles => angle.sin(reduce(minBy(angle.sin), angles[0], tail(angles))),
+    maxY: angles => angle.sin(reduce(maxBy(angle.sin), angles[0], tail(angles))),
 }
 
 const boundingAngles = (angles: Angle[]) => transform(angles, BoundingAngles)
@@ -72,8 +74,8 @@ const boundingAngles = (angles: Angle[]) => transform(angles, BoundingAngles)
 const ORIGIN_POINT: Offset = { x: 0, y: 0 }
 
 const PolygonAngles = {
-    triangle: [90, 210, 330].map(it => Angle.of(it)),
-    square: [0, 1, 2, 3].map(it => Angle.of(it * 90 + 45)),
+    triangle: [90, 210, 330].map(it => angle.angle(it)),
+    square: [0, 1, 2, 3].map(it => angle.angle(it * 90 + 45)),
 }
 
 const last = <T>(arr: T[]): T => {
@@ -103,22 +105,28 @@ function roundedPolygon(
                   y: cornerRadius + radius * minY,
               })
 
-    const halfSweep = Angle.of(180 / angles.length)
+    const halfSweep = angle.angle(180 / angles.length)
 
     const initialPoint = add(
         offset,
         add(
             polarToOffset({ r: radius, Θ: last(angles) }),
-            polarToOffset({ r: cornerRadius, Θ: last(angles).plus(halfSweep) })
+            polarToOffset({ r: cornerRadius, Θ: angle.add(last(angles), halfSweep) })
         )
     )
 
     const p: Path = path()
     const arcTo = (Θ: Angle) => {
         const arc = (p: Path, point: Offset, radius: number, Θ1: Angle, Θ2: Angle) =>
-            p.arc(point.x, point.y, radius, -Θ1.radians, -Θ2.radians, true)
+            p.arc(point.x, point.y, radius, -angle.radians(Θ1), -angle.radians(Θ2), true)
 
-        arc(p, polarToOffset({ r: radius, Θ }), cornerRadius, Θ.minus(halfSweep), Θ.plus(halfSweep))
+        arc(
+            p,
+            polarToOffset({ r: radius, Θ }),
+            cornerRadius,
+            angle.subtract(Θ, halfSweep),
+            angle.add(Θ, halfSweep)
+        )
     }
     p.moveTo(initialPoint.x, initialPoint.y)
     angles.forEach(arcTo)

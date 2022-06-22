@@ -1,4 +1,5 @@
-import { CityGeoFacts, Configuration, DefaultApiFp } from '../astro'
+import { Configuration, DefaultApiFp } from '../astro'
+import type { CityGeoFacts } from '../astro'
 import type { BirthChart } from './models/BirthChart'
 import { fromApi } from './models/BirthChart'
 
@@ -21,8 +22,8 @@ export class AstroApiClient {
      * @param time -
      * @returns
      */
-    async getChart(tz: string, date: string, time: string): Promise<BirthChart> {
-        const req = await this.apiClient.chartGet(tz, date, time, 0, 0)
+    async getChart(tz: string, date: string, time: string, lat: number, lng: number): Promise<BirthChart> {
+        const req = await this.apiClient.chartGet(tz, date, time, lat, lng)
         const response = await req()
         return fromApi(response.data)
     }
@@ -34,8 +35,14 @@ export class AstroApiClient {
      * @param time -
      * @returns
      */
-    async getSaturnReturn(tz: string, date: string, time: string): Promise<BirthChart> {
-        const req = await this.apiClient.saturnReturnGet(tz, date, time, 0, 0)
+    async getSaturnReturn(
+        tz: string,
+        date: string,
+        time: string,
+        lat: number,
+        lng: number
+    ): Promise<BirthChart> {
+        const req = await this.apiClient.saturnReturnGet(tz, date, time, lat, lng)
         const response = await req()
         return fromApi(response.data)
     }
@@ -47,8 +54,14 @@ export class AstroApiClient {
      * @param time -
      * @returns
      */
-    async getUranusOpposition(tz: string, date: string, time: string): Promise<BirthChart> {
-        const req = await this.apiClient.uranusOppositionGet(tz, date, time, 0, 0)
+    async getUranusOpposition(
+        tz: string,
+        date: string,
+        time: string,
+        lat: number,
+        lng: number
+    ): Promise<BirthChart> {
+        const req = await this.apiClient.uranusOppositionGet(tz, date, time, lat, lng)
         const response = await req()
         return fromApi(response.data)
     }
