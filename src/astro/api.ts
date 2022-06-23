@@ -54,7 +54,7 @@ export interface Chart {
 }
 
 /**
- * 
+ * @public
  */
 export interface ChartDate {
     'date': string;
