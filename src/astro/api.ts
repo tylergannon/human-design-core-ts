@@ -139,8 +139,6 @@ export interface ValidationError {
     'type': string;
 }
 /**
- * An enumeration.
- * @enum {string}
  */
 
 export const Zodiac = {
@@ -169,14 +167,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * Get the human design chart for the given birth coordinates.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         chartGet: async (tz: string, localDate: string, localTime: string, lat: number, lng: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tz' is not null or undefined
@@ -244,14 +235,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get the full chart for the date of Saturn\'s conjunction with its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
          */
         saturnReturnGet: async (tz: string, localDate: string, localTime: string, lat: number, lng: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tz' is not null or undefined
@@ -319,10 +302,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Search Cities
-         * @param {string} q 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         searchCitiesCitiesGet: async (q: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'q' is not null or undefined
@@ -364,14 +344,7 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         uranusOppositionGet: async (tz: string, localDate: string, localTime: string, lat: number, lng: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tz' is not null or undefined
@@ -448,14 +421,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Get the human design chart for the given birth coordinates.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         async chartGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HDChart>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.chartGet(tz, localDate, localTime, lat, lng, options);
@@ -463,40 +429,21 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get the full chart for the date of Saturn\'s conjunction with its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         async saturnReturnGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HDChart>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.saturnReturnGet(tz, localDate, localTime, lat, lng, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Search Cities
-         * @param {string} q 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         async searchCitiesCitiesGet(q: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CityGeoFacts>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.searchCitiesCitiesGet(q, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         async uranusOppositionGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<HDChart>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.uranusOppositionGet(tz, localDate, localTime, lat, lng, options);
@@ -513,52 +460,28 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * Get the human design chart for the given birth coordinates.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         chartGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: any): AxiosPromise<HDChart> {
             return localVarFp.chartGet(tz, localDate, localTime, lat, lng, options).then((request) => request(axios, basePath));
         },
         /**
          * Get the full chart for the date of Saturn\'s conjunction with its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         saturnReturnGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: any): AxiosPromise<HDChart> {
             return localVarFp.saturnReturnGet(tz, localDate, localTime, lat, lng, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary Search Cities
-         * @param {string} q 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         searchCitiesCitiesGet(q: string, options?: any): AxiosPromise<Array<CityGeoFacts>> {
             return localVarFp.searchCitiesCitiesGet(q, options).then((request) => request(axios, basePath));
         },
         /**
          * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
-         * @summary 
-         * @param {string} tz 
-         * @param {string} localDate 
-         * @param {string} localTime 
-         * @param {number} lat 
-         * @param {number} lng 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
+
          */
         uranusOppositionGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: any): AxiosPromise<HDChart> {
             return localVarFp.uranusOppositionGet(tz, localDate, localTime, lat, lng, options).then((request) => request(axios, basePath));
@@ -567,21 +490,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * DefaultApi - object-oriented interface
- * @class DefaultApi
- * @extends {BaseAPI}
+
  */
 export class DefaultApi extends BaseAPI {
     /**
      * Get the human design chart for the given birth coordinates.
-     * @summary 
-     * @param {string} tz 
-     * @param {string} localDate 
-     * @param {string} localTime 
-     * @param {number} lat 
-     * @param {number} lng 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
+
      */
     public chartGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).chartGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
@@ -589,25 +503,14 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * Get the full chart for the date of Saturn\'s conjunction with its own position in the natal chart for the given date of birth.
-     * @summary 
-     * @param {string} tz 
-     * @param {string} localDate 
-     * @param {string} localTime 
-     * @param {number} lat 
-     * @param {number} lng 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
+
      */
     public saturnReturnGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).saturnReturnGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
-     * 
-     * @summary Search Cities
-     * @param {string} q 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
+
      */
     public searchCitiesCitiesGet(q: string, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).searchCitiesCitiesGet(q, options).then((request) => request(this.axios, this.basePath));
@@ -615,14 +518,7 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * Get the full chart for the date of Uranus\' opposition across its own position in the natal chart for the given date of birth.
-     * @summary 
-     * @param {string} tz 
-     * @param {string} localDate 
-     * @param {string} localTime 
-     * @param {number} lat 
-     * @param {number} lng 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
+
      */
     public uranusOppositionGet(tz: string, localDate: string, localTime: string, lat: number, lng: number, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).uranusOppositionGet(tz, localDate, localTime, lat, lng, options).then((request) => request(this.axios, this.basePath));

@@ -21,7 +21,6 @@ export type {
     Motor,
     Planet,
     PlanetRecord,
-    Position,
     YinYang,
     Zodiac,
 } from './models/index'

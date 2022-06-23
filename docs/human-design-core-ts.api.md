@@ -10,47 +10,38 @@ import type { Maybe } from 'purify-ts';
 export const allPips: GateRecord<Offset>;
 
 // @public (undocumented)
-export class Angle {
-    constructor(deg?: number, min?: number, sec?: number);
-    // (undocumented)
-    get cos(): number;
+export interface Angle {
     // (undocumented)
     readonly deg: number;
     // (undocumented)
-    div(other: Angle): number;
-    // (undocumented)
     readonly min: number;
     // (undocumented)
-    minus(other: Angle): Angle;
-    // (undocumented)
-    negative(): Angle;
-    // (undocumented)
-    static of(deg: number, min?: number, sec?: number): Angle;
-    // (undocumented)
-    static opposite: Angle;
-    // (undocumented)
-    plus(other: Angle): Angle;
-    // (undocumented)
-    get radians(): number;
-    // (undocumented)
     readonly sec: number;
+}
+
+// @public (undocumented)
+export interface Ascendant {
+    // Warning: (ae-forgotten-export) The symbol "Angle" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    get sin(): number;
+    'lng': Angle_2;
+    // Warning: (ae-forgotten-export) The symbol "Zodiac" needs to be exported by the entry point index.d.ts
+    //
     // (undocumented)
-    times(scale: number): Angle;
+    'zodiac': Zodiac_2;
     // (undocumented)
-    toFloat(): number;
+    'zodiacLng': Angle_2;
 }
 
 // @public (undocumented)
 export class AstroApiClient {
     constructor(apiKey: string);
     // (undocumented)
-    getChart(tz: string, date: string, time: string): Promise<BirthChart>;
+    getChart(tz: string, date: string, time: string, lat: number, lng: number): Promise<BirthChart>;
     // (undocumented)
-    getSaturnReturn(tz: string, date: string, time: string): Promise<BirthChart>;
+    getSaturnReturn(tz: string, date: string, time: string, lat: number, lng: number): Promise<BirthChart>;
     // (undocumented)
-    getUranusOpposition(tz: string, date: string, time: string): Promise<BirthChart>;
+    getUranusOpposition(tz: string, date: string, time: string, lat: number, lng: number): Promise<BirthChart>;
     // (undocumented)
     searchCities(q: string): Promise<CityGeoFacts[]>;
 }
@@ -58,19 +49,18 @@ export class AstroApiClient {
 // @public (undocumented)
 export type Authority = 'emotional' | 'sacral' | 'splenic' | 'ego' | 'self' | 'mental' | 'noAuthority';
 
-// @public
-export class BirthChart {
-    constructor(natal: Chart, design: Chart);
+// @public (undocumented)
+export interface BirthChart {
     // (undocumented)
-    get allGates(): GateRecord<GateDefType>;
+    readonly allGates: GateRecord<GateDefType>;
     // (undocumented)
-    get connectivity(): Connectivity;
+    readonly connectivity: Connectivity;
     // (undocumented)
-    get definedGates(): Gate[];
+    readonly definedGates: GateNum[];
     // (undocumented)
-    design: Chart;
+    readonly design: Chart;
     // (undocumented)
-    natal: Chart;
+    readonly natal: Chart;
 }
 
 // @public (undocumented)
@@ -79,9 +69,10 @@ export type Center = 'head' | 'ajna' | 'throat' | 'identity' | 'sacral' | 'splee
 // @public (undocumented)
 export type CenterRecord<T> = Record<Center, T>;
 
-// @public
-export class Chart {
-    constructor(chartDate: ChartDate, planets: PlanetRecord<Position>);
+// @public (undocumented)
+export interface Chart {
+    // (undocumented)
+    readonly ascendant: Ascendant;
     // Warning: (ae-forgotten-export) The symbol "ChartDate" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
@@ -126,7 +117,7 @@ export interface Connectivity {
     readonly centers: CenterRecord<DefState>;
     readonly components: Center[][];
     readonly rank: number;
-    readonly solutions: Maybe<Gate[][]>;
+    readonly solutions: Maybe<GateNum[][]>;
     readonly type: HDType;
 }
 
@@ -165,7 +156,7 @@ export type HDLine = '1' | '2' | '3' | '4' | '5' | '6';
 // @public (undocumented)
 export interface HDPos {
     // (undocumented)
-    readonly gate: Gate;
+    readonly gate: GateNum;
     // (undocumented)
     readonly line: HDLine;
     // (undocumented)
@@ -236,29 +227,6 @@ export type PlanetRecord<T> = Record<Planet, T>;
 
 // @public (undocumented)
 export const polygons: CenterRecord<string>;
-
-// @public (undocumented)
-export class Position implements HDPos {
-    constructor(lng: Angle, lat: SignedAngle, distance: Scientific, speed: ObjectSpeed, zodiac: Zodiac, zodiacLng: Angle);
-    // (undocumented)
-    readonly distance: Scientific;
-    // (undocumented)
-    get gate(): Gate;
-    // (undocumented)
-    readonly lat: SignedAngle;
-    // (undocumented)
-    get line(): HDLine;
-    // (undocumented)
-    readonly lng: Angle;
-    // (undocumented)
-    opposite(): Position;
-    // (undocumented)
-    readonly speed: ObjectSpeed;
-    // (undocumented)
-    readonly zodiac: Zodiac;
-    // (undocumented)
-    readonly zodiacLng: Angle;
-}
 
 // @public
 export const roundedSquare: (size: Size, offset?: Offset, rotate?: Angle, offsetFrom?: OffsetFrom, radiusRatio?: number) => string;
