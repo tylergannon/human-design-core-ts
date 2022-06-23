@@ -21,16 +21,12 @@ export interface Angle {
 
 // @public (undocumented)
 export interface Ascendant {
-    // Warning: (ae-forgotten-export) The symbol "Angle" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
-    'lng': Angle_2;
-    // Warning: (ae-forgotten-export) The symbol "Zodiac" needs to be exported by the entry point index.d.ts
-    //
+    readonly lng: Angle;
     // (undocumented)
-    'zodiac': Zodiac_2;
+    readonly zodiac: Zodiac;
     // (undocumented)
-    'zodiacLng': Angle_2;
+    readonly zodiacLng: Angle;
 }
 
 // @public (undocumented)
@@ -73,12 +69,22 @@ export type CenterRecord<T> = Record<Center, T>;
 export interface Chart {
     // (undocumented)
     readonly ascendant: Ascendant;
-    // Warning: (ae-forgotten-export) The symbol "ChartDate" needs to be exported by the entry point index.d.ts
-    //
     // (undocumented)
     readonly chartDate: ChartDate;
     // (undocumented)
     readonly planets: PlanetRecord<HDPos>;
+}
+
+// @public (undocumented)
+export interface ChartDate {
+    // (undocumented)
+    'date': string;
+    // (undocumented)
+    'sid': number;
+    // (undocumented)
+    'time': string;
+    // (undocumented)
+    'tz': string;
 }
 
 // @public (undocumented)
@@ -188,11 +194,6 @@ export interface Hexagram {
     readonly ord: number;
 }
 
-// Warning: (ae-internal-missing-underscore) The name "Measurement" should be prefixed with an underscore because the declaration is marked as @internal
-//
-// @internal (undocumented)
-export type Measurement = Record<string, number>;
-
 // @public (undocumented)
 export type Motor = 'root' | 'sacral' | 'will' | 'esp';
 
@@ -206,10 +207,8 @@ export interface ObjectSpeed {
     'lng': Scientific;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "Offset" is marked as @public, but its signature references "Measurement" which is marked as @internal
-//
 // @public (undocumented)
-export interface Offset extends Measurement {
+export interface Offset extends Record<string, number> {
     // (undocumented)
     x: number;
     // (undocumented)
@@ -254,10 +253,8 @@ export interface SignedAngle {
     'sign': number;
 }
 
-// Warning: (ae-incompatible-release-tags) The symbol "Size" is marked as @public, but its signature references "Measurement" which is marked as @internal
-//
 // @public (undocumented)
-export interface Size extends Measurement {
+export interface Size extends Record<string, number> {
     // (undocumented)
     height: number;
     // (undocumented)

@@ -1,15 +1,25 @@
-import type { Chart as ApiChart } from '../../astro'
-import type { Chart } from './types'
+import type { Chart as ApiChart, Zodiac as ApiZodiac } from '../../astro'
+import type { Angle, Chart, Zodiac } from './types'
 import { fromApi as positionFromApi, opposite } from './Position'
+
+const toZodiac = (z: ApiZodiac): Zodiac => z.toLowerCase() as Zodiac
 
 /**
  * @internal
  * @param apiResult -
  * @returns
  */
-export const fromApi = ({ chart_date: chartDate, ascendant, ...chart }: ApiChart): Chart => {
+export const fromApi = ({
+    chart_date: chartDate,
+    ascendant: { lng, zodiac, zodiacLng },
+    ...chart
+}: ApiChart): Chart => {
     return {
-        ascendant,
+        ascendant: {
+            lng: lng as unknown as Angle,
+            zodiac: toZodiac(zodiac),
+            zodiacLng: zodiacLng as unknown as Angle,
+        },
         chartDate,
         planets: {
             sun: positionFromApi(chart.sun),

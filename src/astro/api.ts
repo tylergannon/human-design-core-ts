@@ -29,7 +29,6 @@ export interface Angle {
 }
 
 /**
- * @public
  */
 export interface Ascendant {
     'lng': Angle;

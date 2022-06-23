@@ -2,6 +2,7 @@ export { allPips, getPath, polygons, roundedSquare, roundedTriangle } from './sh
 export { AstroApiClient } from './AstroApiClient'
 export type {
     Angle,
+    Ascendant,
     Authority,
     BirthChart,
     Center,
@@ -26,4 +27,4 @@ export type {
 } from './models/index'
 
 export { Yang, Yin } from './models/index'
-export type { Measurement, ChartObject, WidthType, Size, Offset, OffsetFrom } from './shapes/index'
+export type { ChartObject, WidthType, Size, Offset, OffsetFrom } from './shapes/index'

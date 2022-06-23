@@ -7,14 +7,9 @@ export interface Point {
 }
 
 /**
- * @internal
- */
-export type Measurement = Record<string, number>
-
-/**
  * @public
  */
-export interface Offset extends Measurement {
+export interface Offset extends Record<string, number> {
     x: number
     y: number
 }
@@ -22,7 +17,7 @@ export interface Offset extends Measurement {
 /**
  * @public
  */
-export interface Size extends Measurement {
+export interface Size extends Record<string, number> {
     width: number
     height: number
 }
