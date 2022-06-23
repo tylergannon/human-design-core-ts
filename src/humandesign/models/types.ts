@@ -1,4 +1,4 @@
-import { Ascendant, ChartDate } from '$astro'
+import { Ascendant, ChartDate } from '../../astro'
 import type { Maybe } from 'purify-ts'
 
 /**
@@ -241,6 +241,9 @@ export interface HDProfile {
     readonly natal: HDLine
 }
 
+/**
+ * @public
+ */
 export interface Angle {
     readonly deg: number
     readonly min: number
