@@ -1,3 +1,30 @@
+# [2.3.0](https://github.com/tylergannon/human-design-core-ts/compare/v2.2.0...v2.3.0) (2022-06-23)
+
+
+### Build
+
+* Add missing public declaration to ChartDate ([c26a34b](https://github.com/tylergannon/human-design-core-ts/commit/c26a34bf7d857599780af91cf481fb8adb75ad00))
+* run tests after doing build. ([ce4c1fa](https://github.com/tylergannon/human-design-core-ts/commit/ce4c1fa205ee1766691869bbdfc12a4950eeb1e0))
+
+### Chore
+
+* Remove debug code ([e709204](https://github.com/tylergannon/human-design-core-ts/commit/e709204548dca7017ba8754e6eae1d4dbaba152d))
+
+### Fix
+
+* api-extractor works with recent model changes. ([07ceb14](https://github.com/tylergannon/human-design-core-ts/commit/07ceb141eb9fb084a7b2385ddf2151f94e2f6730))
+* Charts have correct gates. ([895fa44](https://github.com/tylergannon/human-design-core-ts/commit/895fa44e9647a1dd15d30f14b5997094fc602ae3))
+
+### New
+
+* Charts from API client are portable for JSON. ([d6b85cc](https://github.com/tylergannon/human-design-core-ts/commit/d6b85cceb2fe2bfd79776177a70708603d2f7ab3))
+
+### Update
+
+* Add missing exports ([fcc157b](https://github.com/tylergannon/human-design-core-ts/commit/fcc157bb212ad4b7320507a0e35cff16812a025f))
+* Replace Chart class with simple interface ([c906298](https://github.com/tylergannon/human-design-core-ts/commit/c90629878354a86dddcb4846ca63b5288f030dbe))
+* Replace Position class with interface ([8e2e487](https://github.com/tylergannon/human-design-core-ts/commit/8e2e487473778662cf2e0063faaf27e1199c2cc0))
+
 # [2.2.0](https://github.com/tylergannon/human-design-core-ts/compare/v2.1.0...v2.2.0) (2022-06-22)
 
 
