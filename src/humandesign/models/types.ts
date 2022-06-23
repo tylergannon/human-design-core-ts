@@ -1,4 +1,4 @@
-import { Ascendant, ChartDate } from '../../astro'
+import { ChartDate } from '../../astro'
 import type { Maybe } from 'purify-ts'
 
 /**
@@ -256,6 +256,15 @@ export interface Angle {
 export interface HDPos {
     readonly gate: GateNum
     readonly line: HDLine
+    readonly lng: Angle
+    readonly zodiac: Zodiac
+    readonly zodiacLng: Angle
+}
+
+/**
+ * @public
+ */
+export interface Ascendant {
     readonly lng: Angle
     readonly zodiac: Zodiac
     readonly zodiacLng: Angle

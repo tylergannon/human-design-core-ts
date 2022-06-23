@@ -1,5 +1,5 @@
 import { mapObjIndexed, multiply } from 'ramda'
-import type { Offset, Measurement } from './types'
+import type { Offset } from './types'
 
 /**
  * @internal
@@ -7,7 +7,7 @@ import type { Offset, Measurement } from './types'
  * @param arg2 -
  * @returns
  */
-export function add<T extends Measurement>(arg1: T, arg2: T): T {
+export function add<T extends Record<string, number>>(arg1: T, arg2: T): T {
     return mapObjIndexed((val, key) => val + arg2[key], arg1) as T
 }
 
@@ -18,7 +18,7 @@ export function add<T extends Measurement>(arg1: T, arg2: T): T {
  * @param scale -  The scale by which to multiply offset
  */
 export function scale(offset: Offset, scale: number): Offset
-export function scale<T extends Measurement>(obj: Measurement, scale: number): T {
+export function scale<T extends Record<string, number>>(obj: Record<string, number>, scale: number): T {
     return mapObjIndexed(multiply(scale), obj) as T
 }
 
